@@ -1,0 +1,390 @@
+diff --git a/app/helpers/application_helper.rb b/app/helpers/application_helper.rb
+index 7c9aef0..b77af87 100644
+--- a/app/helpers/application_helper.rb
++++ b/app/helpers/application_helper.rb
+@@ -1031,7 +1031,7 @@ module ApplicationHelper
+         (pcts[0] > 0 ? content_tag('td', '', :style => "width: #{pcts[0]}%;", :class => 'closed') : ''.html_safe) +
+         (pcts[1] > 0 ? content_tag('td', '', :style => "width: #{pcts[1]}%;", :class => 'done') : ''.html_safe) +
+         (pcts[2] > 0 ? content_tag('td', '', :style => "width: #{pcts[2]}%;", :class => 'todo') : ''.html_safe)
+-      ), :class => 'progress', :style => "width: #{width};").html_safe +
++      ), :class => "progress progress-#{pcts[0]}", :style => "width: #{width};").html_safe +
+       content_tag('p', legend, :class => 'percent').html_safe
+   end
+ 
+diff --git a/app/models/issue.rb b/app/models/issue.rb
+index ce1fa75..bc09cfc 100644
+--- a/app/models/issue.rb
++++ b/app/models/issue.rb
+@@ -961,8 +961,9 @@ class Issue < ActiveRecord::Base
+ 
+   # Returns a string of css classes that apply to the issue
+   def css_classes
+-    s = "issue tracker-#{tracker_id} status-#{status_id} #{priority.try(:css_classes)}"
++    s = "issue tracker-#{tracker_id} tracker-#{tracker.name.downcase} status-#{status_id} status-#{status.name.downcase} #{priority.try(:css_classes)}"
+     s << ' closed' if closed?
++    s << ' timed' unless due_date.blank?
+     s << ' overdue' if overdue?
+     s << ' child' if child?
+     s << ' parent' unless leaf?
+diff --git a/app/views/issues/show.html.erb b/app/views/issues/show.html.erb
+index 83b4f56..dd5d290 100644
+--- a/app/views/issues/show.html.erb
++++ b/app/views/issues/show.html.erb
+@@ -1,6 +1,6 @@
+ <%= render :partial => 'action_menu' %>
+ 
+-<h2><%= issue_heading(@issue) %></h2>
++<h2 class="<%= 'tracker tracker-'+@issue.tracker_id.to_s+' tracker-'+@issue.tracker.name.downcase %>"><%= issue_heading(@issue) %></h2>
+ 
+ <div class="<%= @issue.css_classes %> details">
+   <% if @prev_issue_id || @next_issue_id %>
+@@ -21,68 +21,69 @@
+ 
+   <%= avatar(@issue.author, :size => "50") %>
+ 
+-<div class="subject">
+-<%= render_issue_subject_with_tree(@issue) %>
+-</div>
+-        <p class="author">
+-        <%= authoring @issue.created_on, @issue.author %>.
+-        <% if @issue.created_on != @issue.updated_on %>
+-        <%= l(:label_updated_time, time_tag(@issue.updated_on)).html_safe %>.
+-        <% end %>
+-        </p>
+-
+-<table class="attributes">
+-<%= issue_fields_rows do |rows|
+-  rows.left l(:field_status), h(@issue.status.name), :class => 'status'
+-  rows.left l(:field_priority), h(@issue.priority.name), :class => 'priority'
+-
+-  unless @issue.disabled_core_fields.include?('assigned_to_id')
+-    rows.left l(:field_assigned_to), avatar(@issue.assigned_to, :size => "14").to_s.html_safe + (@issue.assigned_to ? link_to_user(@issue.assigned_to) : "-"), :class => 'assigned-to'
+-  end
+-  unless @issue.disabled_core_fields.include?('category_id')
+-    rows.left l(:field_category), h(@issue.category ? @issue.category.name : "-"), :class => 'category'
+-  end
+-  unless @issue.disabled_core_fields.include?('fixed_version_id')
+-    rows.left l(:field_fixed_version), (@issue.fixed_version ? link_to_version(@issue.fixed_version) : "-"), :class => 'fixed-version'
+-  end
+-
+-  unless @issue.disabled_core_fields.include?('start_date')
+-    rows.right l(:field_start_date), format_date(@issue.start_date), :class => 'start-date'
+-  end
+-  unless @issue.disabled_core_fields.include?('due_date')
+-    rows.right l(:field_due_date), format_date(@issue.due_date), :class => 'due-date'
+-  end
+-  unless @issue.disabled_core_fields.include?('done_ratio')
+-    rows.right l(:field_done_ratio), progress_bar(@issue.done_ratio, :width => '80px', :legend => "#{@issue.done_ratio}%"), :class => 'progress'
+-  end
+-  unless @issue.disabled_core_fields.include?('estimated_hours')
+-    unless @issue.estimated_hours.nil?
+-      rows.right l(:field_estimated_hours), l_hours(@issue.estimated_hours), :class => 'estimated-hours'
+-    end
+-  end
+-  if User.current.allowed_to?(:view_time_entries, @project)
+-    rows.right l(:label_spent_time), (@issue.total_spent_hours > 0 ? link_to(l_hours(@issue.total_spent_hours), project_issue_time_entries_path(@project, @issue)) : "-"), :class => 'spent-time'
+-  end
+-end %>
+-<%= render_custom_fields_rows(@issue) %>
+-<%= call_hook(:view_issues_show_details_bottom, :issue => @issue) %>
+-</table>
+-
+-<% if @issue.description? || @issue.attachments.any? -%>
+-<hr />
+-<% if @issue.description? %>
+-<div class="description">
+-  <div class="contextual">
+-  <%= link_to l(:button_quote), quoted_issue_path(@issue), :remote => true, :method => 'post', :class => 'icon icon-comment' if authorize_for('issues', 'edit') %>
++  <div class="subject">
++    <%= render_issue_subject_with_tree(@issue) %>
+   </div>
++  
++  <p class="author">
++    <%= authoring @issue.created_on, @issue.author %>.
++    <% if @issue.created_on != @issue.updated_on %>
++    <%= l(:label_updated_time, time_tag(@issue.updated_on)).html_safe %>.
++    <% end %>
++  </p>
++
++  <table class="attributes">
++    <%= issue_fields_rows do |rows|
++      rows.left l(:field_status), h(@issue.status.name), :class => 'status status-'+@issue.status.name.downcase+' status-'+@issue.status_id.to_s
++      rows.left l(:field_priority), h(@issue.priority.name), :class => 'priority priority-'+@issue.priority.name.downcase+' priority-'+@issue.priority_id.to_s
++
++      unless @issue.disabled_core_fields.include?('assigned_to_id')
++        rows.left l(:field_assigned_to), avatar(@issue.assigned_to, :size => "14").to_s.html_safe + (@issue.assigned_to ? link_to_user(@issue.assigned_to) : "-"), :class => 'assigned-to'
++      end
++      unless @issue.disabled_core_fields.include?('category_id')
++        rows.left l(:field_category), h(@issue.category ? @issue.category.name : "-"), :class => 'category'
++      end
++      unless @issue.disabled_core_fields.include?('fixed_version_id')
++        rows.left l(:field_fixed_version), (@issue.fixed_version ? link_to_version(@issue.fixed_version) : "-"), :class => 'fixed-version'
++      end
++
++      unless @issue.disabled_core_fields.include?('start_date')
++        rows.right l(:field_start_date), format_date(@issue.start_date), :class => 'start-date'
++      end
++      unless @issue.disabled_core_fields.include?('due_date')
++        rows.right l(:field_due_date), format_date(@issue.due_date), :class => 'due-date'
++      end
++      unless @issue.disabled_core_fields.include?('done_ratio')
++        rows.right l(:field_done_ratio), progress_bar(@issue.done_ratio, :width => '80px', :legend => "#{@issue.done_ratio}%"), :class => 'progress'
++      end
++      unless @issue.disabled_core_fields.include?('estimated_hours')
++        unless @issue.estimated_hours.nil?
++          rows.right l(:field_estimated_hours), l_hours(@issue.estimated_hours), :class => 'estimated-hours'
++        end
++      end
++      if User.current.allowed_to?(:view_time_entries, @project)
++        rows.right l(:label_spent_time), (@issue.total_spent_hours > 0 ? link_to(l_hours(@issue.total_spent_hours), project_issue_time_entries_path(@project, @issue)) : "-"), :class => 'spent-time'
++      end
++    end %>
++    <%= render_custom_fields_rows(@issue) %>
++    <%= call_hook(:view_issues_show_details_bottom, :issue => @issue) %>
++  </table>
++
++  <% if @issue.description? || @issue.attachments.any? -%>
++  <hr />
++  <% if @issue.description? %>
++  <div class="description">
++    <div class="contextual">
++      <%= link_to l(:button_quote), quoted_issue_path(@issue), :remote => true, :method => 'post', :class => 'icon icon-comment' if authorize_for('issues', 'edit') %>
++    </div>
+ 
+-  <p><strong><%=l(:field_description)%></strong></p>
+-  <div class="wiki">
+-  <%= textilizable @issue, :description, :attachments => @issue.attachments %>
++    <p><strong><%=l(:field_description)%></strong></p>
++    <div class="wiki">
++      <%= textilizable @issue, :description, :attachments => @issue.attachments %>
++    </div>
+   </div>
+-</div>
+-<% end %>
+-<%= link_to_attachments @issue, :thumbnails => true %>
++  <% end %>
++  <%= link_to_attachments @issue, :thumbnails => true %>
+ <% end -%>
+ 
+ <%= call_hook(:view_issues_show_description_bottom, :issue => @issue) %>
+@@ -155,4 +156,4 @@ end %>
+     <%= auto_discovery_link_tag(:atom, {:format => 'atom', :key => User.current.rss_key}, :title => "#{@issue.project} - #{@issue.tracker} ##{@issue.id}: #{@issue.subject}") %>
+ <% end %>
+ 
+-<%= context_menu issues_context_menu_path %>
++<%= context_menu issues_context_menu_path %>
+\ No newline at end of file
+diff --git a/app/views/versions/index.html.erb b/app/views/versions/index.html.erb
+index d28963a..7821878 100644
+--- a/app/views/versions/index.html.erb
++++ b/app/views/versions/index.html.erb
+@@ -20,7 +20,7 @@
+     <% issues.each do |issue| -%>
+       <tr class="hascontextmenu">
+         <td class="checkbox"><%= check_box_tag 'ids[]', issue.id, false, :id => nil %></td>
+-        <td><%= link_to_issue(issue, :project => (@project != issue.project)) %></td>
++        <td class="issue"><%= link_to_issue(issue, :project => (@project != issue.project)) %></td>
+       </tr>
+     <% end -%>
+     </table>
+@@ -65,4 +65,4 @@
+ 
+ <% html_title(l(:label_roadmap)) %>
+ 
+-<%= context_menu issues_context_menu_path %>
++<%= context_menu issues_context_menu_path %>
+\ No newline at end of file
+diff --git a/public/stylesheets/application.css b/public/stylesheets/application.css
+index 31e56b8..2a25e12 100644
+--- a/public/stylesheets/application.css
++++ b/public/stylesheets/application.css
+@@ -121,10 +121,12 @@ a.collapsible.collapsed {background: url(../images/arrow_collapsed.png) no-repea
+ 
+ a#toggle-completed-versions {color:#999;}
+ /***** Tables *****/
+-table.list { border: 1px solid #e4e4e4;  border-collapse: collapse; width: 100%; margin-bottom: 4px; }
++table.list { border: 1px solid #e4e4e4; border-collapse: collapse; table-layout:fixed; min-width:100%; width:auto; margin-bottom: 4px; }
++table.list tr a{ white-space:nowrap; }
+ table.list th {  background-color:#EEEEEE; padding: 4px; white-space:nowrap; }
+ table.list td { vertical-align: top; padding-right:10px; }
+-table.list td.id { width: 2%; text-align: center;}
++table.list td, table.list tr:hover td{border:1px solid #d7d7d7;}
++table.list td.id { text-align: center;}
+ table.list td.checkbox { width: 15px; padding: 2px 0 0 0; }
+ table.list td.checkbox input {padding:0px;}
+ table.list td.buttons { width: 15%; white-space:nowrap; text-align: right; }
+@@ -165,6 +167,86 @@ tr.issue.idnt-7 td.subject {padding-left: 9.5em;}
+ tr.issue.idnt-8 td.subject {padding-left: 11em;}
+ tr.issue.idnt-9 td.subject {padding-left: 12.5em;}
+ 
++/* Issue priority colors */
++/* default */
++tr.issue.odd td, tr.issue.even td{color:#484848; padding: 5px;}
++tr.issue.context-menu-selection.odd td, tr.issue.context-menu-selection.even td{color:#F8F8F8; padding: 5px;}
++/* special color fields */
++tr.issue.odd td.priority, tr.issue.even td.priority,
++tr.issue.odd td.status, tr.issue.even td.status{color:#484848;}
++
++/* low */
++tr.issue.odd.priority-1 td.priority{background-color:#d6ffd0;border-color: #a5d690;}
++tr.issue.even.priority-1 td.priority{background-color:#e2ffde;border-color: #a5d690;}
++/* normal */
++tr.issue.odd.priority-2 td.priority{background-color:#eaf7ff;border-color: #add7f3;}
++tr.issue.even.priority-2 td.priority{background-color:#f2faff;border-color: #add7f3;}
++/* high */
++tr.issue.odd.priority-3 td.priority{background-color:#fffbca;border-color: #d7d290;}
++tr.issue.even.priority-3 td.priority{background-color:#fffcdb;border-color: #d7d290;}
++/* urgent */
++tr.issue.odd.priority-4 td.priority{background-color:#FF7777;border-color:#FF8888;}
++tr.issue.even.priority-4 td.priority{background-color: #FF9999;border-color:#FFA0A0;}
++/* immediate */
++tr.issue.odd.priority-5 td.priority{background-color:#FF7777;border-color: #FF8888;}
++tr.issue.even.priority-5 td.priority{background-color:#FF9999;border-color: #FFA0A0;}
++
++/* Issue status colors */
++/* new */
++tr.issue.odd.status-1 td.status{background-color:#eaf7ff;border-color:#add7f3;font-weight:bold;}
++tr.issue.even.status-1 td.status{background-color:#f2faff;border-color:#add7f3;font-weight:bold;}
++/* in progress */
++tr.issue.odd.status-2 td.status{background-color:#fffbca;border-color:#d7d290;}
++tr.issue.even.status-2 td.status{background-color:#fffcdb;border-color:#d7d290;}
++/* resolved */ 
++tr.issue.odd.status-3 td.status{background-color:#d6ffd0;border-color:#a5d690;font-style: italic;}
++tr.issue.even.status-3 td.status{background-color:#e2ffde;border-color:#a5d690;font-style: italic;}
++/* feedback */
++tr.issue.odd.status-4 td.status{background-color:#d6ffd0;border-color:#a5d690;}
++tr.issue.even.status-4 td.status{background-color:#e2ffde;border-color:#a5d690;}
++/* closed */
++tr.issue.odd.status-5 td.status{background-color:#d6ffd0;border-color:#a5d690;}
++tr.issue.even.status-5 td.status{background-color:#e2ffde;border-color:#a5d690;}
++/* rejected */
++tr.issue.odd.status-6 td.status{background-color:#FF9999;border-color:#FF8888;}
++tr.issue.even.status-6 td.status{background-color:#FFA5A5;border-color:#FFA0A0;}
++
++/* issue tracker icons */
++/* default */
++tr.issue td.tracker:before, table.related-issues td.issue a:before,
++h2.tracker:before{content:"";display:-moz-inline-box;display:inline-block;width:16px;height:16px;margin:0 2px 0 5px;}
++h2.tracker:before{margin:4px 2px 0 0;}
++select#issue_tracker_id option{padding-left:20px;}
++tr.issue td.tracker:before, table.related-issues td.issue a:before,
++h2.tracker:before,select#issue_tracker_id option{background:url("../images/page_white.png") no-repeat;}
++
++/* bug */
++tr.issue.tracker-1 td.tracker:before, table.related-issues td.issue a.tracker-1:before,
++h2.tracker.tracker-1:before,select#issue_tracker_id option[value="1"]{background:url("../images/bug.png") no-repeat;}
++/* feature */
++tr.issue.tracker-2 td.tracker:before, table.related-issues td.issue a.tracker-2:before,
++h2.tracker.tracker-2:before,select#issue_tracker_id option[value="2"]{background:url("../images/brick_add.png") no-repeat;}
++/* support */
++tr.issue.tracker-3 td.tracker:before, table.related-issues td.issue a.tracker-3:before,
++h2.tracker.tracker-3:before,select#issue_tracker_id option[value="3"]{background:url("../images/shield.png") no-repeat;}
++
++/* issue assigned_to */
++tr.issue td.assigned_to a:before{content:"";display:-moz-inline-box;display:inline-block;width:16px;height:16px;margin:0 2px 0 5px;}
++tr.issue td.assigned_to a:after{content:"";display:-moz-inline-box;display:inline-block;width:16px;height:16px;margin:0 5px 0 2px;}
++tr.issue.created-by-me td.assigned_to a:before{background:url("../images/created_by_me.png") no-repeat;}
++tr.issue.assigned-to-me td.assigned_to a:after{background:url("../images/assigned_to_me.png") no-repeat;}
++
++/* issue due_date */
++tr.issue td.id:before{content:"";display:-moz-inline-box;display:inline-block;width:16px;height:16px;margin-right:2px;background:url("../images/issue.png") no-repeat;}
++tr.issue.timed td.id:before{background:url("../images/clock.png") no-repeat;}
++tr.issue.overdue td.id:before{background:url("../images/clock_red.png") no-repeat;}
++tr.issue.overdue td.id a,tr.issue.open.overdue td.due_date{color:#FF3333;}
++tr.issue.closed.overdue td.id a,tr.issue.open.overdue td.due_date{color:#484848;}
++tr.issue.private td.id:before{background:url("../images/private.png") no-repeat;}
++tr.issue.closed td.id:before{background:url("../images/lock.png") no-repeat;}
++
++body.admin #header{background-color:#628DB6;background-repeat:repeat;background-size:15px 15px;background-image:linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);}
++
+ tr.entry { border: 1px solid #f8f8f8; }
+ tr.entry td { white-space: nowrap; }
+ tr.entry td.filename { width: 30%; }
+@@ -279,7 +361,6 @@ span.search_for_watchers {display:block;}
+ span.search_for_watchers, span.add_attachment {font-size:80%; line-height:2.5em;}
+ span.search_for_watchers a, span.add_attachment a {padding-left:16px; background: url(../images/bullet_add.png) no-repeat 0 50%; }
+ 
+-
+ .highlight { background-color: #FCFD8D;}
+ .highlight.token-1 { background-color: #faa;}
+ .highlight.token-2 { background-color: #afa;}
+@@ -318,7 +399,7 @@ blockquote blockquote { margin-left: 0;}
+ acronym  { border-bottom: 1px dotted; cursor: help; }
+ textarea.wiki-edit {width:99%; resize:vertical;}
+ li p {margin-top: 0;}
+-div.issue {background:#ffffdd; padding:6px; margin-bottom:6px;border: 1px solid #d7d7d7;}
++div.issue {background:#F8F8F8; padding:6px; margin-bottom:6px;border: 1px solid #d7d7d7;}
+ p.breadcrumb { font-size: 0.9em; margin: 4px 0 4px 0;}
+ p.subtitle { font-size: 0.9em; margin: -6px 0 12px 0; font-style: italic; }
+ p.footnote { font-size: 0.9em; margin-top: 0px; margin-bottom: 0px; }
+@@ -327,11 +408,24 @@ div.issue div.subject div div { padding-left: 16px; }
+ div.issue div.subject p {margin: 0; margin-bottom: 0.1em; font-size: 90%; color: #999;}
+ div.issue div.subject>div>p { margin-top: 0.5em; }
+ div.issue div.subject h3 {margin: 0; margin-bottom: 0.1em;}
+-div.issue span.private { position:relative; bottom: 2px; text-transform: uppercase; background: #d22; color: #fff; font-weight:bold; padding: 0px 2px 0px 2px; font-size: 60%; margin-right: 2px; border-radius: 2px;}
++div.issue span.private { position:relative; bottom: 2px; text-transform: uppercase; background: #d22; color: #fff; font-weight:bold; padding: 0px 2px; font-size: 60%; margin-right: 2px; border-radius: 2px;}
+ div.issue .next-prev-links {color:#999;}
+ div.issue table.attributes th {width:22%;}
+ div.issue table.attributes td {width:28%;}
+-
++/* Highlight for priority and status in issue#show */
++div.issue td.priority,div.issue td.status{display:inline;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius: 5px;padding: 2px 5px;color:#484848;}
++div.issue td.status-1{background-color:#eaf7ff;}
++div.issue td.status-2{background-color:#fffbca;}
++div.issue td.status-3{background-color:#d6ffd0;}
++div.issue td.status-4{background-color:#d6ffd0;}
++div.issue td.status-5{background-color:#d6ffd0;}
++div.issue td.status-6{background-color:#FF9999;}
++div.issue td.priority-1{background-color:#d6ffd0;}
++div.issue td.priority-2{background-color:#eaf7ff;}
++div.issue td.priority-3{background-color:#fffbca;}
++div.issue td.priority-4{background-color:#FF9999;}
++div.issue td.priority-5{background-color:#FF9999;}
++r
+ #issue_tree table.issues, #relations table.issues { border: 0; }
+ #issue_tree td.checkbox, #relations td.checkbox {display:none;}
+ #relations td.buttons {padding:0;}
+@@ -692,19 +786,23 @@ img.ui-datepicker-trigger {
+ }
+ 
+ /***** Progress bar *****/
+-table.progress {
+-  border-collapse: collapse;
+-  border-spacing: 0pt;
+-  empty-cells: show;
+-  text-align: center;
+-  float:left;
+-  margin: 1px 6px 1px 0px;
+-}
+-
+-table.progress td { height: 1em; }
+-table.progress td.closed { background: #BAE0BA none repeat scroll 0%; }
+-table.progress td.done { background: #D3EDD3 none repeat scroll 0%; }
+-table.progress td.todo { background: #eee none repeat scroll 0%; }
++table.progress{border-collapse:collapse;border-spacing:0pt;empty-cells:show;text-align:center;float:left;margin:1px 6px 1px 0px;}
++
++table.progress td{height:5px;}
++table.progress td.closed{background-color:#628DB6}
++table.progress.progress-10 td.closed{background-color:#ec0a0a}
++table.progress.progress-20 td.closed{background-color:#ec650a}
++table.progress.progress-30 td.closed{background-color:#ecb00a}
++table.progress.progress-40 td.closed{background-color:#ddec0a}
++table.progress.progress-50 td.closed{background-color:#7bec0a}
++table.progress.progress-60 td.closed{background-color:#21ec0a}
++table.progress.progress-70 td.closed{background-color:#43ec0a}
++table.progress.progress-80 td.closed{background-color:#09c7a5}
++table.progress.progress-90 td.closed{background-color:#51b5d7}
++table.progress.progress-100 td.closed{background-color:#628DB6}
++
++table.progress td.done{background-color:#7CB2E6}
++table.progress td.todo{background-color:#EEE}
+ p.percent {font-size: 80%;}
+ p.progress-info {clear: left; font-size: 80%; margin-top:-4px; color:#777;}
+ 
+@@ -1151,4 +1249,4 @@ h2 img { vertical-align:middle; }
+   width:1px;
+   height:1px;
+   overflow:hidden;
+-}
++}
+\ No newline at end of file
