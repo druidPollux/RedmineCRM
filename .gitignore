@@ -17,3 +17,7 @@ script
 test
 tmp
 vendor
+.bundle
+.hgignore
+
+#todo add plugins and public
