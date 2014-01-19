@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+payment_001:
+  id: 1
+  invoice_id: 1
+  amount: 10.50
+  description: Cash payment
+  payment_date: <%= Date.today - 1.days%>
+
+payment_002:
+  id: 2
+  invoice_id: 1
+  amount: 10
+  description: PayPal payment
+  payment_date: <%= Date.today %>
+
+payment_003:  
+  id: 3
+  invoice_id: 2
+  amount: 20
+  description: Partial payment
+  payment_date: <%= Date.today - 10.day %>

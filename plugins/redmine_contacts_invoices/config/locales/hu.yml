@@ -1,0 +1,133 @@
+# encoding: utf-8
+# Hungarian strings go here for Rails i18n
+hu:
+  project_module_contacts_invoices: Számlák
+
+  label_invoice_plural: Számlák
+  label_invoice: Számla
+  label_invoice_new: Új számla
+  label_invoice_edit: Számla szerkesztése
+  label_invoice_status: Státusz
+  label_invoice_status_draft: Vázlat
+  label_invoice_status_sent: Elküldve
+  label_invoice_status_paid: Fizetve
+  label_invoice_lines: Tételek
+  label_invoice_percent: Százalék
+  label_invoice_amount: Összeg
+  label_invoice_address: Cím
+  label_invoice_bill_to: Ügyfél
+  label_invoice_company_representative: Képviselő
+  label_invoice_company_name: Cég neve
+  label_invoice_company_info: Cég információk
+  label_invoice_bill_info: Számlázási információk
+  label_invoice_units: Tétel egységek
+  label_invoice_total: Összesen
+  label_invoice_tax: Adó
+  label_invoice_sub_amount: Részösszeg
+  label_invoice_invoiced: Számlázva
+  label_invoice_add_line: Új tétel
+  label_invoice_overdue: Lejárt
+  label_invoice_last_number: 'Utolsó számlaszám: #%{number}'
+  label_invoice_template: Sablon
+  label_invoice_number_format: Számlaszám formátum
+  label_invoice_default_tax: Alapértelmezett adó
+  label_invoice_line_grouping: Tételek csoportosítása
+  label_invoice_line_grouping_by_activity: Aktivitás szerint
+  label_invoice_line_grouping_by_issue: Feladat szerint
+  label_invoice_line_grouping_by_user: Felhasználó szerint
+  label_invoice_line_grouping_single_line: Egy tétel
+
+  permission_edit_own_invoices: Saját számlák szerkesztése
+  permission_edit_invoices: Számlák szerkesztése
+  permission_delete_invoices: Számlák törlése
+  permission_view_invoices: Számlák megtekintése
+
+  button_send_mail: Küldés
+  button_print: Nyomtatás
+  button_invoice: Számlázás
+
+  field_invoice_number: Számla száma
+  field_invoice_date: Kelt
+  field_invoice_contact: Kliens
+  field_invoice_due_date: Határidő
+  field_invoice_amount: Összeg
+  field_invoice_discount: Kedvezmény
+  field_invoice_assigned_to: Hozzárendelve
+  field_invoice_status: Státusz
+  field_invoice_currency: Pénznem
+  field_invoice_language: Invoice language
+
+  field_invoice_line_position: '#'
+  field_invoice_line_description: Leírás
+  field_invoice_line_price: Egységár
+  field_invoice_line_quantity: Mennyiség
+  field_invoice_line_tax: Adó
+  field_invoice_line_tax_amount: Adó összege
+  field_invoice_line_total: Összesen
+  field_invoice_line_units: Egység
+
+  #0.0.3
+  label_invoice_company_logo_url: Cég logó (URL)
+
+  #1.0.1
+  label_invoice_line_grouping_all: Összes
+  label_invoice_default_currency: Alapértelmezett pénznem
+  label_invoice_total_including_tax: Az összeg tartalmazza az adót
+  label_invoice_excerpt_invoice_list: Számla lista kivonat
+  label_invoice_created: Számla létrehozva
+  label_invoice_disable_taxes: Adó letiltása
+  label_invoice_days_late: '%{days} napos késés'
+  label_invoice_contact_extra_field: Extra kliens mező
+  lable_invoice_contact_extra_field_tip: Megjelenik a számlán (pl. Saját kliens azonosító)
+  label_invoice_decimal_separator: Tizedes elválasztó
+  label_invoice_thousands_delimiter: Ezres elválasztó
+  label_invoice_general: Általános
+  label_invoice_company: Cég
+  label_invoice_total_with_tax: Összesen (adóval)
+
+  #1.0.2
+  label_invoice_show_in_pdf: Megjelenítés PDF-ben
+  label_invoice_discount_including_tax: Kedvezmény (adóval)
+
+  #1.0.3
+  label_invoice_use_rate_plugin: Díjszabás plugin használata
+  label_invoice_line_grouping_by_time_entry: Időbejegyzés alapján
+  label_generate_invoice: Számla generálása
+
+  #1.0.4
+  field_invoice_subject: Tárgy
+
+  #2.0.0
+  label_invoice_filter_companies: Cégek mint kliensek
+
+  #2.0.1
+  label_invoice_company_profile: Cég profil
+
+# Expenses
+  project_module_contacts_expenses: Kiadás
+
+  permission_import_invoices: Számlák importálása
+  permission_import_expenses: Kiadások importálása
+  label_expense_plural: Kiadások
+  label_expense: Kiadás
+  label_expense_new: Új kiadás
+  label_expense_edit: Kiadás szerkesztése
+  label_expense_status: Státusz
+  label_expense_status_draft: Vázlat
+  label_expense_status_new: Új
+  label_expense_status_billed: Számlázva
+  label_expense_status_paid: Fizetve
+  label_expense_created: Kiadás létrehozva
+
+  field_expense_date: Kiadás dátuma
+  field_expense_contact: Kliens
+  field_expense_status: Státusz
+  field_expense_price: Összeg
+
+  permission_edit_own_expenses: Saját kiadások szerkesztése
+  permission_edit_expenses: Kiadások szerkesztése
+  permission_delete_expenses: Kiadások törlése
+  permission_view_expenses: Kiadások megtekintése
+
+  label_expense_stat_by_period: Kiadások periódus szerint
+  label_expense_stat_by_status: Kiadások státusz szerint

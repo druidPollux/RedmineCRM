@@ -1,0 +1,161 @@
+# encoding: utf-8
+# Japanese strings go here for Rails i18n
+ja:
+  project_module_contacts_invoices: インボイス
+
+  label_invoice_plural: インボイス
+  label_invoice: インボイス
+  label_invoice_new: 新規インボイス
+  label_invoice_edit: インボイスの編集
+  label_invoice_status: ステータス
+  label_invoice_status_draft: ドラフト
+  label_invoice_status_sent: 請求済み
+  label_invoice_status_paid: 支払い済
+  label_invoice_lines: インボイス項目
+  label_invoice_percent: パーセンテージ
+  label_invoice_amount: 数量
+  label_invoice_address: 住所
+  label_invoice_bill_to: 請求先
+  label_invoice_company_representative: 代表
+  label_invoice_company_name: 企業名
+  label_invoice_company_info: 企業情報
+  label_invoice_bill_info: 請求情報
+  label_invoice_units: 行単位
+  label_invoice_total: 合計
+  label_invoice_tax: 税率
+  label_invoice_sub_amount: 仮合計
+  label_invoice_invoiced: インボイスされた項目
+  label_invoice_add_line: 一行を追加
+  label_invoice_overdue: 延滞
+  label_invoice_last_number: '最新のインボイス番号は#%{number}'
+  label_invoice_template: テンプレート
+  label_invoice_number_format: インボイス番号形式
+  label_invoice_default_tax: 既定の税率
+  label_invoice_line_grouping: 項目グルーピング
+  label_invoice_line_grouping_by_activity: 活動で
+  label_invoice_line_grouping_by_issue: チケットで
+  label_invoice_line_grouping_by_user: ユーザーで
+  label_invoice_line_grouping_single_line: 単独の行
+
+  permission_edit_own_invoices: 自分のインボイスの編集
+  permission_edit_invoices: インボイスの編集
+  permission_delete_invoices: インボイスの削除
+  permission_view_invoices: インボイスを閲覧
+
+  button_send_mail: 送信
+  button_print: 印刷
+  button_invoice: インボイス
+
+  field_invoice_number: インボイス番号
+  field_invoice_date: インボイス日付
+  field_invoice_contact: クライエント
+  field_invoice_due_date: 支払期限
+  field_invoice_amount: 数量
+  field_invoice_discount: 値引き
+  field_invoice_assigned_to: 担当者
+  field_invoice_status: ステータス
+  field_invoice_currency: 通貨
+  field_invoice_language: インボイス言語
+
+  field_invoice_line_position: '#'
+  field_invoice_line_description: 概要
+  field_invoice_line_price: 単価
+  field_invoice_line_quantity: 数量
+  field_invoice_line_tax: 税率
+  field_invoice_line_tax_amount: 税金
+  field_invoice_line_total: 合計
+  field_invoice_line_units: 単位
+
+  #0.0.3
+  label_invoice_company_logo_url: 会社ロゴ(URL)
+
+  #1.0.1
+  label_invoice_line_grouping_all: すべて
+  label_invoice_default_currency: 既定の通貨
+  label_invoice_total_including_tax: 税込み合計
+  label_invoice_excerpt_invoice_list: インボイス一覧の閲覧
+  label_invoice_created: インボイス作成完了
+  label_invoice_disable_taxes: 税率を適応しない
+  label_invoice_days_late: '%{days}日の延滞'
+  label_invoice_contact_extra_field: インボイス用のコンタクト追加項目
+  lable_invoice_contact_extra_field_tip: インボイスで表示（例：消費税、TAX番号等）
+  label_invoice_decimal_separator: 小数点の記号
+  label_invoice_thousands_delimiter: 千単位の区切り記号
+  label_invoice_general: 一般
+  label_invoice_company: 会社
+  label_invoice_total_with_tax: 税込み合計
+
+  #1.0.2
+  label_invoice_show_in_pdf: PDF形式で表示
+  label_invoice_discount_including_tax: 税込み値引き
+
+  #1.0.3
+  label_invoice_use_rate_plugin: レートプラグインを使用
+  label_invoice_line_grouping_by_time_entry: 時間順
+  label_generate_invoice: インボイスを作成
+
+  #1.0.4
+  field_invoice_subject: 掲題
+
+  #2.0.0
+  label_invoice_filter_companies: 企業名でフィルター
+
+  #2.0.1
+  label_invoice_company_profile: 企業プロフィル
+
+# 経費
+  project_module_contacts_expenses: 経費
+
+  permission_import_invoices: インボイスをインポート
+  permission_import_expenses: 経費をインポート
+  label_expense_plural: 経費
+  label_expense: 経費
+  label_expense_new: 新規経費
+  label_expense_edit: 経費の編集
+  label_expense_status: ステータス
+  label_expense_status_draft: ドラフト
+  label_expense_status_new: 新規
+  label_expense_status_billed: 請求済み
+  label_expense_status_paid: 支払い済
+  label_expense_created: 経費作成完了
+
+  field_expense_date: 経費日付
+  field_expense_contact: クライエント
+  field_expense_status: ステータス
+  field_expense_price: 金額
+
+  permission_edit_own_expenses: 自分の経費の編集
+  permission_edit_expenses: 経費の編集
+  permission_delete_expenses: 経費の削除
+  permission_view_expenses: 経費の閲覧
+
+  label_expense_stat_by_period: 期間毎の経費
+  label_expense_stat_by_status: ステータス順の経費
+
+  #2.1.1
+  label_invoice_cross_project_contacts: プロジェクト間のコンタクト関係を許可
+
+  #2.1.2
+  label_invoice_show_invoices_in_top_menu: トップメニューにインボイスを表示
+  label_invoice_show_expenses_in_top_menu: トップメニューに経費を表示
+  permission_manage_invoices: インボイス管理
+  permission_comment_invoices: インボイスにコメント追加
+
+  #2.2.0
+  activerecord:
+    errors:
+      messages:
+        text_invoice_cant_change_status: を更新出来なかった
+  label_invoice_status_canceled: 取り消し
+  label_invoice_amount_due: 未払い金額
+  label_invoice_payment: インボイス支払い
+  label_invoice_payment_plural: 支払い
+  label_invoice_payment_new: 新規インボイス支払い
+  label_invoice_add_payment: 支払いを追加
+  label_invoice_payment_date: 支払日
+  label_invoice_paid_date: 支払い済日
+  label_invoice_balance: 残高
+  label_invoice_days_due: '%{days}日の延滞'
+  label_invoice_internal: 内部
+  permission_edit_invoice_payments: 支払いの編集
+  label_invoice_payment_created: インボイス支払い作成完了

@@ -1,0 +1,5 @@
+Folowing icons taken from http://p.yusukekamiyamane.com (c) Yusuke Kamiyamane
+* bank.png
+* money-arrow.png
+* money-coin.png
+* money.png

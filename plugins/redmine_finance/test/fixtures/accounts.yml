@@ -1,0 +1,16 @@
+account_001:
+  id: 1
+  name: Cash
+  description: Cash account
+  amount: 30
+  currency: USD
+  project_id: 1
+  assigned_to_id: 1
+account_002:
+  id: 2
+  name: Bank account
+  description: Bank account
+  amount: 120
+  currency: EUR
+  project_id: 1
+  assigned_to_id: 1

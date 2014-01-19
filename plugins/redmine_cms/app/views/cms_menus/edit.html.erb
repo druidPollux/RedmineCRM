@@ -1,0 +1,7 @@
+<h2><%= link_to l(:label_cms_menu_plural), cms_menus_path %> &#187; <%=l(:label_cms_menu)%> <%= @cms_menu.caption %></h2>
+
+<%= labelled_form_for :cms_menu, @cms_menu, :url => { :action => 'update', :id => @cms_menu},
+  :html => { :id => 'cms_menu-form', :method => :put } do |f| %>
+<%= render :partial => 'form', :locals => { :f => f } %>
+<%= submit_tag l(:button_save) %>
+<% end %>

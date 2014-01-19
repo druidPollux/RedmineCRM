@@ -1,0 +1,28 @@
+<%= error_messages_for 'invoice_payment' %>
+
+<div class="box tabular">
+  
+<p><%= f.text_field :amount, :label => l(:field_invoice_amount), :size => 10, :required => true %></p>
+<p><%= f.text_field :payment_date, :label => l(:label_invoice_payment_date), :size => 12, :required => true %><%= calendar_for('invoice_payment_payment_date') %> </p>
+<p><%= f.text_field :description, :style => "width: 98%;" %></p>
+
+<% @invoice_payment.custom_field_values.each do |value| %>
+  <p>
+    <%= custom_field_tag_with_label :invoice_payment, value %>
+  </p>
+<% end -%>
+
+</div>
+
+<fieldset><legend><%= l(:label_attachment_plural) %></legend>
+<% if @invoice_payment.attachments.any? -%>
+  <%= link_to_attachments @invoice_payment, :thumbnails => true %>
+<% end %>
+
+<p><%= render :partial => 'attachments/form', :locals => {:container => @invoice_payment} %></p>
+</fieldset>  
+<br>
+
+
+
+

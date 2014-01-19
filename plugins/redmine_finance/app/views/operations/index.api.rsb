@@ -1,0 +1,19 @@
+api.array :operations, api_meta(:total_count => @operations_count, :offset => @offset, :limit => @limit) do
+  @operations.each do |operation|
+    api.operation do
+        api.id operation.id
+        api.amount operation.amount if operation.amount
+        api.currency operation.currency if operation.currency
+        api.operation_date operation.operation_date
+        api.description operation.description
+        api.category(:id => operation.category_id, :name => operation.category.name, :is_income => operation.category.is_income) unless operation.category.blank?
+        api.account(:id => operation.account_id, :name => operation.account.name) unless operation.account.blank?
+        api.contact(:id => operation.contact_id, :name => operation.contact.name) unless operation.contact.blank?
+        api.author(:id => operation.author_id, :name => operation.author.name) unless operation.author.nil?
+
+      api.created_at operation.created_at
+      api.updated_at operation.updated_at
+
+    end
+  end
+end

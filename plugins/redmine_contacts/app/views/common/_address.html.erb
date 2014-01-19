@@ -1,0 +1,13 @@
+<% unless address.street1.blank? %>
+	<%= address.street1 %>
+<% end %>
+<% unless address.street2.blank? %>
+	<br>
+	<%= address.street2 %>
+<% end %>
+<br>
+<%= "#{address.city}, #{address.region} #{address.postcode}" unless address.postcode.blank? && address.region.blank? && address.postcode.blank? %>
+<% unless address.country.blank? %>
+	<br>
+	<%= address.country %>
+<% end %>

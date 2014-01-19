@@ -1,0 +1,21 @@
+roles_005: 
+  name: Anonymous
+  id: 5
+  builtin: 2
+  issues_visibility: default
+  permissions: |
+    --- 
+    - :view_issues
+    - :add_issue_notes
+    - :view_gantt
+    - :view_calendar
+    - :view_time_entries
+    - :view_documents
+    - :view_wiki_pages
+    - :view_wiki_edits
+    - :view_files
+    - :browse_repository
+    - :view_changesets
+    - :view_invoices
+
+  position: 5

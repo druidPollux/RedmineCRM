@@ -1,0 +1,47 @@
+# Polish strings go here for Rails i18n
+pl:
+  label_people: Osoby
+  label_people_edit_person: Edytuj informacje o osobie
+  label_people_new_person: Nowa osoba
+  label_people_group_plular: Groupy
+  label_people_search: Szukaj po nazwisku
+  label_people_show_on_map: Pokazna mapie
+  label_people_person: Osoba
+  label_people_all: Pokaż wszystkich
+  label_people_next_birthdays: Najbliższe urodziny
+  label_people_new_people: Nowe osoby
+  label_people_male: Mężczyzna
+  label_people_female: Kobieta
+  label_people_settings: Ustawienia osób
+
+  button_people_edit_profile: Edytuj profil
+
+  field_people_avatar: Avatar
+  field_people_job_title: Stanowisko
+  field_people_phone: Telefon
+  field_people_phone_plural: Telefony
+  field_people_skype: Skype
+  field_people_twitter: Twitter
+  field_people_facebook: Facebook 
+  field_people_linkedin: LinkedIn
+  field_people_middlename: Drugie imię
+  field_people_background: Informacje
+  field_people_address: Adres
+  field_people_gender: Płeć
+  field_people_birthday: Urodziny
+  field_people_appearance_date: Data dołączenia
+  field_people_age: Wiek
+
+  people_permission_edit_people: Edycja osób
+  people_permission_view_people: Przeglądanie osób
+  people_permission_add_people: Dodawanie osób
+  people_permission_delete_people: Usuwanie osób
+  people_permission_add_attachments: Dodawanie załączników
+
+  #0.0.2
+  label_people_acl_settings: Ustawienia kontroli dostępu
+  label_people_visibility: Widoczność osób
+  label_people_visibility_select: Pokaż osoby
+  label_people_visibility_resistered: Dla zarejestrowanych użytkowników
+  label_people_visibility_selected: Dla wybranych użytkowników
+  label_people_visibility_anonymous: Dla anonimowych użytkowników

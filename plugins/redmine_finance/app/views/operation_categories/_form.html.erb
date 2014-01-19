@@ -1,0 +1,14 @@
+<%= error_messages_for 'category' %>
+
+<div class="box tabular">
+<p><label for="category_name"><%=l(:field_name)%><span class="required"> *</span></label>
+<%= text_field 'category', 'name'  %></p>
+
+<p><label for="category_is_income"><%=l(:label_operation_category_is_income)%></label>
+<%= check_box 'category', 'is_income' %></p>
+
+</div>
+                 
+
+<% content_for :header_tags do %>
+<% end %>

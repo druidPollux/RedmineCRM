@@ -1,0 +1,184 @@
+# encoding: utf-8
+# English strings go here for Rails i18n
+en:
+  project_module_contacts_invoices: Invoices
+
+  label_invoice_plural: Invoices
+  label_invoice: Invoice
+  label_invoice_new: New invoice
+  label_invoice_edit: Edit invoice
+  label_invoice_status: Status
+  label_invoice_status_draft: Draft
+  label_invoice_status_sent: Sent
+  label_invoice_status_paid: Paid
+  label_invoice_lines: Invoice lines
+  label_invoice_percent: '%'
+  label_invoice_amount: '$'
+  label_invoice_address: Address
+  label_invoice_bill_to: Bill to
+  label_invoice_company_representative: Representative
+  label_invoice_company_name: Company name
+  label_invoice_company_info: Company info
+  label_invoice_bill_info: Bill info
+  label_invoice_units: Line units
+  label_invoice_total: Total
+  label_invoice_tax: Tax
+  label_invoice_sub_amount: Sub total
+  label_invoice_invoiced: Invoiced
+  label_invoice_add_line: Add line
+  label_invoice_overdue: Overdue
+  label_invoice_last_number: 'Last invoice number was #%{number}'
+  label_invoice_template: Template
+  label_invoice_number_format: Invoice number format
+  label_invoice_default_tax: Default tax value
+  label_invoice_line_grouping: Lines grouping
+  label_invoice_line_grouping_by_activity: By activity
+  label_invoice_line_grouping_by_issue: By issue
+  label_invoice_line_grouping_by_user: By user
+  label_invoice_line_grouping_single_line: Single line
+
+  permission_edit_own_invoices: Edit own invoices
+  permission_edit_invoices: Edit invoices
+  permission_delete_invoices: Delete invoices
+  permission_view_invoices: View invoices
+
+  button_send_mail: Send
+  button_print: Print
+  button_invoice: Invoice
+
+  field_invoice_number: Invoice ID
+  field_invoice_date: Issue date
+  field_invoice_contact: Client
+  field_invoice_due_date: Due date
+  field_invoice_amount: Amount
+  field_invoice_discount: Discount
+  field_invoice_assigned_to: Assigned to
+  field_invoice_status: Status
+  field_invoice_currency: Currency
+  field_invoice_language: Language
+
+  field_invoice_line_position: '#'
+  field_invoice_line_description: Description
+  field_invoice_line_price: Unit price
+  field_invoice_line_quantity: Qty
+  field_invoice_line_tax: Tax
+  field_invoice_line_tax_amount: Tax amount
+  field_invoice_line_total: Total
+  field_invoice_line_units: Units
+
+  #0.0.3
+  label_invoice_company_logo_url: Company logo (URL)
+
+  #1.0.1
+  label_invoice_line_grouping_all: All
+  label_invoice_default_currency: Default currency
+  label_invoice_total_including_tax: Total including tax
+  label_invoice_excerpt_invoice_list: Excerpt invoice list
+  label_invoice_created: Invoice created
+  label_invoice_disable_taxes: Disable taxes
+  label_invoice_days_late: '%{days} days late'
+  label_invoice_contact_extra_field: Contact extra field for invoice
+  lable_invoice_contact_extra_field_tip: Displayed on invoices (e.g. Client VAT or TAX ID)
+  label_invoice_decimal_separator: Decimal separator
+  label_invoice_thousands_delimiter: Thousands delimiter
+  label_invoice_general: General
+  label_invoice_company: Company
+  label_invoice_total_with_tax: Total, including tax
+
+  #1.0.2
+  label_invoice_show_in_pdf: Show in PDF
+  label_invoice_discount_including_tax: Discount including tax
+
+  #1.0.3
+  label_invoice_use_rate_plugin: Use rate plugin
+  label_invoice_line_grouping_by_time_entry: By time entry
+  label_generate_invoice: Generate invoice
+
+  #1.0.4
+  field_invoice_subject: Subject
+
+  #2.0.0
+  label_invoice_filter_companies: Filter companies
+
+  #2.0.1
+  label_invoice_company_profile: Company profile
+
+# Expenses
+  project_module_contacts_expenses: Expenses
+
+  permission_import_invoices: Import invoices
+  permission_import_expenses: Import expenses
+  label_expense_plural: Expenses
+  label_expense: Expense
+  label_expense_new: New expense
+  label_expense_edit: Edit expense
+  label_expense_status: Status
+  label_expense_status_draft: Draft
+  label_expense_status_new: New
+  label_expense_status_billed: Billed
+  label_expense_status_paid: Paid
+  label_expense_created: Expense created
+
+  field_expense_date: Expense date
+  field_expense_contact: Client
+  field_expense_status: Status
+  field_expense_price: Amount
+
+  permission_edit_own_expenses: Edit own expenses
+  permission_edit_expenses: Edit expenses
+  permission_delete_expenses: Delete expenses
+  permission_view_expenses: View expenses
+
+  label_expense_stat_by_period: Expenses by period
+  label_expense_stat_by_status: Expenses by status
+
+  #2.1.1
+  label_invoice_cross_project_contacts: Allow cross-project contacts relations
+
+  #2.1.2
+  label_invoice_show_invoices_in_top_menu: Show invoices in top menu
+  label_invoice_show_expenses_in_top_menu: Show expenses in top menu
+  permission_manage_invoices: Manage invoices
+  permission_comment_invoices: Comment invoices
+
+  #2.2.0
+  activerecord:
+    errors:
+      messages:
+        text_invoice_cant_change_status: can't be changed
+  label_invoice_status_canceled: Canceled
+  label_invoice_amount_due: Due
+  label_invoice_payment: Invoice payment
+  label_invoice_payment_plural: Payments
+  label_invoice_payment_new: New invoice payment
+  label_invoice_add_payment: Add payment
+  label_invoice_payment_date: Payment date
+  label_invoice_paid_date: Paid date
+  label_invoice_balance: Balance
+  label_invoice_days_due: '%{days} days due'
+  label_invoice_internal: Internal
+  permission_edit_invoice_payments: Edit payments
+  label_invoice_payment_created: Invoice payment created
+
+  #2.3.0
+  label_invoice_is_billable: Billable
+  label_invoice_show_units: Show units
+  label_invoice_status_estimate: Estimate
+  label_estimate: Estimate
+
+  #3.0.0
+  label_invoice_templates: Templates
+  label_invoice_custom_template: Invoice custom template
+  label_invoice_pdf: PDF
+  label_invoice_public_link: Public link
+  label_invoice_template_classic: "Classic"
+  label_invoice_template_modern: "Modern"
+  label_invoice_template_left: "Modern left"
+  label_invoice_template_blank_header: "Modern with blank header"
+  label_invoice_template_custom: "Custom template"
+  label_invoice_public_links: Public links
+  label_invoice_recurring: Recurring invoice
+
+  #3.0.1
+  permission_add_invoices: Add invoices
+  permission_add_expenses: Add expenses

@@ -1,0 +1,8 @@
+001:
+  id: 1
+  name: Category 1
+  is_income: true
+002:
+  id: 2
+  name: Category 2
+  is_income: false

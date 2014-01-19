@@ -1,0 +1,179 @@
+# encoding: utf-8
+de:
+  project_module_contacts_invoices: Rechnungen
+
+  label_invoice_plural: Rechnungen
+  label_invoice: Rechnung
+  label_invoice_new: Neue Rechnung
+  label_invoice_edit: Rechnung bearbeiten
+  label_invoice_status: Status
+  label_invoice_status_draft: Entwurf
+  label_invoice_status_sent: Versendet
+  label_invoice_status_paid: Bezahlt
+  label_invoice_lines: Rechnungspositionen
+  label_invoice_percent: Prozentual
+  label_invoice_amount: Betrag
+  label_invoice_address: Adresse
+  label_invoice_bill_to: Rechnung an
+  label_invoice_company_representative: Repräsentative
+  label_invoice_company_name: Firmenname
+  label_invoice_company_info: Firmeninfo
+  label_invoice_bill_info: Rechnungsinfo
+  label_invoice_units: Einheiten
+  label_invoice_total: Gesamt
+  label_invoice_tax: Steuer
+  label_invoice_sub_amount: Zwischensumme
+  label_invoice_invoiced: Gestellte Rechnungen
+  label_invoice_add_line: Neue Position
+  label_invoice_overdue: Überfällig
+  label_invoice_last_number: 'Letzte Rechnungsnummer war #%{number}'
+  label_invoice_template: Vorlage
+  label_invoice_number_format: Format Rechnungsnummer
+  label_invoice_default_tax: Standard Steuersatz
+  label_invoice_line_grouping: Zeilengruppierung
+  label_invoice_line_grouping_by_activity: nach Aktivität
+  label_invoice_line_grouping_by_issue: nach Ausstellung
+  label_invoice_line_grouping_by_user: nach Benutzer
+  label_invoice_line_grouping_single_line: einzigen Zeile
+
+  permission_edit_own_invoices: Eigenen Rechnungen bearbeiten
+  permission_edit_invoices: Rechnungen bearbeiten
+  permission_delete_invoices: Löschen Rechnungen
+  permission_view_invoices: Rechnungen anzeigen
+
+  button_send_mail: Senden
+  button_print: Drucken
+  button_invoice: Rechnung
+
+  field_invoice_number: Rechnungs-Nr.
+  field_invoice_date: Rechnungsdatum
+  field_invoice_contact: Kunde
+  field_invoice_due_date: Fälligkeit
+  field_invoice_amount: Betrag
+  field_invoice_discount: Ermäßigung
+  field_invoice_assigned_to: Zugewiesen an
+  field_invoice_status: Status
+  field_invoice_currency: Währung
+  field_invoice_language: Rechnungssprache
+
+  field_invoice_line_position: '#'
+  field_invoice_line_description: Beschreibung
+  field_invoice_line_price: Preis
+  field_invoice_line_quantity: Menge
+  field_invoice_line_tax: Steuer
+  field_invoice_line_tax_amount: Steuerbetrag
+  field_invoice_line_total: Gesamt
+  field_invoice_line_units: Einheiten
+
+  #0.0.3
+  label_invoice_company_logo_url: Firmenlogo (URL)
+
+  #1.0.1
+  label_invoice_line_grouping_all: Alle
+  label_invoice_default_currency: Standard Währung
+  label_invoice_total_including_tax: Zwischensummer beinhaltet Steuer
+  label_invoice_excerpt_invoice_list: Rechnungsliste herausziehen
+  label_invoice_created: Rechnung erstellt
+  label_invoice_disable_taxes: Steuern deaktiviert
+  label_invoice_days_late: '%{days} Tage fällig'
+  label_invoice_contact_extra_field: Kontakt Zusatzfeld für Rechnungen
+  lable_invoice_contact_extra_field_tip: Anzeige auf Rechnungen (z.B. für Steuernummer)
+  label_invoice_decimal_separator: Dezimaltrennzeichen
+  label_invoice_thousands_delimiter: Tausendertrennzeichen
+  label_invoice_general: Allgemein
+  label_invoice_company: Unternehmen
+  label_invoice_total_with_tax: Gesamt, inkl. Steuer
+
+  #1.0.2
+  label_invoice_show_in_pdf: Anzeige in PDF
+  label_invoice_discount_including_tax: Ermäßigung enthält Steuer
+
+  #1.0.3
+  label_invoice_use_rate_plugin: Verwende Rate Plugin
+  label_invoice_line_grouping_by_time_entry: nach Buchung
+  label_generate_invoice: Rechnung erstellen
+
+  #1.0.4
+  field_invoice_subject: Betreff
+
+  #2.0.0
+  label_invoice_filter_companies: Unternehmen als Kunden
+
+  #2.0.1
+  label_invoice_company_profile: Unternehmensprofil
+
+# Expenses
+  project_module_contacts_expenses: Aufwendungen
+
+  permission_import_invoices: Rechnung importieren
+  permission_import_expenses: Aufwände importieren
+  label_expense_plural: Aufwendungen
+  label_expense: Aufwand
+  label_expense_new: Neuer Aufwand
+  label_expense_edit: Aufwand bearbeiten
+  label_expense_status: Status
+  label_expense_status_draft: Entwurf
+  label_expense_status_new: Neu
+  label_expense_status_billed: berechnet
+  label_expense_status_paid: bezahlt
+  label_expense_created: Aufwand erstellt
+
+  field_expense_date: Datum
+  field_expense_contact: Kunde
+  field_expense_status: Status
+  field_expense_price: Betrag
+
+  permission_edit_own_expenses: Eigene Aufwendungen bearbeiten
+  permission_edit_expenses: Aufwendungen bearbeiten
+  permission_delete_expenses: Aufwendungen löschen
+  permission_view_expenses: Aufwendungen anzeigen
+
+  label_expense_stat_by_period: Aufwendungen pro Zeitraum
+  label_expense_stat_by_status: Aufwendungen pro Status
+
+  #2.1.1
+  label_invoice_cross_project_contacts: Projektübergreifende Kontakte erlauben
+
+  #2.1.2
+  label_invoice_show_invoices_in_top_menu: Zeige Rechnungen im oberen Menü
+  label_invoice_show_expenses_in_top_menu: Zeige Aufwendungen im oberen Menü
+  permission_manage_invoices: Rechnungen verwalten
+  permission_comment_invoices: Rechnung kommentieren
+
+  #2.2.0
+  activerecord:
+    errors:
+      messages:
+        text_invoice_cant_change_status: kann nicht geändert werden
+  label_invoice_status_canceled: Abgebrochen
+  label_invoice_amount_due: Fällig
+  label_invoice_payment: Zahlungseingang Rechnung
+  label_invoice_payment_plural: Zahlungen
+  label_invoice_payment_new: Neue Zahlung
+  label_invoice_add_payment: Zahlung hinzufügen
+  label_invoice_payment_date: Zahlungsdatum
+  label_invoice_paid_date: Bezahldatum
+  label_invoice_balance: Kontostand
+  label_invoice_days_due: '%{days} Tage fällig'
+  label_invoice_internal: Intern
+  permission_edit_invoice_payments: Zahlungen bearbeiten
+  label_invoice_payment_created: Zahlungseingang buchen
+
+  #2.3.0
+  label_invoices_is_billable: abrechnungsfähig
+  label_invoice_show_units: Einheiten anzeigen
+  label_invoice_status_estimate: Angebot
+  label_estimate: Angebot
+
+  #3.0.0
+  label_invoice_templates: Vorlagen
+  label_invoice_custom_template: Eigene Vorlage
+  label_invoice_pdf: PDF
+  label_invoice_public_link: Öffentlicher Link
+  label_invoice_template_classic: "Classic"
+  label_invoice_template_modern: "Modern"
+  label_invoice_template_left: "Modern links"
+  label_invoice_template_blank_header: "Modern mit leerem Kopf"
+  label_invoice_template_custom: "Eigene Vorlage"
+  label_invoice_public_links: Öffentliche Links
+  label_invoice_recurring: Wiederkehrende Rechnung

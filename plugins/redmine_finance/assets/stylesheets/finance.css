@@ -1,0 +1,31 @@
+/**********************************************************************/
+/* ICONS
+/**********************************************************************/
+.icon-finance { background-image: url(../images/bank.png); }  
+.icon-operation { background-image: url(../images/money-coin.png); }  
+.icon-approve { background-image: url(../images/stamp.png); }  
+.icon-operation-income { background-image: url(../images/money-income.png); }  
+.icon-operation-outcome { background-image: url(../images/money-arrow.png); }  
+
+
+/**********************************************************************/
+/* OPERATION LIST 
+/**********************************************************************/
+.operation_list table.list td.description {white-space: normal;}
+.operation_list table.list td.contact {white-space: normal;}
+.operation_list table.list tr.operation a {color: #666;}
+table.list .money  {text-align: right;}
+
+
+/**********************************************************************/
+/* ACCOUNTS STAT 
+/**********************************************************************/
+table.accounts-stat {padding-right: 10px; width: 100%;}
+table.accounts-stat th {text-align: left; vertical-align: top; padding-bottom: 10px;font-weight: normal;}
+table.accounts-stat td.sum {text-align: right; padding-bottom: 10px;white-space: nowrap;font-weight: bold;}
+
+/**********************************************************************/
+/* ACCOUNT
+/**********************************************************************/
+div.account.details div.operation_list {margin-top: 20px;}
+div.account, div.operation { background: rgb(236, 250, 241);}

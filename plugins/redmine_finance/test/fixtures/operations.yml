@@ -1,0 +1,40 @@
+001:
+  id: 1
+  amount: 100
+  category_id: 1
+  account_id: 1
+  contact_id: 1
+  comments_count: 0
+  operation_date: <%= 10.days.ago.to_s(:db) %>
+  author_id: 1
+  description: 'Operation #1 description'
+002:
+  id: 2
+  amount: 50
+  category_id: 2
+  account_id: 1
+  contact_id: 2
+  comments_count: 0
+  operation_date: <%= 9.days.ago.to_s(:db) %>
+  author_id: 1
+  description: 'Operation #2 description'
+003:
+  id: 3
+  amount: 20
+  category_id: 2
+  account_id: 1
+  contact_id: 1
+  comments_count: 0
+  operation_date: <%= 8.days.ago.to_s(:db) %>
+  author_id: 2
+  description: 'Operation #3 description'
+004:
+  id: 4
+  amount: 120
+  category_id: 1
+  account_id: 2
+  contact_id: 1
+  comments_count: 0
+  operation_date: <%= 8.days.ago.to_s(:db) %>
+  author_id: 2
+  description: 'Operation #4 description'

@@ -1,0 +1,43 @@
+<div class="contextual">
+<%= link_to l(:label_cms_part_new), new_part_path, :class => 'icon icon-add' %>
+</div>
+
+<h3><%=l(:label_cms_part_plural)%></h3>
+
+<div class="autoscroll">
+<table class="list">
+  <thead><tr>
+    <th><%= l(:label_cms_part_name) %></th>
+    <th><%= l(:label_cms_part_content) %></th>
+    <th></th>
+  </tr></thead>
+  <% previous_group = false %>
+  <tbody>
+<% for part in @parts -%>
+    <% if part.part_type != previous_group %>
+      <% reset_cycle %>
+      <tr class="group open">
+        <td colspan="3">
+          <span class="expander" onclick="toggleRowGroup(this);">&nbsp;</span>
+          <%= part.part_type.blank? ? 'None' : part.part_type %> 
+          <%= link_to_function("#{l(:button_collapse_all)}/#{l(:button_expand_all)}", "toggleAllRowGroups(this)", :class => 'toggle-all') %>
+        </td>
+      </tr>
+      <% previous_group = part.part_type %>
+    <% end %>
+
+
+  <tr class="part <%= cycle("odd", "even") %> ">
+  <td class="name"><%= link_to h(part.name), edit_part_path(part) %></td>
+  <td class="type"><%= part.content_type %></td>
+    <td class="buttons">
+      <%= link_to l(:button_duplicate), {:controller => 'parts', :action => 'new', :copy_from => part }, :class => 'icon icon-duplicate' %>
+      <%= delete_link part_path(part, :back_url => parts_path(params)) %>
+    </td>
+  </tr>
+<% end -%>
+  </tbody>
+</table>
+</div>
+
+<% html_title(l(:label_cms_part_plural)) -%>

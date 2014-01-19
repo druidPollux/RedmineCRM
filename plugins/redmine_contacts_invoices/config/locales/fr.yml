@@ -1,0 +1,93 @@
+fr:
+  project_module_contacts_invoices: Factures
+
+  label_invoice_plural: Factures
+  label_invoice: Facture
+  label_invoice_new: Nouvelle facture
+  label_invoice_edit: Modifier la facture
+  label_invoice_status: Statut
+  label_invoice_status_draft: Devis
+  label_invoice_status_sent: Envoyée
+  label_invoice_status_paid: Payée
+  label_invoice_lines: Eléments de facturation
+  label_invoice_percent: Pourcentage
+  label_invoice_amount: Montant
+  label_invoice_address: Adresse
+  label_invoice_bill_to: Destinée à
+  label_invoice_company_representative: Suivi commercial
+  label_invoice_company_name: Nom de la société
+  label_invoice_company_info: Information sur la société
+  label_invoice_bill_info: Destinataire
+  label_invoice_units: Unités
+  label_invoice_total: Total
+  label_invoice_tax: Taxe
+  label_invoice_sub_amount: Sous-total
+  label_invoice_invoiced: Facturée
+  label_invoice_add_line: Ajouter une ligne
+  label_invoice_overdue: Retard
+  label_invoice_last_number: 'Numéro de la dernière facture #%{number}'
+  label_invoice_template: Modèle
+  label_invoice_number_format: Format de numérotation
+  label_invoice_default_tax: Valeur par défaut de la taxe
+  label_invoice_line_grouping: Groupage de ligne
+  label_invoice_line_grouping_by_activity: Par activité
+  label_invoice_line_grouping_by_issue: Par issue
+  label_invoice_line_grouping_by_user: Par utilisateur
+  label_invoice_line_grouping_single_line: Ligne unique
+
+  permission_edit_own_invoices: Modifier ses propres factures
+  permission_edit_invoices: Edition des factures
+  permission_delete_invoices: Supprimer les factures
+  permission_view_invoices: Visualisez vos factures
+
+  button_send_mail: Envoyer
+  button_print: Imprimer
+  button_invoice: Facture
+
+  field_invoice_number: Numéro de facture
+  field_invoice_date: Date de facturation
+  field_invoice_contact: Client
+  field_invoice_due_date: Date d'échéance
+  field_invoice_amount: Montant
+  field_invoice_discount: Remise
+  field_invoice_assigned_to: Assignée à
+  field_invoice_status: Statut
+  field_invoice_currency: Monnaie
+  field_invoice_language: Langue de la facture
+
+  field_invoice_line_position: '#'
+  field_invoice_line_description: Description
+  field_invoice_line_price: Prix unitaire
+  field_invoice_line_quantity: Qté
+  field_invoice_line_tax: Taxe
+  field_invoice_line_tax_amount: Montant de taxe
+  field_invoice_line_total: Total
+  field_invoice_line_units: Unité
+
+# in case of need
+
+  in_case_of_need_draft: Brouillon
+
+# Expenses
+  project_module_contacts_expenses: Dépenses
+
+  label_expense_plural: Dépenses
+  label_expense: Dépense
+  label_expense_new: Nouvelle dépense
+  label_expense_edit: Editer la dépense
+  label_expense_status: Statut
+  label_expense_status_draft: Brouillon
+  label_expense_status_new: Nouveau
+  label_expense_status_billed: Facturée
+  label_expense_status_paid: Payée
+  label_expense_created: Dépense créée
+
+  field_expense_date: Date de la dépense
+  field_expense_contact: Client
+  field_expense_status: Statut
+  field_expense_price: Montant
+
+  permission_edit_own_expenses: Editer vos dépenses
+  permission_edit_expenses: Editer les dépenses
+  permission_delete_expenses: Effacer les dépenses
+  permission_view_expenses: Voir les dépenses

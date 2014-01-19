@@ -1,0 +1,62 @@
+<% unless (@project = User.current.allowed_to?(:add_invoices, @project) ? @project : Invoice.allowed_target_projects.first).blank? %>
+
+  <% if [0,1,2,3].include?(InvoicesSettings[:invoices_line_grouping, @project].to_i) %>
+    <li><%= context_menu_link l(:button_invoice), {:controller => 'invoices',
+                                                   :action => 'new',
+                                                   :time_entries_ids => @time_entries.collect(&:id),
+                                                   :project_id => @project,
+                                                   :line_grouping => InvoicesSettings[:invoices_line_grouping, @project].to_i,
+                                                   :back_url => @back},
+                              :method => :get,
+                              :class => 'icon-invoice-add-context' %>
+    </li>
+  <% else %>
+    <li class="folder">
+    	<a href="#" class="submenu icon-invoice-add-context"><%= l(:label_invoice_new) %></a>
+    	<ul>
+    	  <li><%= context_menu_link l(:label_invoice_line_grouping_by_activity), {:controller => 'invoices',
+                                                       :action => 'new',
+                                                       :time_entries_ids => @time_entries.collect(&:id),
+                                                       :project_id => @project,
+                                                       :line_grouping => 0,
+                                                       :back_url => @back},
+                                  :method => :get %>
+        </li>
+        <li><%= context_menu_link l(:label_invoice_line_grouping_by_issue), {:controller => 'invoices',
+                                                       :action => 'new',
+                                                       :time_entries_ids => @time_entries.collect(&:id),
+                                                       :project_id => @project,
+                                                       :line_grouping => 1,
+                                                       :back_url => @back},
+                                  :method => :get %>
+        </li>
+        <li><%= context_menu_link l(:label_invoice_line_grouping_by_user), {:controller => 'invoices',
+                                                       :action => 'new',
+                                                       :time_entries_ids => @time_entries.collect(&:id),
+                                                       :project_id => @project,
+                                                       :line_grouping => 2,
+                                                       :back_url => @back},
+                                  :method => :get %>
+        </li>
+        <li><%= context_menu_link l(:label_invoice_line_grouping_single_line), {:controller => 'invoices',
+                                                       :action => 'new',
+                                                       :time_entries_ids => @time_entries.collect(&:id),
+                                                       :project_id => @project,
+                                                       :line_grouping => 3,
+                                                       :back_url => @back},
+                                  :method => :get %>
+        </li>
+        <li><%= context_menu_link l(:label_invoice_line_grouping_by_time_entry), {:controller => 'invoices',
+                                                       :action => 'new',
+                                                       :time_entries_ids => @time_entries.collect(&:id),
+                                                       :project_id => @project,
+                                                       :line_grouping => 5,
+                                                       :back_url => @back},
+                                  :method => :get %>
+        </li>
+    	</ul>
+    </li>
+  <% end  %>
+<% end %>
+
+

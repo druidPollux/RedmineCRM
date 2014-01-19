@@ -1,0 +1,167 @@
+# encoding: utf-8
+# Brazilian Portuguese strings go here for Rails i18n
+pt-BR:
+  project_module_contacts_invoices: Faturas
+
+  label_invoice_plural: Faturas
+  label_invoice: Fatura
+  label_invoice_new: Nova fatura
+  label_invoice_edit: Editar fatura
+  label_invoice_status: Situação
+  label_invoice_status_draft: Rascunho
+  label_invoice_status_sent: Emitido
+  label_invoice_status_paid: Paga
+  label_invoice_lines: Items
+  label_invoice_percent: Percentual
+  label_invoice_amount: Montante
+  label_invoice_address: Endereço
+  label_invoice_bill_to: Conta para
+  label_invoice_company_representative: Representante
+  label_invoice_company_name: Nome da companhia
+  label_invoice_company_info: Informações da companhia
+  label_invoice_bill_info: Informações da conta
+  label_invoice_units: Unidades
+  label_invoice_total: Total
+  label_invoice_tax: Nota fiscal
+  label_invoice_sub_amount: Subtotal
+  label_invoice_invoiced: Faturado
+  label_invoice_add_line: Adicionar item
+  label_invoice_overdue: Vencido
+  label_invoice_last_number: "Último número da fatura foi #%{number}"
+  label_invoice_template: Template
+  label_invoice_number_format: Formato da numeração da fatura
+  label_invoice_default_tax: Valor de Imposto Padrao
+  label_invoice_line_grouping: Lines grouping
+  label_invoice_line_grouping_by_activity: Por atividade
+  label_invoice_line_grouping_by_issue: Por tarefa
+  label_invoice_line_grouping_by_user: Por usuario
+  label_invoice_line_grouping_single_line: Unica Linha
+
+  permission_edit_own_invoices: Editar minhas faturas
+  permission_edit_invoices: Editar faturas
+  permission_delete_invoices: Apagar faturas
+  permission_view_invoices: Ver faturas
+
+  button_send_mail: Enviar
+  button_print: Imprimir
+  button_invoice: Fatura
+
+  field_invoice_number: Número
+  field_invoice_date: Data da fatura
+  field_invoice_contact: Cliente
+  field_invoice_due_date: Data de vencimento
+  field_invoice_amount: Valor
+  field_invoice_discount: Desconto
+  field_invoice_assigned_to: Atribuído para
+  field_invoice_status: Situação
+  field_invoice_currency: Moeda
+  field_invoice_language: Language
+
+  field_invoice_line_position: '#'
+  field_invoice_line_description: Descrição
+  field_invoice_line_price: Valor
+  field_invoice_line_quantity: Qtde
+  field_invoice_line_tax: Taxa
+  field_invoice_line_tax_amount: Total da taxa
+  field_invoice_line_total: Total
+  field_invoice_line_units: Unidade
+
+  #0.0.3
+  label_invoice_company_logo_url: Company logo (URL)
+
+  #1.0.1
+  label_invoice_line_grouping_all: Todos
+  label_invoice_default_currency: Moeda padrão
+  label_invoice_total_including_tax: Total com impostos
+  label_invoice_excerpt_invoice_list: Excerpt invoice list
+  label_invoice_created: Fatura criada
+  label_invoice_disable_taxes: Desativar impostos
+  label_invoice_days_late: '%{days} dias atrazado'
+  label_invoice_contact_extra_field: Contact extra field for invoice
+  lable_invoice_contact_extra_field_tip: Displayed on invoices (e.g. Client VAT or TAX ID)
+  label_invoice_decimal_separator: Decimal separator
+  label_invoice_thousands_delimiter: Thousands delimiter
+  label_invoice_general: Geral
+  label_invoice_company: Empresa
+  label_invoice_total_with_tax: Total, incluindo impostos
+
+  #1.0.2
+  label_invoice_show_in_pdf: Show in PDF
+  label_invoice_discount_including_tax: Descontos incluindo impostos
+
+  #1.0.3
+  label_invoice_use_rate_plugin: Use rate plugin
+  label_invoice_line_grouping_by_time_entry: By time entry
+  label_generate_invoice: Gerar fatura
+
+  #1.0.4
+  field_invoice_subject: Assunto
+
+  #2.0.0
+  label_invoice_filter_companies: Filter companies
+
+  #2.0.1
+  label_invoice_company_profile: Company profile
+
+# Expenses
+  project_module_contacts_expenses: Despesa
+
+  permission_import_invoices: Importar faturas
+  permission_import_expenses: Importar depesas
+  label_expense_plural: Despesas
+  label_expense: Despesa
+  label_expense_new: Nova Despesa
+  label_expense_edit: Editar Despesa
+  label_expense_status: Status
+  label_expense_status_draft: Rascunho
+  label_expense_status_new: Nova
+  label_expense_status_billed: 	Emitida
+  label_expense_status_paid: Pago
+  label_expense_created: Despesa Criada
+
+  field_expense_date: Data da despesa
+  field_expense_contact: Cliente
+  field_expense_status: Status
+  field_expense_price: Valor
+
+  permission_edit_own_expenses: Editar somente minhas despesa
+  permission_edit_expenses: Editar despesas
+  permission_delete_expenses: Deletar despesas
+  permission_view_expenses: Visualizar despesas
+
+  label_expense_stat_by_period: Despesas por periodo
+  label_expense_stat_by_status: Despesas por status
+
+  #2.1.1
+  label_invoice_cross_project_contacts: Allow cross-project contacts relations
+
+  #2.1.2
+  label_invoice_show_invoices_in_top_menu: Show invoices in top menu
+  label_invoice_show_expenses_in_top_menu: Show expenses in top menu
+  permission_manage_invoices: Manage invoices
+  permission_comment_invoices: Comment invoices
+
+  #2.2.0
+  activerecord:
+    errors:
+      messages:
+        text_invoice_cant_change_status: can't be changed
+  label_invoice_status_canceled: Cancelado
+  label_invoice_amount_due: Vencido
+  label_invoice_payment: Invoice payment
+  label_invoice_payment_plural: Payments
+  label_invoice_payment_new: New invoice payment
+  label_invoice_add_payment: Adicionar pagamento
+  label_invoice_payment_date: Data de pagamento
+  label_invoice_paid_date: Data de pagamento
+  label_invoice_balance: Saldo
+  label_invoice_days_due: '%{days} days due'
+  label_invoice_internal: Internal
+  permission_edit_invoice_payments: Editar pagamentos
+  label_invoice_payment_created: Pagamento da fatura efetuado
+
+  #2.3.0
+  label_invoice_is_billable: Faturável
+  label_invoice_show_units: Show units
+  label_invoice_status_estimate: Estimate
+  label_estimate: Estimate

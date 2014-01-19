@@ -1,0 +1,17 @@
+api.array :accounts, api_meta(:total_count => @accounts_count) do
+  @accounts.each do |account|
+    api.account do
+        api.id account.id
+        api.name account.name
+        api.description account.description
+        api.amount account.amount
+        api.currency account.currency
+        api.project(:id => account.project_id, :name => account.project.name) unless account.project.blank?
+        api.assigned_to(:id => account.assigned_to_id, :name => account.assigned_to.name) unless account.assigned_to.blank?
+
+      api.created_at account.created_at
+      api.updated_at account.updated_at
+
+    end
+  end
+end

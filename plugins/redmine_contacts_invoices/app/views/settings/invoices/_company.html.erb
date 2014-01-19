@@ -1,0 +1,20 @@
+<p>  
+  <label><%= l(:label_invoice_company_name) %></label>
+  <%= text_field_tag 'settings[invoices_company_name]', @settings[:invoices_company_name], :size => 60 %>
+</p>
+
+<p>  
+  <label><%= l(:label_invoice_company_representative) %></label>
+  <%= text_field_tag 'settings[invoices_company_representative]', @settings[:invoices_company_representative], :size => 60 %>
+</p>
+
+
+<p>  
+  <label><%= l(:label_invoice_company_info) %></label>
+  <%= text_area_tag 'settings[invoices_company_info]', @settings[:invoices_company_info], :rows => 8, :cols => 50 %>
+</p>
+
+<p>  
+  <label><%= l(:label_invoice_bill_info) %></label>
+  <%= text_area_tag 'settings[invoices_bill_info]', @settings[:invoices_bill_info], :rows => 8, :cols => 50 %>
+</p>

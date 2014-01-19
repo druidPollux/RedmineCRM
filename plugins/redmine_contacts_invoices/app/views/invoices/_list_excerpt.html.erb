@@ -1,0 +1,70 @@
+<%= form_tag({}) do -%>
+	<%= hidden_field_tag 'back_url', url_for(params) %>
+	<%= hidden_field_tag 'project_id', @project.id if @project %>
+		<table class="contacts invoices index">
+		<tbody>
+	    <% @invoices.each do |invoice| %>
+			<tr class="hascontextmenu">
+				<td class="checkbox">
+					<%= check_box_tag("ids[]", invoice.id, false, :id => nil)  %>
+				</td>
+				<td class="status">
+				  <%= invoice_status_tag(invoice) %>
+				</td>
+				<% if invoice.contact %>
+				<td class="avatar">
+					<%= contact_tag(invoice.contact, :type => :avatar, :size => 32) %>
+				</td>
+				<% end %>
+				<td class="name invoice-name" <%= 'colspan=2' unless invoice.contact %>>
+						<h1 class="invoice_number"><%= link_to "#{invoice.number}#{' - ' + invoice.subject unless invoice.subject.blank?}", {:controller => :invoices, :action => :show, :id => invoice.id} %></h1>
+						<h2>
+							<% if invoice.contact.blank? %>
+								<%= l(:label_invoice_internal) %>
+							<% else %>
+								<%= contact_tag(invoice.contact, :type => 'plain') %>
+							<% end %>
+							<% if invoice.is_paid? %>
+								 - <%= l(:label_invoice_status_paid) %>: <%= format_date(invoice.paid_date) %>
+							<% elsif invoice.is_open? && invoice.balance > 0 %>
+								 - <%= l(:label_invoice_amount_due) %>: <%= price_to_currency(invoice.remaining_balance, invoice.currency) %>
+							<% end %>
+						</h2>
+				</td>
+
+				<td class="info invoice-info">
+					<div class="invoice-sum"><strong><%= invoice.amount_to_s  %></strong>
+
+					</div>
+					<div class="invoice-date" >
+						<strong><%# l(:field_invoice_date) + ":" %></strong> <%= format_date(invoice.invoice_date) %><%= due_days(invoice) %>
+					</div>
+				</td>
+			</tr>
+	    <% end %>
+
+		</tbody>
+	  </table>
+	  <table class="contacts invoices index total">
+			<tbody>
+			<tr class="total">
+				<th class="title"><%= l(:label_invoice_amount_due) %>:</th>
+				<th class="sum invoices-sum">
+					<%= prices_collection_by_currency(@due_amount, :hide_zeros => true).join('<br/>').html_safe %>
+				</th>
+				<th class="title"><%= l(:label_invoice_status_paid) %>:</th>
+				<th class="sum invoices-sum">
+					<%= prices_collection_by_currency(@paid_amount, :hide_zeros => true).join('<br/>').html_safe %>
+				</th>
+				<th class="title"><%= "#{l(:label_total)} (#{@invoices_count})" %>:</th>
+				<th class="sum invoices-sum">
+					<%= prices_collection_by_currency(@invoiced_amount, :hide_zeros => true).join('<br/>').html_safe %>
+				</th>
+			</tr>
+
+			</tbody>
+	  </table>
+
+<% end %>
+
+

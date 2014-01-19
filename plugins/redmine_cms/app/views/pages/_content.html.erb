@@ -1,0 +1,34 @@
+<%= labelled_form_for :page, @page, :url => { :action => 'update', :id => @page},
+  :html => { :id => 'page_form', :multipart => true, :method => :put } do |f| %>
+
+<div class="box tabular">
+
+  <%= text_area_tag 'page[content]', @page.content, :cols => 100, :rows => 30, :class => 'wiki-edit' %>
+ <%= javascript_tag 'var editor = CodeMirror.fromTextArea(document.getElementById("page_content"), {mode: "text/html", tabMode: "indent", lineNumbers: "true", lineWrapping: "true", autofocus: "true"});' %>
+
+<p><%= f.select :content_type, options_for_select([["Textile", "textile"], ["HTML", "html"]],  @page.content_type), :label => l(:label_cms_page_content_type) %></p>  
+
+<p id="attachments_form"><label><%= l(:label_attachment_plural) %></label><%= render :partial => 'attachments/form', :locals => {:container => @page} %></p>
+
+</div>
+
+<fieldset><legend><%= l(:label_attachment_plural) %></legend>
+  <%= link_to_attachments @page, :thumbnails => true  %>
+</fieldset>
+<br/>
+<%= submit_tag l(:button_save) %>
+<%= link_to l(:label_cms_apply), "#", :style => "margin-left:10px;", :remote => true, :onclick => "editor.save(); $.ajax({url: '#{escape_javascript url_for(@page)}', type: \'post\', data: $(\'#page_form\').serialize()});return false;"%>
+<% end %>
+
+
+<% content_for :header_tags do %>
+  <%= javascript_include_tag 'codemirror/codemirror', :plugin => 'redmine_cms'  %>
+  <%= javascript_include_tag 'codemirror/mode/htmlmixed/htmlmixed', :plugin => 'redmine_cms'  %>
+  <%= javascript_include_tag 'codemirror/mode/css/css', :plugin => 'redmine_cms'  %>
+  <%= javascript_include_tag 'codemirror/mode/xml/xml', :plugin => 'redmine_cms'  %>
+  <%= javascript_include_tag 'codemirror/mode/javascript/javascript', :plugin => 'redmine_cms'  %>
+  <%= stylesheet_link_tag 'codemirror/codemirror', :plugin => 'redmine_cms'  %>
+<% end %>
+
+
+

@@ -1,0 +1,10 @@
+<%= form_tag({:controller => :people_settings, :action => :update, :id => '1', :tab => 'general'}, 
+               :method => :put, :id => "people_acl_form") do %>
+  <fieldset class="box tabular"><legend><%=l(:label_people_visibility)%></legend>
+  <p>  
+    <label><%= l(:label_people_visibility_select) %></label>
+    <%= select_tag 'settings[visibility]', options_for_select([[l(:label_people_visibility_selected), ""], [l(:label_people_visibility_resistered), "registered"], [l(:label_people_visibility_anonymous), "anonymous"]], Setting.plugin_redmine_people["visibility"]) %>
+  </p>
+  </fieldset>
+  <%= submit_tag l(:button_apply) %>
+<% end %>

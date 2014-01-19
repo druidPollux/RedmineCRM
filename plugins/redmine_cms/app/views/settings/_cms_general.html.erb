@@ -1,0 +1,41 @@
+<p>  
+  <label><%= l(:label_cms_use_localization) %></label>
+  <%= check_box_tag 'settings[use_localization]', 1, @settings[:use_localization] %>
+</p>
+
+<p>  
+  <label><%= l(:label_cms_redmine_top_menu) %></label>
+  <label class="block"><%= check_box_tag 'settings[show_home]', 1, @settings[:show_home] %><%= l(:label_home) %></label>
+  <label class="block"><%= check_box_tag 'settings[show_projects]', 1, @settings[:show_projects] %><%= l(:label_project_plural) %></label>
+  <label class="block"><%= check_box_tag 'settings[show_help]', 1, @settings[:show_help] %><%= l(:label_help) %></label>
+</p>
+
+<p>  
+  <label><%= l(:label_cms_base_layout) %></label>
+  <%= select_tag 'settings[base_layout]',  options_for_select([["Redmine", "base"], ["Redmine with meta tags", "base_meta"], ["CMS", "cms"]], @settings[:base_layout]) %>
+</p>
+
+<p>  
+  <label><%= l(:label_cms_landing_page) %></label> 
+  <%= text_field_tag 'settings[landing_page]', @settings[:landing_page], :size => 100 %>
+</p>
+
+<p>  
+  <label><%= l(:label_cms_projects_page) %></label> 
+  <%= text_field_tag 'settings[projects_page]', @settings[:projects_page], :size => 100 %>
+</p>
+
+<p>  
+  <label><%= l(:label_cms_my_page) %></label> 
+  <%= text_field_tag 'settings[my_page]', @settings[:my_page], :size => 100 %>
+</p>
+
+
+<p>  
+  <label><%= l(:label_cms_copyright) %></label> 
+  <%= text_field_tag 'settings[copyright]', @settings[:copyright], :size => 100 %>
+</p>
+
+<fieldset class="box"><legend><%= l(:label_cms_layout_content) %></legend>
+<%= text_area_tag 'settings[layout_content]', @settings[:layout_content], :class => 'wiki-edit', :rows => 20 %>
+</fieldset>    

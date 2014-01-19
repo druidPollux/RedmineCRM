@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="<%= "preview" if @html_preview %>">
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <style type="text/css">
+    .preview body { background-color: #f3f3f3;}
+    .preview div#content {
+      margin: 0 auto;
+      border: 1px solid #CBCBCB;
+      padding: 2.1cm 2.2cm;
+      width: 21cm;
+      min-height: 29.7cm;
+      margin: 2px 0px 0px;
+      margin: auto;
+    }
+    div#content {
+      background-color: #FFFFFF;
+      box-sizing: border-box;
+      moz-box-sizing: border-box;
+      webkit-box-sizing: border-box;
+      color: black;
+      font-family: "Lucida Grande", Helvetica, Arial, "Sans-Serif";
+      font-size: 12px;
+      overflow: hidden;
+      position: relative;
+      text-align: left;
+    }
+
+  </style>
+</head>
+<body>
+  <div id="toolbar">
+    <%= yield :toolbar %>
+  </div>
+  <div id="content">
+    <%= yield %>
+  </div>
+</body>
+</html>

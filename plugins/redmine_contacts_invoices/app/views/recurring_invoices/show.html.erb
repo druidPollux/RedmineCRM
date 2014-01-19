@@ -1,0 +1,35 @@
+<div class="contextual">
+  <%= link_to l(:button_edit), {:controller => 'recurring_invoices', :action => 'edit', :id => @recurring_invoice}, :class => 'icon icon-edit' %>
+  <%= link_to l(:button_duplicate), {:controller => 'recurring_invoices', :action => 'new', :project_id => @project, :copy_from => @recurring_invoice }, :class => 'icon icon-duplicate' if User.current.allowed_to?(:add_invoices, @project) %>
+  <%= link_to l(:button_delete), {:controller => 'recurring_invoices', :action => 'destroy', :id => @recurring_invoice}, :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del'  %>
+</div>
+
+<h2><%= "#{l(:label_invoice_recurring)} ##{@recurring_invoice.id}" %></h2>
+
+<div class="issue invoice details">
+  <div class="subject">
+    <h3><%= "#{@recurring_invoice.contact.name + ' - ' if @recurring_invoice.contact}#{@recurring_invoice.amount_to_s}#{' - ' + @recurring_invoice.subject unless @recurring_invoice.subject.blank?}".html_safe %></h3>
+  </div>
+
+  <p class="author">
+    <%= authoring @recurring_invoice.created_at, @recurring_invoice.author %>.
+    <% if @recurring_invoice.created_at != @recurring_invoice.updated_at %>
+    <%= l(:label_updated_time, time_tag(@recurring_invoice.updated_at)).html_safe %>.
+    <% end %>
+  </p>
+
+  <%= render :partial => 'invoices/attributes', :locals => {:invoice => @recurring_invoice} %>
+
+  <hr />
+  <p><strong><%= l(:label_invoice_lines) %></strong></p>
+  <div class="invoice-lines">
+  <%= render :partial => 'invoices/invoice_lines', :locals => {:invoice => @recurring_invoice} %>
+  </div>
+
+</div>
+
+<% html_title "#{l(:label_invoice_recurring)} ##{@recurring_invoice.number}" %>
+
+<% content_for :header_tags do %>
+  <meta name = "format-detection" content = "telephone=no">
+<% end %>

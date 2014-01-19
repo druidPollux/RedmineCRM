@@ -1,0 +1,149 @@
+<div class="box tabular">
+<p><%= f.text_field :name, :size => 30, :required => true, :label => l(:label_cms_page_name)  %></p>
+<p><%= f.text_field :title, :size => 30, :required => true, :label => l(:label_cms_page_title) %></p>
+<p><%= f.text_field :summary, :size => 100, :label => l(:label_cms_page_summary) %></p>
+<% if @page.valid_parents.any? %>
+<p><%= f.select :parent_id, pages_options_for_select(@page.valid_parents), :include_blank => true, :label => :label_cms_page_parent %></p>
+<% end %>
+
+<p><%= f.select :project_id, "<option value=''></option>".html_safe + project_tree_options_for_select(Project.all, :selected => @page.page_project) %></p>
+
+<p><%= f.select :status_id, options_for_select([["Locked", RedmineCms::STATUS_LOCKED], ["Active", RedmineCms::STATUS_ACTIVE]], @page.status_id), :label => l(:label_cms_page_status)  %></p>  
+
+<fieldset><legend><%= l(:label_cms_seo) %></legend>
+  <p><%= f.text_field :keywords, :size => 100, :label => l(:label_cms_keywords)  %></p>
+  <p><%= f.text_area :description, :rows => 5, :label => l(:label_cms_description) %></p> 
+</fieldset>
+
+<p id="show_content_edit">
+  <%= f.label_for_field :content, :label => l(:label_cms_page_content) %>
+  <%= link_to_function image_tag('edit.png'), '$("#show_content_edit").hide();$("#float_buttons").show();$(".edit-content").show();editor.refresh();return false;' %>
+</p>  
+<span class="edit-content" style="display:none;">
+  <p><%= f.select :content_type, options_for_select([["Textile", "textile"], ["HTML", "html"]],  @page.content_type), :label => l(:label_cms_page_content_type) %></p>  
+</span>
+<p id="attachments_form"><label><%= l(:label_attachment_plural) %></label><%= render :partial => 'attachments/form', :locals => {:container => @page} %></p>
+
+<span class="edit-content" style="display:none;">
+  <%= text_area_tag 'page[content]', @page.content, :cols => 100, :rows =>  30, :class => 'wiki-edit' %>
+<script type="text/javascript">
+    function isFullScreen(cm) {
+      return /\bCodeMirror-fullscreen\b/.test(cm.getWrapperElement().className);
+    }
+    function winHeight() {
+      return window.innerHeight || (document.documentElement || document.body).clientHeight;
+    }
+
+    function setWordWrap(cm)  {
+      cm.setOption("lineWrapping", !cm.options.lineWrapping) 
+    }
+
+
+    function setFullScreen(cm, full) {
+      var wrap = cm.getWrapperElement();
+      if (full) {
+        wrap.className += " CodeMirror-fullscreen";
+        wrap.className = wrap.className.replace(" cm-s-default", " cm-s-ambiance");
+        wrap.style.height = winHeight() + "px";
+        document.documentElement.style.overflow = "hidden";
+      } else {
+        wrap.className = wrap.className.replace(" CodeMirror-fullscreen", "");
+        wrap.className = wrap.className.replace(" cm-s-ambiance", " cm-s-default");
+        wrap.style.height = "";
+        document.documentElement.style.overflow = "";
+      }
+      cm.refresh();
+    }
+    CodeMirror.on(window, "resize", function() {
+      var showing = document.body.getElementsByClassName("CodeMirror-fullscreen")[0];
+      if (!showing) return;
+      showing.CodeMirror.getWrapperElement().style.height = winHeight() + "px";
+    });
+
+  CodeMirror.defineMode("liquid", function(config, parserConfig) {
+    var liquidOverlay = {
+      token: function(stream, state) {
+        var ch;
+        if (stream.match("{{")) {
+          while ((ch = stream.next()) != null)
+            if (ch == "}" && stream.next() == "}") break;
+          stream.eat("}");
+          return "liquid";
+        }
+        while (stream.next() != null && !stream.match("{{", false)) {}
+        return null;
+      }
+    };
+    return CodeMirror.overlayMode(CodeMirror.getMode(config, parserConfig.backdrop || "text/html"), liquidOverlay);
+  });
+
+  CodeMirror.defineMode("liquid1", function(config, parserConfig) {
+    var liquid1Overlay = {
+      token: function(stream, state) {
+        var ch;
+        if (stream.match("{%")) {
+          while ((ch = stream.next()) != null)
+            if (ch == "%" && stream.next() == "}") break;
+          stream.eat("}");
+          return "liquid";
+        }
+        while (stream.next() != null && !stream.match("{%", false)) {}
+        return null;
+      }
+    };
+    return CodeMirror.overlayMode(CodeMirror.getMode(config, parserConfig.backdrop || "liquid"), liquid1Overlay);
+  });
+
+  var editor = CodeMirror.fromTextArea(document.getElementById("page_content"), {
+    mode: "liquid1", 
+    tabMode: "indent", 
+    lineNumbers: "true",
+    lineWrapping: "true",
+    profile: 'xhtml',
+    extraKeys: {
+        "Shift-Ctrl-W": function(cm) {
+          setWordWrap(cm);
+        },      
+        "Ctrl-F11": function(cm) {
+          setFullScreen(cm, !isFullScreen(cm));
+        },
+        "Esc": function(cm) {
+          if (isFullScreen(cm)) setFullScreen(cm, false);
+        }
+      }    
+  });
+</script>  
+</span>
+</div> 
+
+<% if @page.attachments.any? %>
+<fieldset><legend><%= l(:label_attachment_plural) %></legend>
+  <%= link_to_attachments @page, :thumbnails => true  %>
+</fieldset>
+<br/>
+<% end %>
+
+<% content_for :header_tags do %>
+  <%= javascript_include_tag 'codemirror/codemirror', :plugin => 'redmine_cms'  %>
+  <%= javascript_include_tag 'codemirror/emmet', :plugin => 'redmine_cms'  %>
+  <%= javascript_include_tag 'codemirror/addon/mode/overlay', :plugin => 'redmine_cms'  %>
+  <%= javascript_include_tag 'codemirror/addon/search/search', :plugin => 'redmine_cms'  %>
+  <%= javascript_include_tag 'codemirror/addon/search/searchcursor', :plugin => 'redmine_cms'  %>
+  <%= javascript_include_tag 'codemirror/addon/dialog/dialog', :plugin => 'redmine_cms'  %>
+  <%= javascript_include_tag 'codemirror/mode/htmlmixed/htmlmixed', :plugin => 'redmine_cms'  %>
+  <%= javascript_include_tag 'codemirror/mode/css/css', :plugin => 'redmine_cms'  %>
+  <%= javascript_include_tag 'codemirror/mode/xml/xml', :plugin => 'redmine_cms'  %>
+  <%= javascript_include_tag 'codemirror/mode/javascript/javascript', :plugin => 'redmine_cms'  %>
+  <%= stylesheet_link_tag 'codemirror/codemirror', :plugin => 'redmine_cms'  %>
+  <%= stylesheet_link_tag 'codemirror/theme/ambiance', :plugin => 'redmine_cms'  %>
+<% end %>
+
+<% content_for :header do %>
+  <div class="contextual page-edit" id="float_buttons" style="display:none;">
+    <%= link_to l(:label_cms_apply), "#", :class => "icon icon-checked", :remote => true, :onclick => "editor.save(); $.ajax({url: '#{escape_javascript url_for(@page)}', type: \'post\', data: $(\'#page_form\').serialize()});return false;"%>
+  </div>
+<% end %>
+
+
+
+

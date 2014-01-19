@@ -1,0 +1,83 @@
+<div class="contextual">   
+  <%= link_to l(:button_edit), {:controller => "operations", :action => "edit", :id => @operation}, :class => 'icon icon-edit' if !@operation.blank? && @operation.editable_by?(User.current) %>  
+  <%= link_to l(:button_delete), {:controller => "operations", :action => "destroy", :id => @operation}, :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del' if !@operation.nil? && @operation.destroyable_by?(User.current) %>
+</div>
+<h2><%= "#{l(:label_operation)} ##{@operation.id}" %></h2>   
+<div class="operation issue details">   
+
+<div class="subject">
+<h3><%= "#{@operation.category_name}: #{@operation.amount_to_s}" %></h3>
+</div>
+<p class="author">
+<%= authoring @operation.created_at, @operation.author %>.
+<% if @operation.created_at != @operation.updated_at %>
+<%= l(:label_updated_time, time_tag(@operation.updated_at)).html_safe %>.
+<% end %>
+</p>
+
+<table class="attributes">
+  <tr>
+    <th class="account"><%= l(:label_account) %></th><td class="account"><%= link_to @operation.account.name, account_path(@operation.account) %> (<strong><%= @operation.account.amount_to_s %></strong>)</td>
+    <th class="operation_date"><%= l(:label_operation_date) %></th><td class="operation_date"><%= format_time(@operation.operation_date) %></td>
+  </tr>
+  <tr>
+    <th class="contact"><%= l(:label_contact) %></th><td class="contact"><%= link_to_contact(@operation.contact, :avatar => true) if @operation.contact %></td>
+    <th class=""></th><td class=""></td>
+  </tr>
+<%= call_hook(:view_operations_show_details_bottom, :operation => @operation) %>
+</table>
+
+<% if @operation.description? || (@operation.respond_to?(:attachments) && @operation.attachments && @operation.attachments.any?) -%>
+<hr />
+<% if @operation.description? %>
+<div class="description">
+  <p><strong><%=l(:field_description)%></strong></p>
+  <div class="wiki">
+  <% attachments = nil %>
+  <%= textilizable @operation, :description, :attachments => attachments %>
+  </div>
+</div>
+<% end %>
+<% end -%>
+
+</div>
+
+<div id="comments" style="margin-bottom:16px;">
+<h3 class="comments"><%= l(:label_comment_plural) %></h3>
+<% @comments.each do |comment| %>
+    <% next if comment.new_record? %>
+    <div class="contextual">
+    <%= link_to_if_authorized image_tag('delete.png'), {:controller => 'operation_comments', :action => 'destroy', :id => @operation, :comment_id => comment},
+                                                       :data => {:confirm => l(:text_are_you_sure)}, :method => :delete, :title => l(:button_delete) %>
+    </div>
+    <h4><%= avatar(comment.author, :size => "24") %><%= authoring comment.created_on, comment.author %></h4>
+    <%= textilizable(comment.comments) %>
+<% end if @comments.any? %>
+</div>
+
+<% if @operation.commentable? %>
+  <p><%= toggle_link l(:label_comment_add), "add_comment_form", :focus => "comment_comments" %></p>
+  <%= form_tag({:controller => 'operation_comments', :action => 'create', :id => @operation}, :id => "add_comment_form", :style => "display:none;") do %>
+    <div class="box">
+        <%= text_area 'comment', 'comments', :cols => 80, :rows => 15, :class => 'wiki-edit' %>
+        <%= wikitoolbar_for 'comment_comments' %>
+    </div>
+    <p><%= submit_tag l(:button_add) %></p>
+  <% end %>
+<% end %>
+
+
+<% content_for :sidebar do %>   
+  <% unless @operation.contact.blank? %>
+  <div class="contact-card small-card">
+      <h3><%= l(:label_contact) %></h3>
+      <%= render :partial => 'contacts/contact_card', :object => @operation.contact %>
+  </div>
+  <% end %>
+<% end %>
+
+<% html_title "#{l(:label_operation)} ##{@operation.id}: #{@operation.category_name}" %> 
+
+<% content_for :header_tags do %>
+  <meta name = "format-detection" content = "telephone=no">
+<% end %>

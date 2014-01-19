@@ -1,0 +1,38 @@
+api.invoice do
+  api.id @invoice.id 
+  api.number @invoice.number                                              
+  api.invoice_date @invoice.invoice_date.to_date if @invoice.invoice_date                                     
+  api.due_date @invoice.due_date.to_date if @invoice.due_date
+  api.language @invoice.language                                              
+  api.currency @invoice.currency    
+  api.discount @invoice.discount    
+  api.discount_type @invoice.discount_type    
+  api.amount @invoice.amount  
+  api.balance @invoice.balance
+  api.description @invoice.description  
+  api.project(:id => @invoice.project_id, :name => @invoice.project.name) unless @invoice.project.nil?
+  api.status(:id => @invoice.status_id, :name => @invoice.status) unless @invoice.status_id.blank?
+  api.contact(:id => @invoice.contact_id, :name => @invoice.contact.name) unless @invoice.contact.nil?
+  api.author(:id => @invoice.author_id, :name => @invoice.author.name) unless @invoice.author.nil?
+  api.assigned_to(:id => @invoice.assigned_to_id, :name => @invoice.assigned_to.name) unless @invoice.assigned_to.nil?
+                                        
+  api.paid_date @invoice.paid_date if @invoice.is_paid?
+  api.created_on @invoice.created_at                                              
+  api.updated_on @invoice.updated_at
+
+  api.array :lines do
+    @invoice.lines.each do |invoice_line|
+      api.invoice_line do
+        api.id invoice_line.id
+        api.position invoice_line.position
+        api.quantity invoice_line.quantity
+        api.description invoice_line.description
+        api.tax invoice_line.tax
+        api.tax_amount invoice_line.tax_amount
+        api.price invoice_line.price
+        api.units invoice_line.units
+        api.total invoice_line.total
+      end
+    end
+  end if @invoice.lines
+end

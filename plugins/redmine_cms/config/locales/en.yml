@@ -1,0 +1,60 @@
+# English strings go here for Rails i18n
+en:
+  label_cms: CMS
+
+  label_project_tab: "Project tab"
+  label_project_tab_caption: "Project tab %{index}"
+  label_project_tab_page: "Page"
+
+  label_cms_menu: Menu
+  label_cms_menu_new: New menu
+  label_cms_menu_plural: Menus
+  label_cms_menu_name: Name
+  label_cms_menu_caption: Caption
+  label_cms_menu_type: Type
+  label_cms_menu_path: Path
+  label_cms_menu_status: Status
+  label_cms_menu_parent: Parent menu
+  label_cms_position: Position
+  label_cms_account_settings: Account settings
+
+  label_cms_page_plural: Pages
+  label_cms_page: Page
+  label_cms_page_new: New page
+  label_cms_page_name: Name
+  label_cms_page_summary: Summary
+  label_cms_page_title: Title
+  label_cms_page_status: Status
+  label_cms_page_content: Content
+  label_cms_page_content_type: Content type
+  label_cms_page_parent: Parent page
+  label_cms_use_localization: Localization
+  label_cms_home_page: Home page
+  label_cms_landing_page: Landing page
+  label_cms_projects_page: Projects page
+  label_cms_my_page: My page
+  label_cms_is_cached: Is cached
+
+  label_cms_part_plural: Parts
+  label_cms_part: Part
+  label_cms_part_new: New part
+  label_cms_part_name: Name
+  label_cms_part_status: Status
+  label_cms_part_content: Content
+  label_cms_part_content_type: Content type
+  label_cms_part_type: Type
+  label_cms_is_global: Is global
+  label_cms_refresh_cache: Refresh cache
+  label_cms_base_layout: Base layout
+  label_cms_seo: SEO
+  label_cms_keywords: Keywords
+  label_cms_description: Dscription
+
+  label_cms_layout_content: Layout content
+  label_cms_apply: Apply
+  label_cms_visibility: Visibility
+  label_cms_show_activity_tab: Show activity tab
+  label_cms_show_overview_tab: Show overview tab
+
+  label_cms_redmine_top_menu: Default top menu items
+  label_cms_copyright: Copyright info

@@ -1,0 +1,72 @@
+# English strings go here for Rails i18n
+en:
+  label_finance: Finance
+  label_finance_plural: Finances
+  label_finance_thousands_delimiter: Thousands delimiter
+  label_finance_decimal_separator: Decimal separator
+  label_finance_default_currency: Default currecy
+  project_module_finance: Finance
+
+  label_account: Account
+  label_account_plural: Accounts
+  label_account_debit: Debit
+  label_account_credit: Credit
+  label_account_new: New account
+  label_account_edit: Edit account
+  label_account_balance: Balance
+  label_account_currency: Currency
+
+  field_account: Account
+  field_account_currency: Currency
+
+  label_operation: Operation
+  label_operation_plural: Operations
+  label_operation_edit: Edit operation
+  label_operation_new: New operation
+  label_operation_date: Date
+  label_operation_income: Income
+  label_operation_expense: Expense
+  label_operation_category: Category
+  label_operation_amount: Amount
+
+  field_operation_category: Category
+  field_operation_date: Operation date
+  field_operation_amount: Amount
+
+  label_operation_category_plural: Operation categories
+  label_operation_category_new: New operation category
+  label_operation_category_is_income: Is income
+
+  label_finance_show_in_top_menu: Show in top menu
+  label_finance_show_in_app_menu: Show in app menu
+
+  permission_view_finances: View finance
+  permission_edit_operations: Edit operations
+  permission_edit_own_operations: Edit own operations
+  permission_delete_operations: Delete operations
+  permission_comment_operations: Comment operations
+  permission_import_operations: Import operations
+  permission_edit_accounts: Edit accounts
+  permission_delete_accounts: Delete accounts
+  permission_manage_operation_invoices: Manage operation invoices
+  permission_manage_operation_relations: Manage operation relations
+
+  label_related_operations: Related operations
+  text_account_updated: "Account %{name} has been updated by %{author}."
+  text_account_amount_changed: "Amount changed from %{old} to %{new}"
+  label_finance_account_updated: Finance account updated
+  label_finance_total: Total
+
+  #1.0.3
+  permission_delete_operation_comments: Delete comments
+
+  #1.0.4
+  label_finance_cross_project_contacts: Allow cross-project contacts relations
+  label_finance_filter_companies: Filter companies
+
+  #1.0.7
+  label_finance_operation_comment_added: Comment added to a finance operation
+
+  #1.0.8
+  label_finance_can_not_delete_account: "This account contains operations and cannot be deleted."
+  label_finance_can_not_delete_category: "This operaion category in use and cannot be deleted."

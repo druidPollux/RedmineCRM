@@ -1,0 +1,10 @@
+<h3><%= l(:label_account_plural) %></h3>
+
+<table class="accounts-stat">
+  <% @acconts.each do |account| %>
+  <tr>
+    <th><%= link_to account.name, account_path(account) %></th>      
+    <td class="sum"><%= account.amount_to_s %></td>
+  </tr>
+  <% end %>
+</table>

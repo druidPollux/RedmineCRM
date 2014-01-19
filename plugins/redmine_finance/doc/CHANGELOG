@@ -1,0 +1,72 @@
+== Redmine Finance plugin changelog
+
+Redmine Finance plugin - accounting plugin for redmine
+Copyright (C) 2011-2013 Kirill Bezrukov
+http://www.redminecrm.com/
+
+== 2014-01-10 v1.0.8
+
+* Check for account and category in use
+* Last year added to filters
+
+== 2013-11-15 v1.0.7
+
+* REST API for operations
+* Email notifications for operation comments
+* Fixed recalculation on changing account for the operation
+
+== 2013-10-31 v1.0.6
+
+* Minor enhancements and bug fixes
+* German local fixes from Terence Mill
+
+== 2013-09-20 v1.0.5
+
+* Added Slovak translation by Martin Bucko
+* Fixed bug with PostgreSQL
+
+== 2013-07-03 v1.0.4
+
+* Fixed bug with show operation for light version
+* German translation by Sebastian Kriesmer
+* Cross-project contacts relations
+* Only companies could be operation contacts setting
+
+== 2013-04-10 v1.0.3
+
+* Fixed invoices relations
+
+== 2013-04-05 v1.0.2
+
+* New CRM plugin (3.2.1) support
+
+== 2013-02-26 v1.0.1
+
+* Fixed invoices support
+* Fixed money gem requirements
+
+== 2013-02-25 v1.0.0
+
+* Financial operations
+* Accounts
+* Account watching (email notifications)
+* Comments
+* CSV Import/Export
+* Operation relations
+* Invoices relation
+* Attachments
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

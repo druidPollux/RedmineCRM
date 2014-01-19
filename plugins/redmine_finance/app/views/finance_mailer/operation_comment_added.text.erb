@@ -1,0 +1,6 @@
+<%= "#{l(:label_operation)} - #{@operation.to_s}" %>
+<%= operation_url(@operation) %>
+
+<%= l(:text_user_wrote, :value => @comment.author) %>
+
+<%= @comment.comments %>

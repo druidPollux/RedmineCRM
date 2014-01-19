@@ -1,0 +1,196 @@
+.icon-pdf { background-image: url(../images/page_white_acrobat.png); }
+.icon-pdf-context { background-image: url(../images/page_white_acrobat_context.png); }
+.icon-invoice { background-image: url(../images/invoice.png); }
+.icon-expense { background-image: url(../images/coins.png); }
+.icon-add-payment { background-image: url(../images/coins_add.png); }
+.icon-invoice-add { background-image: url(../images/invoice_add.png); }
+.icon-invoice-add-context { background-image: url(../images/invoice_add_context.png); }
+.icon-sort { background-image: url(../images/sortable.png); }
+
+div.issue.invoice {background: #EAF7FF;}
+
+/**********************************************************************/
+/* INVOICE LIST
+/**********************************************************************/
+
+.invoice_list table.list td.amount, .invoice_list table.list tr:hover td.amount {border-left-style: hidden;padding-left: 10px;}
+.invoice_list table.list tr.invoice a {color: #666;}
+.invoice_list tr.odd.overdue, .invoice_list table.list tbody tr.odd.overdue:hover { color: #900; }
+.invoice_list tr.odd.overdue { background: #FEE; }
+.invoice_list tr.even.overdue, .invoice_list table.list tbody tr.even.overdue:hover { color: #900; }
+.invoice_list tr.even.overdue { background: #FFF2F2; }
+.invoice_list tr.overdue a { color: #900; }
+.invoice_list tr.odd.overdue td, .invoice_list tr.even.overdue td { border-color: #FCC;}
+
+.invoice_list tr.odd.status-3, .invoice_list table.list tbody tr.odd.status-3:hover { color: #005F00; }
+.invoice_list tr.odd.status-3 { background: #EBFEEB; }
+.invoice_list tr.even.status-3, .invoice_list table.list tbody tr.even.status-3:hover { color: #005F00; }
+.invoice_list tr.even.status-3 { background: #DFFFDF; }
+.invoice_list tr.status-3 a { color: #005F00; }
+.invoice_list tr.odd.status-3 td, .invoice_list tr.even.status-3 td { border-color: #9FCF9F; }
+
+/**********************************************************************/
+/* INVOICE EXCERPT LIST
+/**********************************************************************/
+table.invoices.index { margin-bottom: 0px;}
+table.invoices.index.total { border-top: 0px;}
+table.invoices.index td.name h1.invoice_number {font-size: 16px;}
+table.invoices.index td.status { padding: 13px 5px 0px 10px;}
+table.invoices.index td.name.invoice-name { width: 80%;}
+table.invoices.index td.info.invoice-info {white-space: nowrap; text-align: right;padding-right: 10px;}
+table.contacts.index th.sum.invoices-sum, .invoice_list th.sum.invoices-sum { text-align: right; white-space: nowrap; width: 10%;}
+table.contacts.index .invoice-date {margin-top: 3px;}
+table.contacts.index .overdue-days {color: #B54;}
+table.contacts.index tr.context-menu-selection .overdue-days {color: white;}
+
+/**********************************************************************/
+/* INVOICE DATA
+/**********************************************************************/
+span.invoice-status {
+	font-size: 10px;
+	white-space: nowrap;
+	margin-right: 4px;
+	color: white;
+}
+
+span.invoice-status.draft {background-color: #AAA;}
+span.invoice-status.estimate {background-color: #F7AA3F;}
+span.invoice-status.sent {background-color: deepSkyBlue;}
+span.invoice-status.paid {background-color: green;}
+span.invoice-status.canceled {background-color: #FF3030;}
+
+div.issue.invoice table.progress td.closed { background: #F99 none repeat scroll 0%;}
+
+/**********************************************************************/
+/* INVOICE LINES
+/**********************************************************************/
+table.invoice-lines {border: 0px;}
+table.invoice-lines thead th, table.invoice-lines th {border: 0px;background: transparent;}
+table.invoice-lines th.price, table.invoice-lines th.total {text-align: right;}
+table.invoice-lines tbody tr:hover { background-color:inherit;}
+table.invoice-lines tbody tr.line-data:hover { background-color:#ffffdd; }
+table.invoice-lines tr.line-data {white-space: nowrap;}
+table.invoice-lines td {padding-left: 4px; border: solid 1px #D7D7D7;}
+table.invoice-lines td.description {text-align: left;width: 70%;white-space: normal;}
+table.invoice-lines td.quantity {text-align: center;}
+table.invoice-lines td.units {text-align: center;}
+table.invoice-lines td.price {text-align: right}
+table.invoice-lines td.tax {text-align: center;;width: 1px;}
+table.invoice-lines td.tax_amount {text-align: right;}
+table.invoice-lines td.total_price {text-align: right;}
+table.invoice-lines tr.total th {
+	text-align: right;
+	padding-top: 1px;
+  padding-bottom: 1px;
+}
+table.invoice-lines tr.total.delimiter th {padding-top: 5px;}
+
+table.invoice-lines tr.total.invoice-payment th {
+	font-weight: normal;
+}
+/*tr.sortable-line {cursor: row-resize;}*/
+
+
+/**********************************************************************/
+/* INVOICE PAYMENTS
+/**********************************************************************/
+
+div#invoice_payments {
+	float: right;
+	width: 45%;
+	margin-left: 1em;
+	margin-bottom: 1em;
+	padding-left: 1em;
+}
+
+/**********************************************************************/
+/* INVOICE STAT
+/**********************************************************************/
+
+table.invoices-stat th {text-align: left; vertical-align: top; padding-bottom: 10px;font-weight: normal;}
+table.invoices-stat td.sum {text-align: right; padding-bottom: 10px;white-space: nowrap;font-weight: bold;}
+table.invoices-stat {padding-right: 10px; width: 100%;}
+table.invoices-stat .currency {	padding-left: 15px;	padding-right: 15px;}
+table.invoices-stat.statuses th {padding-top: 7px;}
+
+/**********************************************************************/
+/* INVOICE  FORM
+/**********************************************************************/
+#invoice_form p.object-select select {width: 60%;}
+
+/**********************************************************************/
+/* INVOICE LINES FORM
+/**********************************************************************/
+table.invoice-lines.form {width: 100%;}
+table.invoice-lines.form td {border: 0px;}
+table.invoice-lines.form td.position {width: 20px;}
+table.invoice-lines.form tr.line.fields td.units select {max-width: 100px;min-width: 80px;}
+table.invoice-lines.form tr.line.fields td.quantity input {text-align: center;}
+table.invoice-lines.form tr.line.fields td.price input {text-align: right;}
+table.invoice-lines.form tr.line.fields td.tax input {text-align: right;}
+table.invoice-lines.form tr.line.fields td {text-align: center;}
+table.invoice-lines.form tr.line.fields td.description textarea {width: 100%;}
+table.invoice-lines.form tr.line.fields td.description {padding-right: 10px;}
+table.invoice-lines.form tr.line.fields td.total {text-align: right;font-weight: bold;}
+table.invoice-lines.form td#total_amount {
+	text-align: right;
+	border-top-style: solid;
+	border-top-color: #D7D7D7;
+	border-top-width: 1px;
+	font-weight: bold;
+}
+
+/**********************************************************************/
+/* MISC
+/**********************************************************************/
+
+.filter-condition {
+	display: inline-block;
+}
+
+/**********************************************************************/
+/* EXPENSE LIST
+/**********************************************************************/
+
+.expense_list table.list td.amount, .expense_list table.list tr:hover td.amount {border-left-style: hidden;padding-left: 10px;}
+.expense_list table.list tr.expense a {color: #666;}
+.expense_list table.list td.description {text-align: left; white-space: normal;}
+
+.expense_list tr.odd.status-4, .expense_list table.list tbody tr.odd.status-4:hover { color: #005F00; }
+.expense_list tr.odd.status-4 { background: #EBFEEB; }
+.expense_list tr.even.status-4, .expense_list table.list tbody tr.even.status-4:hover { color: #005F00; }
+.expense_list tr.even.status-4 { background: #DFFFDF; }
+.expense_list tr.status-4 a { color: #005F00; }
+.expense_list tr.odd.status-4 td, .expense_list tr.even.status-4 td { border-color: #9FCF9F; }
+
+
+
+/**********************************************************************/
+/* EXPENSE EXCERPT LIST
+/**********************************************************************/
+
+table.expenses.index td.name h1.expense_number {font-size: 16px;}
+table.expenses.index td.status { padding: 13px 5px 0px 10px;}
+table.expenses.index td.name.expense-name { width: 80%;}
+table.expenses.index td.info.expense-info {white-space: nowrap; text-align: right;padding-right: 10px;}
+table.expenses.index th.sum.expenses-sum { text-align: right; }
+table.expenses.index .expense-date {margin-top: 3px;}
+table.expenses.index .overdue-days {color: #B54;}
+table.expenses.index tr.context-menu-selection .overdue-days {color: white;}
+
+/**********************************************************************/
+/* EXPENSE DATA
+/**********************************************************************/
+span.expense-status {
+	font-size: 10px;
+	white-space: nowrap;
+	margin-right: 4px;
+	color: white;
+}
+
+span.expense-status.draft {background-color: #AAA;}
+span.expense-status.new {background-color: #B54;}
+span.expense-status.billed {background-color: #F7AA3F;}
+span.expense-status.paid {background-color: green;}
+
+div.issue.expense table.progress td.closed { background: #F99 none repeat scroll 0%;}

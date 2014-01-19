@@ -1,0 +1,23 @@
+<p><%= breadcrumb [link_to(l(:label_cms_part_plural), parts_path)] %></p>
+
+<h2><%="#{l(:label_cms_part)}: #{@part.name}"%></h2>
+
+<% if @part.is_header_type? %>
+  <% content_for :header do %>
+    <%= render_part @part %>
+  <% end %>
+<% elsif @part.is_sidebar_type? %>
+  <% content_for :sidebar do  %>
+    <%= render_part @part %>
+  <% end %>
+<% else %>
+  <div class="wiki page part <%= @part.name %>">
+    <%= render_part @part %>
+  </div>
+<% end %>
+
+<% content_for :header do %>
+  <div class="contextual page-edit">
+    <%= link_to l(:button_edit), edit_part_path(@part), :class => 'icon icon-edit' %>
+  </div>
+<% end if User.current.admin? %>

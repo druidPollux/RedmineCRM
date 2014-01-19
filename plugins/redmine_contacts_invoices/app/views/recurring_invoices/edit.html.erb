@@ -1,0 +1,10 @@
+<h2><%= l(:label_invoice_recurring_edit) %></h2>
+
+<%= labelled_form_for :recurring_invoice, @recurring_invoice, :url => {:action => 'update', :id => @recurring_invoice.id}, :html => { :multipart => true, :method => :put, :id => 'invoice_form'} do |f|  %>
+  <%= render :partial => 'form', :locals => {:f => f}  %>
+  <%= submit_tag l(:button_save) -%>
+<% end -%>
+
+<% content_for :header_tags do %>
+  <%= javascript_include_tag :invoices, :plugin => 'redmine_contacts_invoices'  %>
+<% end %>

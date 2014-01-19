@@ -1,0 +1,8 @@
+<% finance_tabs = [{:name => 'general', :partial => 'settings/finance_general', :label => :label_general},
+        {:name => 'operation_categories', :partial => 'settings/operation_categories', :label => :label_operation_category_plural}
+        ]   %>   
+
+<%= render_tabs finance_tabs %>
+
+<% html_title(l(:label_settings), l(:label_finance)) -%>  
+

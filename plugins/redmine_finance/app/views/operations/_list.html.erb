@@ -1,0 +1,40 @@
+<%= form_tag({}) do -%>
+  <%= hidden_field_tag 'back_url', url_for(params) %>
+  <%= hidden_field_tag 'project_id', @project.id if @project %>
+<div class="autoscroll">
+    <table class="list">
+      <thead>
+      <tr>
+        <th class="checkbox hide-when-print"><%= link_to image_tag('toggle_check.png'), {}, :onclick => 'toggleIssuesSelection(this); return false;',
+                                                           :title => "#{l(:button_check_all)}/#{l(:button_uncheck_all)}" %>
+        </th>
+        <th>#</th>
+        <th><%= l(:label_operation_date) %></th>
+        <th><%= l(:label_operation_income) %></th>
+        <th><%= l(:label_operation_expense) %></th>
+        <th><%= l(:label_operation_category) %></th>
+        <th><%= l(:label_account) %></th>
+        <th><%= l(:field_description) %></th>
+        <th><%= l(:label_contact) %></th>
+      </tr>
+      </thead>
+      <% @operations.each do |operation| %>
+      <tr style="text-align: center;white-space: nowrap;" class="hascontextmenu operation <%= cycle('odd', 'even') %>  <%= 'income' if operation.category.is_income? %>">
+        <td class="checkbox hide-when-print"><%= check_box_tag("ids[]", operation.id, false, :id => nil) %></td>
+        <td class="id"><%= link_to operation.id, operation_path(operation) %></td>
+        <td class="operation_date"><%= link_to format_date(operation.operation_date.to_date), operation_path(operation) %></td>
+        <td class="money income" style="text-align:right;"><%= operation.amount_to_s if operation.is_income? %></td>
+        <td class="money expense" style="text-align:right;"><%= operation.amount_to_s unless operation.is_income? %></td>
+        <td class="type"><%= operation.category_name  %></td>
+        <td class="account"><%= link_to operation.account.name, account_path(operation.account) %></td>
+        <td class="description" style="text-align:left;"><small><%= link_to truncate(operation.description, :length => 100), operation_path(operation) if operation.description %></small></td>
+        <td class="contact" style="text-align:left;"><%= !operation.contact.blank? ? link_to_contact(operation.contact) : "" %></td>
+      </tr>
+      <% end %>
+      <tr>
+        <th></th><th></th><th class="money"><%= l(:label_finance_total) %>:</th><th class="money sum"><%= prices_collection_by_currency(@operations_debit).join('<br>').html_safe %></th><th class="money sum"><%= prices_collection_by_currency(@operations_credit).join('<br>').html_safe %></th><th></th><th></th><th class="money"><%= l(:label_account_balance) %>:</th><th><%= operations_balance_to_currency(@operations_debit, @operations_credit) %></th>
+      </tr>
+    </table>
+</div>
+
+<% end %>

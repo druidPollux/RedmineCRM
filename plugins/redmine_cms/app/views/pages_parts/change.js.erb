@@ -1,0 +1,2 @@
+$('#page_parts').html('<%= escape_javascript(render :partial => 'pages/parts') %>');
+$('#page_part_<%= @part.id %>').effect("highlight");

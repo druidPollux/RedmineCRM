@@ -1,0 +1,28 @@
+<%= error_messages_for 'operation' %>
+
+<div class="box tabular">
+  
+<div class="splitcontentleft">  
+  <p class="type"><%= f.select :category_id, operation_categories_for_select(@operation.category_id), :label => l(:label_operation_category), :required => true %></p>
+  <p class="account"><%= f.select :account_id, accounts_for_select, :label => l(:label_account), :required => true %></p>
+  <p class="contact">
+    <%= label_tag :operation_contact_id,  l(:label_contact)%>
+    <%= select_contact_tag('operation[contact_id]', @operation.contact, :is_select => Contact.visible.by_project(RedmineFinance.settings[:finance_cross_project_contacts] ? nil : @project).count < 50, :include_blank => true, :add_contact => true, :display_field => @operation.contact.blank?, :cross_project_contacts => RedmineFinance.settings[:finance_cross_project_contacts], :is_company => RedmineFinance.settings[:finance_filter_companies]) %>
+  </p>  
+</div>
+
+<div class="splitcontentright">
+  <p><%= f.text_field :operation_date, :size => 12, :required => true, :value => @operation.operation_date.to_date, :label => l(:label_operation_date) %><%= text_field_tag "operation_time", @operation.operation_date.to_s(:time), :size => 5 %><%= calendar_for('operation_operation_date') %> </p>
+  <p>
+    <%= f.text_field :amount, :label => l(:label_operation_amount), :size => 10, :required => true %>
+  </p>
+</div>
+  
+<div style="clear:both;"> </div>
+
+<p><%= f.text_area :description, :cols => 60, :rows => 5, :class => 'wiki-edit' %><%= wikitoolbar_for 'operation_description' %></p>
+
+</div>
+
+
+

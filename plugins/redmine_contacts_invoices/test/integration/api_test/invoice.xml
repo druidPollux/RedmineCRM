@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<invoice>
+  <number>TetsInvoiceNumber-1</number>
+  <invoice_date>2012-12-12</invoice_date>
+  <contact_id>1</contact_id>
+  <status_id>1</status_id>
+  <project_id>invoices</project_id>
+  <lines_attributes>
+    <0>
+      <tax>20</tax>
+      <price>35.0</price>
+      <quantity>10</quantity>
+      <units>hours</units>
+      <description>First line item</description>
+      <_destroy/>
+    </0>
+    <1>
+      <tax>20</tax>
+      <price>45.0</price>
+      <quantity>5</quantity>
+      <units>hours</units>
+      <description>Second line item</description>
+      <_destroy/>
+    </1>
+    <2>
+      <tax>20</tax>
+      <price>55.0</price>
+      <quantity>12</quantity>
+      <units>hours</units>
+      <description>Third line item</description>
+      <_destroy/>
+    </2>
+  </lines_attributes>
+</invoice>

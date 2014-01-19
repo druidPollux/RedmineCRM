@@ -1,0 +1,72 @@
+da:
+  project_module_contacts_invoices: Faktura
+  
+  label_invoice_plural: Faktura
+  label_invoice: Faktura
+  label_invoice_new: Ny faktura
+  label_invoice_edit: Ret faktura
+  label_invoice_status: Status
+  label_invoice_status_draft: Udkast
+  label_invoice_status_sent: Sendt
+  label_invoice_status_paid: Betalt
+  label_invoice_lines: Faktura linjer
+  label_invoice_percent: Procent
+  label_invoice_amount: Beløb
+  label_invoice_address: Adresse
+  label_invoice_bill_to: Regning til
+  label_invoice_company_representative: Kontakt
+  label_invoice_company_name: Firma navn
+  label_invoice_company_info: Firma info
+  label_invoice_bill_info: Regning info
+  label_invoice_units: Linje enheder
+  label_invoice_total: Total
+  label_invoice_tax: Moms
+  label_invoice_sub_amount: Sub total
+  label_invoice_invoiced: Faktureret
+  label_invoice_add_line: Tilføj linje
+  label_invoice_overdue: Forfalden
+  label_invoice_last_number: 'Sidste faktura nr: #%{number}'
+  label_invoice_template: Kladde
+  label_invoice_number_format: Faktura nummer format
+  label_invoice_default_tax: Standard moms beløb
+  label_invoice_line_grouping: Linje grupper
+  label_invoice_line_grouping_by_activity: Efter aktivitetstype
+  label_invoice_line_grouping_by_issue: Efter sag
+  label_invoice_line_grouping_by_user: Efter bruger
+  label_invoice_line_grouping_single_line: Enkelt linjer
+  
+  permission_edit_own_invoices: Ret egen faktura
+  permission_edit_invoices: Ret faktura
+  permission_delete_invoices: Slet faktura
+  permission_view_invoices: Se faktura
+
+  button_send_mail: Send
+  button_print: Print
+  button_invoice: Faktura
+
+  field_invoice_number: Faktura Nr.
+  field_invoice_date: Faktura dato
+  field_invoice_contact: Kunde
+  field_invoice_due_date: Forfaldsdato  
+  field_invoice_amount: Beløb
+  field_invoice_discount: Rabat
+  field_invoice_assigned_to: Tildelt 
+  field_invoice_status: Status
+  field_invoice_currency: Valuta
+  field_invoice_language: Faktura sprog 
+  
+  field_invoice_line_position: '#'
+  field_invoice_line_description: Beskrivelse
+  field_invoice_line_price: Enheds pris
+  field_invoice_line_quantity: Antal
+  field_invoice_line_tax: Moms
+  field_invoice_line_tax_amount: Moms ialt
+  field_invoice_line_total: Total
+  field_invoice_line_units: Enheder
+  
+  #0.0.3
+  label_invoice_company_logo_url: Firma logo (URL)
+  
+  #1.0.1
+  label_invoice_line_grouping_all: Alle
+  label_invoice_default_currency: Standard Valuta

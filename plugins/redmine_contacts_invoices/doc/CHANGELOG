@@ -1,0 +1,100 @@
+== Redmine Invoices plugin changelog
+
+Redmine Invoices plugin - invoicing plugin for Redmine
+Copyright (C) 2011-2013 Kirill Bezrukov
+http://www.redminecrm.com/projects/invoices
+
+== 2013-12-09 v3.0.1
+
+* Migration bug fixes
+* Fixed bug with hidden duplication link on invoice show page
+* Fixes in multiline address format in PDF report
+* New permissions for adding invoices and expenses
+* German translation update (Alex Meindl)
+
+== 2013-12-06 v3.0.0
+
+* Custom templates with liquid markup language
+* Public links
+* List view settings
+* PostgreSQL compatibility fixes
+* Brazilian Portuguese translation (Marcelo Fernandes)
+
+== 2013-11-16 v2.3.0
+
+* Taxes, Billable and Currency fields for Expenses
+* "Estimate" status for invoice
+* Currency signs
+* Global money setting on the Contacts -> Money tab
+* Units could be hided
+* Dutch translation (Bas Van Eijk)
+* Fixed bug in PDF genetation with emplty contact
+
+== 2013-10-22 v2.2.2
+
+* New macro {{invoice(inoice_number)}}
+* CRM 3.2.7 support
+* PostgreSQL sorting issues
+
+== 2013-07-22 v2.2.1
+
+* Japanese tranlation (Stephane Lapie)
+* PostgreSQL fixes for sorting
+
+== 2013-07-11 v2.2.0
+
+* Invoice payments
+* New forkflow for paid invoices
+* Stat for Due and Paid invoices
+* Client balance stat
+* Contacts context menu add invoice
+* Contact invoices tab
+* New "Cancel" invoice status
+* Sortable invoice lines
+
+== 2013-04-05 v2.1.1
+
+* Select project field
+* Bill time entries to different project
+* Contact select clean up
+* Fixed DAILY_ID bug
+* Added %%YEARLY_ID%%, %%MONTHLY_ID%% macros
+* Hungarian translation (Márk Sági-Kazár)
+* Czech translation (Martin Grůber)
+
+== 2013-02-26 v2.1.0
+
+* Assignee for expense
+* Attachments for invoices/expenses
+* Comments for invoices
+* Expenses table view
+* Sorting on excerpt list
+* Finance plugin support
+
+== 2013-02-04 v2.0.3
+
+* Redmine 2.3 support
+* Fixed bug with empty settings params
+
+== 2013-01-21 v2.0.2
+
+* Redmine 2.2.2 support
+
+== 2013-01-20 v2.0.1
+
+* Redmine 2.2 support
+* Per project invoice companies
+* All popular Currencies
+* Merging invoices and expenses plugins
+
+== 2012-05-03 v1.1.0
+
+* Caching for invoice total amount
+* Issues paginator with page_size
+* Invoice subject property
+* Expenses statistic by dates and statuses
+* Page number and invoice number in page footer
+* [PRO] CSV invoices/expenses export
+* [PRO] Custom Field support for Expenses module
+* Bug: Wrong statistics for boundary dates for last month
+* Bug: ActionView:TemplateError

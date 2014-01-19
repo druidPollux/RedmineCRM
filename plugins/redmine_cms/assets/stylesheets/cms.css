@@ -1,0 +1,265 @@
+/**************************************************************/
+/*                   TOP MENU
+/**************************************************************/
+
+#top-menu > ul > li {
+  height: 20px;
+}
+
+#top-menu li ul.menu-children {
+  display: none;
+  position: absolute;
+  clear: both;
+  top: 20px;
+  border: 1px solid #555;
+  background-color: #fff;
+  color: #505050; 
+}
+
+#top-menu ul.menu-children > li {
+  padding: 5px;
+  margin: 0px;
+  float: none;
+}
+
+#top-menu ul.menu-children > li a {
+  color: inherit;
+}
+
+#top-menu li:hover ul.menu-children {
+  display: block;
+  z-index: 1000;
+}
+
+#top-menu #account.cms > ul > li {
+  height: 20px;
+  position: relative;
+}
+
+#top-menu #account li:last-child > ul.menu-children {
+  right: 0px;
+  left: auto;
+}
+
+#top-menu div#account img.gravatar {
+  margin-right: 5px;
+  padding: 0px;
+  position: relative;
+  top: -2px;  
+}
+
+
+
+/**************************************************************/
+/*                   FOOTER MENU
+/**************************************************************/
+#footer ul {
+  position: relative;
+  float: left;
+  padding-left: 0px;
+  list-style: none;
+}
+
+div#footer ul li {
+  display: inline;
+  padding-right: 10px;
+}
+
+div#footer p {
+  text-align: right;
+}
+
+
+/**************************************************************/
+/*                   FEATURE
+/**************************************************************/
+div.feature {
+  padding: 20px;
+  border-bottom: 1px solid #AAA;
+}
+
+div.feature .feature-content {
+  padding-left: 52%;
+  min-height: 250px;
+  position: relative;
+}
+
+.feature .feature-content img {
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  border: 1px solid #CCC;
+}
+
+div.feature.left .feature-content {
+  padding-left: 0px;
+  padding-right: 52%;
+}
+
+div.feature.left .feature-content img {
+  right: 0px;
+  left: auto;
+}
+
+/**************************************************************/
+/*                   PRICING TABLE
+/**************************************************************/
+
+div.wiki .pricingtable {
+  width: 100%;
+}
+
+div.wiki table.pricingtable {
+  text-align: center;
+}
+
+div.wiki table.pricingtable, div.wiki table.pricingtable th, div.wiki table.pricingtable td {
+  border: none;
+}
+
+div.wiki table.pricingtable th, div.wiki table.pricingtable td {
+  padding: 10px;
+}
+
+div.wiki table.pricingtable .divider td, div.wiki table.pricingtable .divider th {
+  padding: 2px;
+}
+div.wiki table.pricingtable .divider, div.wiki table.pricingtable .divider .optimal  {
+  background: #CCC;
+}
+
+div.wiki  table.pricingtable td:first-child {
+  text-align: left;
+  white-space: nowrap;
+}
+
+div.wiki table.pricingtable .price, div.wiki table.pricingtable th.product  {
+  font-size: 25px;
+  padding: 10px;
+  display: block;
+}
+
+div.wiki table.pricingtable .optimal {
+  background: #EBEBEB;
+}
+
+div.wiki table.pricingtable tr:nth-child(even) {
+  background: #F1F1F1;
+}
+
+div.wiki table.pricingtable tr:nth-child(even) .optimal {
+  background: #DBDBDB;
+}
+
+div.wiki table.pricingtable .buttons td {
+  padding-bottom: 20px;
+}
+
+div.wiki table.pricingtable .header th {
+  padding-top: 20px;
+}
+
+div.wiki table.pricingtable .price span {
+  font-size: 14px;
+  font-weight: normal;
+  color: #999;
+}
+
+/**************************************************************/
+/*                   TOOLS
+/**************************************************************/
+#header div.contextual.page-edit a {
+  color: #333;
+}
+
+/**************************************************************/
+/*                   BUTTONS
+/**************************************************************/
+
+a.button, button.button, strong.button, div.button {
+  background-color: #628DB6;
+  color: white;
+}
+
+a.button:hover {
+  text-decoration: none;
+}
+
+.button span {
+  font-size: 12px;
+}
+
+/**************************************************************/
+/*                   PAGE
+/**************************************************************/
+
+.wiki.page .wiki-anchor {
+  display: none;
+}
+
+.contextual.page-edit {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  margin-top: 0px;
+  border: 1px solid #CCC;
+  padding: 5px 10px;
+  background: white;  
+  z-index: 10000;
+}
+
+.contextual.page-edit ul.parts-edit li {
+  padding-left: 10px;
+  list-style-type: none;
+}
+
+.contextual.page-edit ul.parts-edit {
+  display: none;
+}
+
+.contextual.page-edit:hover ul.parts-edit {
+  display: inline;
+}
+
+div.page-title {
+  text-align: center;
+}
+
+/**************************************************************/
+/*                   CODEMIRROR
+/**************************************************************/
+
+.CodeMirror {
+  padding: 2px;
+  border: 1px solid #D7D7D7;
+  height: auto !important;
+}
+
+.CodeMirror-scroll {
+  overflow-y: hidden;
+  overflow-x: auto !important;
+}
+
+.CodeMirror.CodeMirror-fullscreen {
+  display: block;
+  position: fixed !important;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100% !important;
+  z-index: 9999;
+  font-size: 14px; 
+}
+
+.CodeMirror .cm-liquid {
+  color: #0ca;
+}
+  
+/**************************************************************/
+/*                   ICONS
+/**************************************************************/
+#admin-menu a.cms { background-image: url(../images/sitemap_color.png);}
+
+.icon-menu {background-image: url(../images/sitemap.png);}
+.icon-page {background-image: url(../images/page_white_world.png);}
+.icon-refresh {background-image: url(../images/arrow_refresh.png);}
+

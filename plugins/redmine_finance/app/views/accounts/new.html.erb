@@ -1,0 +1,11 @@
+<h2><%= l(:label_account_new) %></h2>
+
+<%= labelled_form_for :account, @account, :url => {:action => 'create', :project_id => @project}, :html => { :multipart => true, :id => 'account_form'} do |f|  %> 
+  <%= render :partial => 'form', :locals => {:f => f}  %> 
+  <%= submit_tag l(:button_save) -%>
+<% end -%>
+
+
+<% content_for :header_tags do %>
+  <%= stylesheet_link_tag :finance, :plugin => 'redmine_finance' %>
+<% end %>

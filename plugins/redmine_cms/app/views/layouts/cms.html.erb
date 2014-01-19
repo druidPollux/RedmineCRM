@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title><%=h html_title %></title>
+<meta name="description" content="<%= @page_description || Redmine::Info.app_name %>" />
+<meta name="keywords" content="<%= @page_keywords || "issue,bug,tracker" %>" />
+<%= csrf_meta_tag %>
+<%= favicon_cms %>
+<%= jquery_tag %>
+<%= stylesheet_link_tag 'rtl', :media => 'all' if l(:direction) == 'rtl' %>
+<%= javascript_heads %>
+<%= heads_for_theme %>
+<%= call_hook :view_layouts_base_html_head %>
+<!-- page specific tags -->
+<%= yield :header_tags -%>
+</head>
+<body class="<%=h body_css_classes %> layout-cms">
+<div id="wrapper">
+<div id="wrapper2">
+    <%# link_to(image_tag("logo1.png", :plugin => "redmine_cms", :class => "logo", :width => 200), {:controller => "welcome", :action => "index"}) %>
+<div id="top-menu">
+
+    <div id="account" class="cms">
+        <%= render_account_menu %>
+        <%# render_menu :account_menu -%>
+    </div>
+    <%# content_tag('div', "#{l(:label_logged_as)} #{link_to_user(User.current, :format => :username)}".html_safe, :id => 'loggedas') if User.current.logged? %>
+    <%= render_menu :top_menu if User.current.logged? || !Setting.login_required? -%>
+</div>
+
+
+<div id="header" class="<%= has_content?(:header) ? '' : 'noheader' %>">
+
+
+    <%= yield :header %>
+    <% if show_main_menu = @project %>
+        <% if User.current.logged? || !Setting.login_required? %>
+        <div id="quick-search">
+            <%= form_tag({:controller => 'search', :action => 'index', :id => @project}, :method => :get ) do %>
+                <%= hidden_field_tag(controller.default_search_scope, 1, :id => nil) if controller.default_search_scope %>
+                <%= text_field_tag 'q', @question, :size => 20, :class => 'small', :accesskey => accesskey(:quick_search), :placeholder => l(:label_search) %>
+            <% end %>
+        </div>
+        <% end %>
+        <h1><%= page_header_title %></h1>
+
+        <% if display_main_menu?(@project) %>
+        <div id="main-menu">
+            <%= render_main_menu(@project) %>
+        </div>
+        <% end %>
+    <% end %>
+</div>
+
+<div id="main" class="<%= sidebar_content? ? '' : 'nosidebar' %> <%= show_main_menu ? '' : 'no-main-menu' %>">
+    <div id="sidebar">
+        <%= yield :sidebar %>
+        <%= view_layouts_base_sidebar_hook_response %>
+    </div>
+
+    <div id="content">
+        <%= render_flash_messages %>
+        <%= yield %>
+        <%= call_hook :view_layouts_base_content %>
+        <div style="clear:both;"></div>
+    </div>
+</div>
+
+<div id="ajax-indicator" style="display:none;"><span><%= l(:label_loading) %></span></div>
+<div id="ajax-modal" style="display:none;"></div>
+
+<div id="footer">
+  <%= yield :footer %>
+  <%= render_menu :footer_menu -%>
+  <p>
+     <%= Setting.plugin_redmine_cms[:copyright].blank? ? "Powered by #{link_to Redmine::Info.app_name, Redmine::Info.url}".html_safe : Setting.plugin_redmine_cms[:copyright].to_s.html_safe %>
+  </p>
+</div>
+</div>
+</div>
+<%= call_hook :view_layouts_base_body_bottom %>
+</body>
+</html>

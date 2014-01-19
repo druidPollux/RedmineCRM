@@ -1,0 +1,27 @@
+<%= form_tag({:controller => "contacts_settings", :action => "save", :project_id => @project, :tab => "project_tab"}, :method => :post, :class => "tabular") do %> 
+  <div class="tabular box">
+    <p>  
+      <label><%= l(:label_cms_landing_page) %></label>
+      <%= text_field_tag "contacts_settings[landing_page]",  ContactsSetting["landing_page", @project.id], :size => 60 %>
+    </p>
+
+    <p>  
+      <label><%= l(:label_cms_show_activity_tab) %></label>
+        <%= hidden_field_tag('contacts_settings[project_tab_show_activity]', 0) %>
+        <%= check_box_tag "contacts_settings[project_tab_show_activity]", 1, ContactsSetting["project_tab_show_activity", @project.id].to_i > 0 %>
+    </p>
+
+
+    <% pages = Page.all %>
+    <% 10.times do |n| %>
+    <p>  
+      <label><%= l(:label_project_tab_caption, :index => n + 1) %></label>
+      <%= text_field_tag "contacts_settings[project_tab_#{n + 1}_caption]",  ContactsSetting["project_tab_#{n + 1}_caption".to_sym, @project.id] %>
+      <em><%= l(:label_project_tab_page) %></em>
+      <%= select_tag "contacts_settings[project_tab_#{n + 1}_page]", options_for_select(pages_name_options_for_select(pages), ContactsSetting["project_tab_#{n + 1}_page".to_sym, @project.id]), :include_blank => true  %>
+    </p>
+    <% end %>
+  </div>
+  <%= submit_tag l(:button_save) %>
+<% end %>
+

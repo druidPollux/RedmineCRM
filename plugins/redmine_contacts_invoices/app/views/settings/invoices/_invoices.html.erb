@@ -1,0 +1,9 @@
+<% invoices_tabs = [
+		{:name => 'general', :partial => 'settings/invoices/general', :label => :label_invoice_general},
+        {:name => 'company', :partial => 'settings/invoices/company', :label => :label_invoice_company_profile}
+        ]   %>
+
+<%= render_tabs invoices_tabs %>
+
+<% html_title(l(:label_settings), l(:label_invoice_plural)) -%>
+

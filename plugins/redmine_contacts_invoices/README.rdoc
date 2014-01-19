@@ -1,0 +1,16 @@
+= contacts_invoices
+
+== Test
+rake db:drop  RAILS_ENV=test_sqlite3
+rake db:migrate db:migrate_plugins RAILS_ENV=test_sqlite3
+rake test:plugins:integration PLUGIN=redmine_contacts_invoices RAILS_ENV=test_sqlite3
+rake test:plugins:functionals PLUGIN=redmine_contacts_invoices RAILS_ENV=test_sqlite3
+rake test:plugins PLUGIN=redmine_contacts_invoices RAILS_ENV=test_sqlite3
+
+rake db:reset  db:migrate_plugins test:plugins NAME=redmine_contacts_invoices RAILS_ENV=test
+
+rake db:drop RAILS_ENV=test && rake db:migrate db:migrate_plugins RAILS_ENV=test && rake test:plugins PLUGIN=redmine_contacts_invoices RAILS_ENV=test
+
+=== Test API
+
+curl -v -H "Content-Type: application/xml" -X POST --data "@invoice.xml" -u admin:admin http://localhost:3000/invoices.xml

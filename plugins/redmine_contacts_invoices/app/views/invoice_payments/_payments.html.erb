@@ -1,0 +1,14 @@
+<% payments.each do |payment| %>
+    <div class="invoice-payment">
+      <div class="contextual">
+      <%= link_to image_tag('delete.png'), invoice_payment_path(@invoice, payment),
+                                                         :data => {:confirm => l(:text_are_you_sure)}, :method => :delete, :title => l(:button_delete) if User.current.allowed_to?(:edit_invoice_payments, @project) %>
+      </div>
+      <h4><%= avatar(payment.author, :size => "24") %><%= authoring payment.created_at, payment.author %></h4>
+      <p><%= format_date(payment.payment_date) %> - <strong><%= payment.amount_to_s %></strong></p>
+      <%= textilizable(payment.description) %>
+      <% if payment.attachments.any? -%>
+      <%= link_to_attachments payment %>
+      <% end %>
+    </div>
+<% end %>

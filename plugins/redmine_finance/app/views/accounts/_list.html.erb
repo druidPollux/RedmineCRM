@@ -1,0 +1,28 @@
+<h3><%= l(:label_account_plural) %></h3>
+
+<% if @project.accounts.any? %>
+<table class="list accounts">
+  <thead><tr>
+  <th><%= l(:field_name) %></th>
+  <th><%= l(:label_account_balance) %></th>
+  <th></th>
+  </tr></thead>
+  <tbody>
+<% for account in @project.accounts %>
+  <% unless account.new_record? %>
+  <tr class="<%= cycle 'odd', 'even' %>">
+  <td><%= link_to_if_authorized h(account.name), { :controller => 'accounts', :action => 'edit', :id => account } %></td>
+  <td class="money"><%= account.amount_to_s %></td>
+  <td class="buttons">
+    <%= link_to_if_authorized l(:button_delete), {:controller => 'accounts', :action => 'destroy', :id => account}, :method => :delete, :confirm => l(:text_are_you_sure), :class => 'icon icon-del' %>
+  </td>
+  </tr>
+  <% end %>
+<% end %>
+    </tbody>
+</table>
+<% else %>
+<p class="nodata"><%= l(:label_no_data) %></p>
+<% end %>
+
+<p><%= link_to_if_authorized l(:label_account_new), :controller => 'accounts', :action => 'new', :project_id => @project, :class => 'icon icon-add' %></p>

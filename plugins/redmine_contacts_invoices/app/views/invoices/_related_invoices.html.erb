@@ -1,0 +1,25 @@
+<% invoices = @contact.invoices.visible.order(:status_id).order(:created_at) %>
+<div id="invoices">
+
+<div class="contextual">
+  <%= link_to_if_authorized l(:label_invoice_new), {:controller => 'invoices', :action => 'new', :project_id => @project, :contact_id => @contact} %>
+</div>
+
+<h3><%= "#{l(:label_invoice_plural)}" %> <%= " - #{prices_collection_by_currency(@contact.invoices_balance, :hide_zeros => true).join(' / ')}".html_safe if invoices.detect{|d| d.is_sent? && !d.amount.blank?} %></h3>
+
+<% if invoices.any? %>
+  <table class="related_invoices">
+  <% invoices.each do |invoice| %>
+    <tr class="invoice">
+      <td class="name" style="vertical-align: top;">
+        <p>
+          <%= invoice_status_tag(invoice) if invoice.status %>
+          <%= link_to "#{invoice.number} #{invoice.subject}", {:controller => 'invoices', :action => 'show', :id => invoice.id } %> -
+          <%= invoice.amount_to_s %>
+        </p>
+      </td>
+    </tr>
+  <% end %>
+  </table>
+<% end %>
+</div>

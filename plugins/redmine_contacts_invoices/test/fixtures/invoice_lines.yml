@@ -1,0 +1,23 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+line_001:
+  invoice_id: 1
+  quantity: 20.50
+  description: Consulting work
+  tax: 18
+  price: 150
+  units: service
+
+line_002:
+  invoice_id: 2
+  quantity: 20.50
+  description: Consulting work
+  price: 150
+  units: service
+
+line_003:  
+  invoice_id: 2
+  quantity: 1
+  description: Product work
+  tax: 10
+  price: 1500
+  units: product

@@ -1,0 +1,12 @@
+<% if @contact && (@project = User.current.allowed_to?(:add_invoices, @project) ? @project : Invoice.allowed_target_projects.first) %>
+    <li><%= context_menu_link l(:button_invoice), {:controller => 'invoices',
+                                                   :action => 'new',
+                                                   :contact_id => @contact,
+                                                   :project_id => @project,
+                                                   :back_url => @back},
+                              :method => :get,
+                              :class => 'icon-invoice-add-context' %>
+    </li>
+<% end %>
+
+

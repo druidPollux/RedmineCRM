@@ -1,0 +1,32 @@
+<%= page_breadcrumb(@page) unless @project %>
+
+<% if params[:title] %>
+<div class="page-title">
+  <h1><%= @page.title %></h1>
+  <% unless @page.summary.blank? %>
+  <p id="page_summary"><%= @page.summary %></p>
+  <% end %>
+</div>
+<% end %>
+<div class="wiki page <%= @page.name %>">
+  <%= render_page @page %>
+</div>
+
+<% content_for :header do %>
+  <% if User.current.admin? %>
+  <div class="contextual page-edit">
+    <%= link_to l(:button_edit), edit_page_path(@page), :class => 'icon icon-edit' %>
+    <% if @page.parts.any? %>
+      <ul class="parts-edit">
+        <% @page.parts.each do |part| %>
+          <li><%= link_to part.name, edit_part_path(part), :class => 'icon icon-edit' %></li>
+        <% end %>
+        <li><hr></li>
+        <li><%= link_to l(:label_cms_refresh_cache), expire_cache_page_path(@page), :class => 'icon icon-reload' %></li>
+      </ul>
+    <% end %>
+  </div>
+  <% end %>
+<% end %>
+
+<% html_title(@page.title) -%>

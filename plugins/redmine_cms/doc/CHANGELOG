@@ -1,0 +1,22 @@
+== Redmine CMS plugin changelog
+
+Redmine CMS plugin - content management system for Redmine
+Copyright (C) 2011-2013  Kirill Bezrukov
+http://www.redminecrm.com/
+
+== 2013-08-28 v0.0.3
+
+* Show overview and activity tabs for projects without project_tab module
+* CMS plugin settings with pages/menus/parts tabs
+* Copyright info settings for CMS and Default with meta templates
+* Top menu child fixes for default themes
+* Menu visibility fixes
+* Attachments delete routing error fixed
+* Apply menu on the top of page
+
+== 2013-04-07 v0.0.2
+
+* Redmine 2.3 support
+* View menu permissions
+* Fixed bug with menu updates in multi redmine instanses
+

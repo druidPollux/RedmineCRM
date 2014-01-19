@@ -1,0 +1,66 @@
+<div class="contextual">
+  <% replace_watcher ||= 'watcher' %>
+  <%= watcher_tag(@account, User.current, {:id => replace_watcher, :replace => ['watcher','watcher2']}) %>
+  <%= link_to_if_authorized l(:button_edit), {:controller => "accounts", :action => "edit", :id => @account}, :class => 'icon icon-edit' unless @account.nil? %>
+  <%= link_to_if_authorized l(:button_delete), {:controller => "accounts", :action => "destroy", :id => @account}, :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del' unless @account.nil? %>
+</div>
+<h2><%= "#{l(:label_account)} ##{@account.id}" %></h2>
+<div class="account issue details">
+
+<div class="subject">
+<h3><%= "#{@account.name }: #{@account.amount_to_s}"%></h3>
+</div>
+
+<table class="attributes">
+  <tr>
+    <th class="debit"><%= l(:label_account_debit) %></th><td class="debit"><%= @account.debit_to_s %></td>
+    <th class="credit"><%= l(:label_account_credit) %></th><td class="credit"><%= @account.credit_to_s %></td>
+  </tr>
+<%= render_custom_fields_rows(@account) %>
+<%= call_hook(:view_accounts_show_details_bottom, :account => @account) %>
+</table>
+
+<% if @account.description? || (@account.attachments && @account.attachments.any?) -%>
+<hr />
+<% if @account.description? %>
+<div class="description">
+  <p><strong><%=l(:field_description)%></strong></p>
+  <div class="wiki">
+  <% attachments = nil %>
+  <%= textilizable @account, :description, :attachments => attachments %>
+  </div>
+</div>
+<% end %>
+<%= link_to_attachments @account, :thumbnails => true %>
+<% end -%>
+
+<%= call_hook(:view_accounts_show_description_bottom, :account => @account) %>
+
+<% unless @operations.empty? %>
+<hr />
+<div id="contact_list" class="operation_list">
+  <div class="contextual">
+  <% if User.current.allowed_to?(:edit_operations, @project) %>
+    <%= link_to l(:button_add), new_operation_path(:project_id => @project, :account_id => @account) %>
+  <% end %>
+  </div>
+
+  <p><strong><%=l(:label_operation_plural)%></strong></p>
+  <%= render :partial => 'operations' %>
+  <p class="pagination"><%= pagination_links_full @operations_pages, @operations_count %></p>
+</div>
+<% end %>
+
+</div>
+
+
+
+<% content_for :sidebar do %>
+
+<% end %>
+
+<% html_title "#{l(:label_account)} ##{@account.id}: #{@account.name}" %>
+
+<% content_for :header_tags do %>
+  <meta name = "format-detection" content = "telephone=no">
+<% end %>

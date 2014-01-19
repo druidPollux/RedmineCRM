@@ -1,0 +1,6 @@
+= Redmine Zen Edit plugin
+
+v0.0.2
+
+* Font size for fullscreen mode changed to 18px
+* English tranlsation fixes

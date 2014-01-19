@@ -1,0 +1,18 @@
+<%= error_messages_for 'cms_menu' %>
+
+<div class="box tabular">
+
+<p><%= f.text_field :name, :size => 30, :required => true, :label => l(:label_cms_menu_name)  %></p>
+<p><%= f.text_field :caption, :size => 30, :required => true, :label => l(:label_cms_menu_caption) %></p>
+<p><%= f.text_field :path, :required => true, :label => l(:label_cms_menu_path) %></p>
+<p><%= f.text_field :position, :size => 5, :required => true, :label => l(:label_cms_position) %></p>
+<% if @cms_menu.valid_parents.any? %>
+<p><%= f.select :parent_id, menus_options_for_select(@cms_menu.valid_parents), :include_blank => true, :label => :label_cms_menu_parent %></p>
+<% end %>
+<p><%= f.select :status_id, options_for_select([["Disabled", 0], ["Active", 1]], @cms_menu.status_id), :label => l(:label_cms_menu_status)  %></p> 
+
+<p><%= f.select :visibility, options_for_select([["Public", 'public'], ["Logged", 'logged']] + (Group.all.map{|g| [g.name, g.id]}), @cms_menu.visibility), :label => l(:label_cms_visibility)  %></p> 
+
+<p><%= f.select :menu_type, options_for_select([["top_menu", "top_menu"], ["footer_menu", "footer_menu"], ["account_menu", "account_menu"]],  @cms_menu.menu_type), :label => l(:label_cms_menu_type) %></p>  
+
+</div>

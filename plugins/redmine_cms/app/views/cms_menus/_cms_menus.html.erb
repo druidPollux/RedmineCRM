@@ -1,0 +1,34 @@
+<table class="list">
+  <thead><tr>
+    <th><%= l(:label_cms_menu_name) %></th>
+    <th><%= l(:label_cms_menu_caption) %></th>
+    <th></th>
+    <th></th>
+  </tr></thead>
+  <% previous_group = false %>
+  <tbody>
+
+<% menu_tree(@cms_menus) do |menu, level| -%>
+    <% if menu.menu_type != previous_group %>
+      <% reset_cycle %>
+      <tr class="group open">
+        <td colspan="5">
+          <span class="expander" onclick="toggleRowGroup(this);">&nbsp;</span>
+          <%= menu.menu_type.blank? ? 'None' : menu.menu_type %> 
+          <%= link_to_function("#{l(:button_collapse_all)}/#{l(:button_expand_all)}", "toggleAllRowGroups(this)", :class => 'toggle-all') %>
+        </td>
+      </tr>
+      <% previous_group = menu.menu_type %>
+    <% end %>
+  <tr class="menu project <%= cycle("odd", "even") %> <%= %w(disabled active)[menu.status_id] %> <%= level > 0 ? "idnt idnt-#{level}" : nil %>" id="cms_menu_<%= menu.id %>">
+  <td class="name"><span><%= link_to menu.name, edit_cms_menu_path(menu), :title => menu.path %></span></td>
+  <td class="caption"><%= link_to h(menu.caption), edit_cms_menu_path(menu), :title => menu.path %></td>
+  <td><%= cms_reorder_links('cms_menu', {:controller => 'cms_menus', :action => 'update', :id => menu}, :put) %></td> 
+    <td class="buttons">
+      <%= change_menu_status_link(menu) %>
+      <%= delete_link cms_menu_path(menu, :back_url => cms_menus_path(params)) %>
+    </td>
+  </tr>
+<% end -%>
+  </tbody>
+</table>

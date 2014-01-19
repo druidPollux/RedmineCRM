@@ -1,0 +1,19 @@
+<div class="contextual">   
+  <%= link_to l(:button_duplicate), {:controller => 'parts', :action => 'new', :copy_from => @part }, :class => 'icon icon-duplicate' %>
+  <%= link_to l(:button_delete), {:controller => 'parts', :action => 'destroy', :id => @part}, :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del' %>
+</div>
+
+<h2><%= link_to l(:label_cms_part_plural), parts_path %> &#187; <%=l(:label_cms_part)%> <%= link_to link_to @part.name, part_url(@part)%></h2>
+
+<%= labelled_form_for :part, @part, :url => { :action => 'update', :id => @part},
+  :html => { :id => 'part_form', :multipart => true, :method => :put } do |f| %>
+
+<%= render :partial => 'form', :locals => { :f => f } %>
+<fieldset><legend><%= l(:label_attachment_plural) %></legend>
+  <%= link_to_attachments @part, :thumbnails => true  %>
+</fieldset><br/>
+
+<%= submit_tag l(:button_save) %>
+<%= link_to l(:label_cms_apply), "#", :style => "margin-left:10px;", :remote => true, :onclick => "editor.save(); $.ajax({url: '#{escape_javascript url_for(@part)}', type: \'post\', data: $(\'#part_form\').serialize()});return false;"%>
+<% end %>
+

@@ -1,0 +1,9 @@
+<% cms_tabs = [{:name => 'pages', :partial => 'pages', :label => :label_cms_page_plural},
+        {:name => 'cms_menus', :partial => 'cms_menus/index', :label => :label_cms_menu_plural},
+        {:name => 'parts', :partial => 'parts/parts', :label => :label_cms_part_plural}
+        ]   %>   
+
+<%= render_tabs cms_tabs %>
+
+
+<% html_title(l(:label_cms)) -%>

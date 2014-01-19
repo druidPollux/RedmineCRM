@@ -1,0 +1,73 @@
+<% if invoice.lines.any? %>
+<table class="list invoice-lines">
+<thead>
+<tr>
+  <th>#</th>
+  <th><%= l(:field_invoice_line_description) %></th>
+  <th><%= l(:field_invoice_line_quantity) %></th>
+  <% if InvoicesSettings.show_units? %>
+  <th><%= l(:field_invoice_line_units) %></th>
+  <% end %>
+  <th class="price"><%= label_with_currency(:field_invoice_line_price, invoice.currency) %></th>
+  <% if invoice.has_taxes?  %>
+  <th><%= l(:field_invoice_line_tax) %></th>
+  <% end %>
+  <th class="total"><%= label_with_currency(:label_invoice_total, invoice.currency) %></th>
+</tr>
+</thead>
+<% @invoice_lines.each do |line| %>
+  <%= render :partial => 'invoices/line_row', :locals => {:line => line, :invoice => invoice} %>
+<% end %>
+
+<% colspan = 4 + (InvoicesSettings.show_units? ? 1 : 0) + (invoice.has_taxes? ? 1 : 0) %>
+
+<tr class="total delimiter"><th></th></tr>
+<tr class="total">
+  <th colspan="<%= colspan %>" class="total"></th>
+  <th class="total_amount"></th>
+</tr>
+
+
+<% if (invoice.discount > 0) || (invoice.tax_amount> 0 && !invoice.total_with_tax?)  %>
+<tr class="total">
+  <th colspan="<%= colspan %>" class="total"><%= l(:label_invoice_sub_amount) %>:</th>
+  <th class="total_amount"><%= price_to_currency(invoice.subtotal, invoice.currency) %></th>
+</tr>
+<% end %>
+
+<% invoice.tax_groups.each do |tax_group| %>
+<tr class="total tax">
+  <th colspan="<%= colspan%>" class="total"><%= "#{l(:label_invoice_tax)} (#{tax_group[0]}%)" %>:</th>
+  <th class="total_amount"> <%= price_to_currency(tax_group[1], invoice.currency)  %></th>
+</tr>
+<% end if invoice.tax_amount> 0 %>
+
+<% if invoice.discount > 0  %>
+<tr class="total">
+  <th colspan="<%= colspan %>" class="total"><%= "#{l(:field_invoice_discount)}#{' (' + invoice.discount_rate.to_s + '%)' if invoice.discount_type == 0 }" %>:</th>
+  <th class="total_amount">-<%= price_to_currency(invoice.discount_amount, invoice.currency)  %></th>
+</tr>
+<% end %>
+
+<tr class="total">
+  <th colspan="<%= colspan %>" class="total"><%= label_with_currency(invoice.total_with_tax? ? :label_invoice_total_with_tax : :label_invoice_total, invoice.currency) %>:</th>
+  <th class="total_amount"><%= price_to_currency(invoice.amount, invoice.currency) %></th>
+</tr>
+
+<tr class="total delimiter"><th></th></tr>
+<% invoice.payments.each do |payment| %>
+<tr class="total invoice-payment">
+  <th colspan="<%= colspan %>" class="total"><%= l(:label_invoice_payment) %> - <%= format_date(payment.payment_date) %></th>
+  <th class="total_amount">(<%= price_to_currency(payment.amount, invoice.currency) %>)</th>
+</tr>
+<% end if invoice.respond_to?(:payments)%>
+<tr class="total delimiter"><th></th></tr>
+<% if invoice.respond_to?(:remaining_balance) %>
+<tr class="total">
+  <th colspan="<%= colspan  %>" class="total"><%= label_with_currency(:label_invoice_amount_due, invoice.currency) %>:</th>
+  <th class="total_amount"><%= price_to_currency(invoice.remaining_balance, invoice.currency) %></th>
+</tr>
+<% end %>
+
+</table>
+<% end %>

@@ -1,0 +1,159 @@
+nl:
+  project_module_contacts_invoices: Facturen
+
+  label_invoice_plural: Facturen
+  label_invoice: Factuur
+  label_invoice_new: Nieuwe factuur
+  label_invoice_edit: Bewerk factuur
+  label_invoice_status: Status
+  label_invoice_status_draft: Voorlopig
+  label_invoice_status_sent: Verstuurd
+  label_invoice_status_paid: Betaald
+  label_invoice_lines: Factuur lijnen
+  label_invoice_percent: Percentage
+  label_invoice_amount: Bedrag
+  label_invoice_address: Adres
+  label_invoice_bill_to: Factuur aan
+  label_invoice_company_representative: Representative
+  label_invoice_company_name: Bedrijfsnaam
+  label_invoice_company_info: Bedrijfsinformatie
+  label_invoice_bill_info: Factuur informatie
+  label_invoice_units: Lijn eenheden
+  label_invoice_total: Totaal
+  label_invoice_tax: Btw
+  label_invoice_sub_amount: Sub totaal
+  label_invoice_invoiced: Gefactureerd
+  label_invoice_add_line: Voeg lijn toe
+  label_invoice_overdue: Achterstall
+  label_invoice_last_number: 'Het laatste factuurnummer was #%{number}'
+  label_invoice_template: Template
+  label_invoice_number_format: Factuur nummer opmaak
+  label_invoice_default_tax: Standaard Btw
+  label_invoice_line_grouping: Lijnen groepering
+  label_invoice_line_grouping_by_activity: Op activiteit
+  label_invoice_line_grouping_by_issue: Op issue
+  label_invoice_line_grouping_by_user: Op gebruiker
+  label_invoice_line_grouping_single_line: Enkele lijn
+
+  permission_edit_own_invoices: Bewerk eigen facturen
+  permission_edit_invoices: Bewerk facturen
+  permission_delete_invoices: Verwijder facturen
+  permission_view_invoices: Bekijk facturen
+
+  button_send_mail: Stuur
+  button_print: Print
+  button_invoice: Factuur
+
+  field_invoice_number: Factuur nummer
+  field_invoice_date: Factuur datum
+  field_invoice_contact: Client
+  field_invoice_due_date: Vervaldatum
+  field_invoice_amount: Bedrag
+  field_invoice_discount: Korting
+  field_invoice_assigned_to: Toegewezen aan
+  field_invoice_status: Status
+  field_invoice_currency: Valuta
+  field_invoice_language: Factuur taal
+
+  field_invoice_line_position: '#'
+  field_invoice_line_description: Omschrijving
+  field_invoice_line_price: Prijs
+  field_invoice_line_quantity: Aantal
+  field_invoice_line_tax: Btw
+  field_invoice_line_tax_amount: Btw bedrag
+  field_invoice_line_total: Totaal
+  field_invoice_line_units: Eenheid
+
+  #0.0.3
+  label_invoice_company_logo_url: Bedrijfslogo (URL)
+
+  #1.0.1
+  label_invoice_line_grouping_all: Allemaal
+  label_invoice_default_currency: Standaard valuta
+  label_invoice_total_including_tax: Totaal inclusief Btw
+  label_invoice_excerpt_invoice_list: Uittreksel factuur lijst
+  label_invoice_created: Factuur gemaakt
+  label_invoice_disable_taxes: Schakel Btw uit
+  label_invoice_days_late: '%{days} dagen te laat'
+  label_invoice_contact_extra_field: Contact extra veld voor factuur
+  lable_invoice_contact_extra_field_tip: Weergegeven op facturen (e.g. Client Btw or Btw ID)
+  label_invoice_decimal_separator: Decimaal scheidingsteken
+  label_invoice_thousands_delimiter: Duizend scheidingsteken
+  label_invoice_general: Algemeen
+  label_invoice_company: Bedrijf
+  label_invoice_total_with_tax: Totaal, inclusief Btw
+
+  #1.0.2
+  label_invoice_show_in_pdf: Toon in PDF
+  label_invoice_discount_including_tax: Korting inclusief Btw
+
+  #1.0.3
+  label_invoice_use_rate_plugin: Gebruik rate plugin
+  label_invoice_line_grouping_by_time_entry: Op tijd
+  label_generate_invoice: Genereer factuur
+
+  #1.0.4
+  field_invoice_subject: Onderwerp
+
+  #2.0.0
+  label_invoice_filter_companies: Filter bedrijven
+
+  #2.0.1
+  label_invoice_company_profile: Bedrijfsprofiel
+
+# Expenses
+  project_module_contacts_expenses: Onkosten
+
+  permission_import_invoices: Importeer facturen
+  permission_import_expenses: Importeer onkosten
+  label_expense_plural: Onkosten
+  label_expense: Onkoste
+  label_expense_new: Nieuwe onkoste
+  label_expense_edit: Bewerk onkoste
+  label_expense_status: Status
+  label_expense_status_draft: Voorlopig
+  label_expense_status_new: Nieuw
+  label_expense_status_billed: Gefactureerd
+  label_expense_status_paid: Betaald
+  label_expense_created: Onkoste gemaakt
+
+  field_expense_date: Onkoste datum
+  field_expense_contact: Client
+  field_expense_status: Status
+  field_expense_price: Bedrag
+
+  permission_edit_own_expenses: Bewerk eigen onkosten
+  permission_edit_expenses: Bewerk onkosten
+  permission_delete_expenses: Verwijder onkosten
+  permission_view_expenses: Bekijk onkosten
+
+  label_expense_stat_by_period: Onkosten per periode
+  label_expense_stat_by_status: Onkosten per status
+
+  #2.1.1
+  label_invoice_cross_project_contacts: Sta cross-project contactrelaties toe
+
+  #2.1.2
+  label_invoice_show_invoices_in_top_menu: Toon facturen in top menu
+  label_invoice_show_expenses_in_top_menu: Toon onkosten in top menu
+  permission_manage_invoices: Beheer facturen
+  permission_comment_invoices: Opmerkingen facturen
+
+  #2.2.0
+  activerecord:
+    errors:
+      messages:
+        text_invoice_cant_change_status: Kan niet worden verandert
+  label_invoice_status_canceled: Geannuleerd
+  label_invoice_amount_due: Verwacht
+  label_invoice_payment: Factuur betaling
+  label_invoice_payment_plural: Betalingen
+  label_invoice_payment_new: Nieuwe factuur betaling
+  label_invoice_add_payment: Voeg betaling toe
+  label_invoice_payment_date: Betaal datum
+  label_invoice_paid_date: Datum betaald
+  label_invoice_balance: Balans
+  label_invoice_days_due: '%{days} dagen te laat'
+  label_invoice_internal: Intern
+  permission_edit_invoice_payments: Bewerk betalingen
+  label_invoice_payment_created: Factuur betaling aangemaakt

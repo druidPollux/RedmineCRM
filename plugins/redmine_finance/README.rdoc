@@ -1,0 +1,7 @@
+= redmine_finance
+
+Description goes here
+
+
+ActiveRecord::Migration.rename_table :operation_types, :operation_categories
+ActiveRecord::Migration.rename_column :operations, :type_id, :category_id

@@ -1,0 +1,3 @@
+[submodule "plugins/redmine_tags"]
+	path = plugins/redmine_tags
+	url = https://github.com/redminecrm/redmine_tags

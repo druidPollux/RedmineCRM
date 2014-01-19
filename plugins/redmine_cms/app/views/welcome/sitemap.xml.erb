@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+  <% @pages.each do |page| %>
+  <url>
+    <loc><%= page_url(page) %></loc>
+    <lastmod><%= page.updated_at.strftime("%Y-%m-%d") %></lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <% end %>
+  <% @projects.each do |project| %>
+
+    <% 10.downto(1) do |index| %>
+      <% unless ContactsSetting["project_tab_#{index}_caption".to_sym, project.id].blank? %>
+        <url>
+          <loc><%= project_tab_url(index, :project_id => project) %></loc>
+          <changefreq>weekly</changefreq>
+        </url>
+      <% end %>
+    <% end if User.anonymous.allowed_to?(:view_project_tabs, project) %>
+
+    <% project.issues.visible.each do |issue| %>
+    <url>
+      <loc><%= issue_url(issue) %></loc>
+      <lastmod><%= issue.updated_on.strftime("%Y-%m-%d") %></lastmod>
+      <changefreq>weekly</changefreq>
+    </url>
+    <% end if User.anonymous.allowed_to?(:view_issues, project)  %>
+
+    <% project.boards.visible.each do |board| %>
+    <url>
+      <loc><%= project_board_url(board, :project_id => project.id) %></loc>
+      <changefreq>weekly</changefreq>
+    </url>
+      <% board.topics.each do |topic| %>
+      <url>
+        <loc><%= board_message_url(topic, :board_id => board.id) %></loc>
+        <lastmod><%= topic.updated_on.strftime("%Y-%m-%d") %></lastmod>
+        <changefreq>weekly</changefreq>
+      </url>
+      <% end %>
+    <% end if User.anonymous.allowed_to?(:view_messages, project) %>
+
+    <% project.wiki.pages.each do |wiki_page| %>
+    <url>
+      <loc><%= url_for(:only_path => false, :controller => 'wiki', :action => 'show', :id => wiki_page.title, :project_id => wiki_page.project, :version => nil ) %></loc>
+      <lastmod><%= wiki_page.updated_on.strftime("%Y-%m-%d") %></lastmod>
+      <changefreq>weekly</changefreq>
+    </url>
+    <% end if User.anonymous.allowed_to?(:view_wiki_pages, project) %>
+
+    <% project.news.each do |news_page| %>
+    <url>
+      <loc><%=  news_url(news_page) %></loc>
+      <lastmod><%= news_page.created_on.strftime("%Y-%m-%d") %></lastmod>
+      <changefreq>weekly</changefreq>
+    </url>
+    <% end if User.anonymous.allowed_to?(:view_news, project) %>    
+
+  <% end %>  
+</urlset>

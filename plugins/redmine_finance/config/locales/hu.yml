@@ -1,0 +1,58 @@
+# Hungarian strings go here for Rails i18n
+hu:
+  label_finance: Pénzügy
+  label_finance_plural: Pénzügyek
+  label_finance_thousands_delimiter: Ezres elválasztó
+  label_finance_decimal_separator: Tizedes elválasztó
+  label_finance_default_currency: Alapértelmezett pénznem
+  project_module_finance: Pénzügy
+
+  label_account: Fiók
+  label_account_plural: Fiókok
+  label_account_debit: Tartozás
+  label_account_credit: Hitel
+  label_account_new: Új fiók
+  label_account_edit: Fiók szerkesztése
+  label_account_balance: Egyenleg
+  label_account_currency: Pénznem
+
+  field_account: Fiók
+  field_account_currency: Pénznem
+
+  label_operation: Tranzakció
+  label_operation_plural: Tranzakciók
+  label_operation_edit: Tranzakció szerkesztése
+  label_operation_new: Új tranzakció
+  label_operation_date: Dátum
+  label_operation_income: Bevétel
+  label_operation_expense: Kiadás
+  label_operation_category: Kategória
+  label_operation_amount: Összeg
+
+  field_operation_category: Kategória
+  field_operation_date: Tranzakció dátuma
+  field_operation_amount: Összeg
+
+  label_operation_category_plural: Tranzakció kategóriák
+  label_operation_category_new: Új tranzakció kategória
+  label_operation_category_is_income: Bevétel
+
+  label_finance_show_in_top_menu: Megjelenítés a felső menüben
+  label_finance_show_in_app_menu: Megjelenítés az alkalmazás menüben
+
+  permission_view_finances: Pénzügyek megtekintése
+  permission_edit_operations: Tranzakciók szerkesztése
+  permission_edit_own_operations: Saját tranzakciók szerkesztése
+  permission_delete_operations: Tranzakciók törlése
+  permission_comment_operations: Hozzászólás a tranzakciókhoz
+  permission_import_operations: Tranzakciók importálása
+  permission_edit_accounts: Fiókok szerkesztése
+  permission_delete_accounts: Fiókok törlése
+  permission_manage_operation_invoices: Tranzakció számlák kezelése
+  permission_manage_operation_relations: Tranzakció kapcsolatok kezelése
+
+  label_related_operations: Kapcsolódó tranzakciók
+  text_account_updated: "A %{name} fiókot %{author} módosította."
+  text_account_amount_changed: "Az összeg megváltozott, %{old} helyett %{new} lett"
+  label_finance_account_updated: Pénzügyi fiók frissítve
+  label_finance_total: Összesen

@@ -1,0 +1,6 @@
+<h2><%= link_to l(:label_operation_category_plural), :action =>"plugin", :id => "redmine_finance", :controller => "settings", :tab => 'operation_categories' %> &#187; <%=l(:label_operation_category_new)%></h2>
+
+<%= form_tag({:action => 'create'}, :class => "tabular") do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag l(:button_create) %>
+<% end %>

@@ -1,0 +1,44 @@
+<h3><%= "#{l(:label_invoice_status)}#{' - ' + @invoice.contact.name.strip if @invoice && @invoice.contact}"  %></h3>
+<table class="invoices-stat statuses">
+  <tr>
+    <th>
+      <span class="tag-label-color invoice-status draft" >
+        <span><%= link_to "#{l(:label_invoice_status_draft)}#{'(' + @draft_status_count.to_s + ')' if @draft_status_count > 0 }", {:conroller => "invoices", :action => "index", :status_id => Invoice::DRAFT_INVOICE, :project_id => @project, :contact_id => @invoice && @invoice.contact } %> </span>
+      </span>
+    </th>
+    <td class="sum"><%= prices_collection_by_currency(@draft_status_sum, :hide_zeros => true).join('<br/>').html_safe %></td>
+  </tr>
+  <tr>
+    <th>
+      <span class="tag-label-color invoice-status estimate" >
+			  <span><%= link_to "#{l(:label_invoice_status_estimate)}#{'(' + @estimate_status_count.to_s + ')' if @estimate_status_count > 0 }", {:conroller => "invoices", :action => "index", :status_id => Invoice::ESTIMATE_INVOICE, :project_id => @project, :contact_id => @invoice && @invoice.contact } %> </span>
+      </span>
+    </th>
+    <td class="sum"><%= prices_collection_by_currency(@estimate_status_sum, :hide_zeros => true).join('<br/>').html_safe %></td>
+  </tr>
+  <tr>
+    <th>
+    <span class="tag-label-color invoice-status sent" >
+		  <span><%= link_to "#{l(:label_invoice_status_sent)}#{'(' + @sent_status_count.to_s + ')' if @sent_status_count > 0 }", {:conroller => "invoices", :action => "index", :status_id => Invoice::SENT_INVOICE, :project_id => @project, :contact_id => @invoice && @invoice.contact } %> </span>
+    </span>
+    </th>
+    <td class="sum"><%= prices_collection_by_currency(@sent_status_sum, :hide_zeros => true).join('<br/>').html_safe %></td>
+  </tr>
+  <tr>
+    <th>
+    <span class="tag-label-color invoice-status paid" >
+      <span><%= link_to "#{l(:label_invoice_status_paid)}#{'(' + @paid_status_count.to_s + ')' if @paid_status_count > 0 }", {:conroller => "invoices", :action => "index", :status_id => Invoice::PAID_INVOICE, :project_id => @project, :contact_id => @invoice && @invoice.contact } %> </span>
+    </span>
+    </th>
+    <td class="sum"><%= prices_collection_by_currency(@paid_status_sum, :hide_zeros => true).join('<br/>').html_safe %></td>
+  </tr>
+  <tr>
+    <th>
+    <span class="tag-label-color invoice-status canceled" >
+		  <span><%= link_to "#{l(:label_invoice_status_canceled)}#{'(' + @canceled_status_count.to_s + ')' if @canceled_status_count > 0 }", {:conroller => "invoices", :action => "index", :status_id => Invoice::CANCELED_INVOICE, :project_id => @project, :contact_id => @invoice && @invoice.contact } %> </span>
+    </span>
+    </th>
+    <td class="sum"><%= prices_collection_by_currency(@canceled_status_sum, :hide_zeros => true).join('<br/>').html_safe %></td>
+  </tr>
+
+</table>

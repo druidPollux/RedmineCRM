@@ -1,0 +1,21 @@
+<tr class="line fields sortable-line" id="line-<%= f.object.id %>">
+  <!-- <td><span class="sort icon icon-sort" style="cursor: row-resize;"></span> </td>  -->
+  <td class="description"><%= f.text_area :description, :no_label => true,  :rows => f.object.description.blank? ? 2 : [f.object.description.lines.count, 2].max, :onkeyup => "activateTextAreaResize(this);" %></td>
+  <td class="quantity"><%= f.text_field :quantity, :no_label => true, :size => 6, :onkeyup => 'updateInvoiceTotal(this)' %></td>
+  <% if InvoicesSettings.show_units? %>
+  <td class="units"><%= f.text_field :units, :no_label => true, :size => 8 %></td>
+  <% end %>
+  <td class="price"><%= f.text_field :price, :no_label => true, :size => 8, :onkeyup => 'updateInvoiceTotal(this)' %></td>
+  <% if !InvoicesSettings.disable_taxes?(@project) || (f.object.invoice.respond_to?(:has_taxes?) && f.object.invoice.has_taxes?)   %>
+  <td class="tax">
+    <% line_tax = (f.object.new_record? && f.object.tax.blank?) ? ContactsSetting.default_tax : f.object.tax %>
+    <%= check_box_tag :show_tax, "1", false, :onclick=>"$(this).hide(); $(this).parent().find('.tax-fields').show(); $(this).next().find('input').focus();  $(this).next().find('input').val('#{ContactsSetting.default_tax}'); return false;" if line_tax.blank? || line_tax == 0 %>
+    <span class="tax-fields" style="white-space: nowrap; <%= line_tax.blank? || line_tax == 0 ? "display:none;" : "" %>"><%= f.text_field :tax, :no_label => true, :size => 5, :value => line_tax %>&nbsp;%
+    </span>
+  </td>
+  <% end %>
+  <td class="total"><%= format("%.2f\n", f.object.price * f.object.quantity) if f.object.price && f.object.quantity  %></td>
+  <td> <%= link_to_remove_invoice_fields "", f, :class => "icon icon-del"  %></td>
+  <%= f.hidden_field :position, :class => 'position' %>
+</tr>
+

@@ -1,0 +1,18 @@
+<%= l(:text_account_updated, :name => "#{@account.name}", :author => h(@author)) %>
+
+<%=l(:text_account_amount_changed, :old => price_to_currency(@account_amount_was, @account.currency), :new => @account.amount_to_s) %>
+
+----------------------------------------
+<%= "#{l(:label_operation)} ##{@operation.id}: #{@operation.category.name}" %>
+<%= operation_url(@operation) %>
+
+* <%= l(:label_operation_category) %>: <%= @operation.category.name %>
+* <%= l(:label_operation_date) %>: <%= format_date(@operation.operation_date) %>
+* <%= l(:label_operation_amount) %>: <%= @operation.amount_to_s %>
+* <%= l(:label_account) %>: <%= "#{@operation.account.name} - #{@operation.account.amount_to_s} (#{account_url(@operation.account)})" %> 
+  <% if @operation.contact %>
+* <%= l(:label_contact) %>: <%= @operation.contact.name %>
+  <% end %>
+
+<%= @operation.description %>
+

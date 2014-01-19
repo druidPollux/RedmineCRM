@@ -1,0 +1,11 @@
+<ul>
+	<% if !@operation.nil? %>
+		<li><%= context_menu_link l(:button_edit), {:controller => 'operations', :action => 'edit', :id => @operation},
+		        :class => 'icon-edit', :disabled => !@can[:edit] %></li>   
+		
+	<% end %>
+
+   	 <li><%= context_menu_link l(:button_delete), {:controller => 'operations', :action => 'bulk_destroy', :ids => @operations.collect(&:id), :project_id => @project},
+                            :method => :delete, :confirm => l(:text_are_you_sure), :class => 'icon-del', :disabled => !@can[:delete] %></li>	
+</ul>
+

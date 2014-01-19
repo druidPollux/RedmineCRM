@@ -1,0 +1,65 @@
+# English strings go here for Rails i18n
+sk:
+  label_finance: Financie
+  label_finance_plural: Financie
+  label_finance_thousands_delimiter: Oddeľovač tisícov
+  label_finance_decimal_separator: Desatinný oddelovač
+  label_finance_default_currency: Východzia mena
+  project_module_finance: Financie
+
+  label_account: Účet
+  label_account_plural: Účty
+  label_account_debit: Debet
+  label_account_credit: Kredit
+  label_account_new: Nový účet
+  label_account_edit: Upraviť účet
+  label_account_balance: Rozdiel
+  label_account_currency: Mena
+
+  field_account: Účet
+  field_account_currency: Mena
+
+  label_operation: Operácia
+  label_operation_plural: Operácie
+  label_operation_edit: Upraviť operáciu
+  label_operation_new: Nová operácia
+  label_operation_date: Dátum
+  label_operation_income: Príjem
+  label_operation_expense: Výdaj
+  label_operation_category: Kategória
+  label_operation_amount: Suma
+
+  field_operation_category: Kategória
+  field_operation_date: Dátum operácie
+  field_operation_amount: Suma
+
+  label_operation_category_plural: Kategórie operácií
+  label_operation_category_new: Nová kategória operácií
+  label_operation_category_is_income: Je príjem
+
+  label_finance_show_in_top_menu: Zobraziť v hornom menu
+  label_finance_show_in_app_menu: Zobraziť v menu aplikácie
+
+  permission_view_finances: Zobraziť financie
+  permission_edit_operations: Upraviť operácie
+  permission_edit_own_operations: Upraviť operácie
+  permission_delete_operations: Vymazať operácie
+  permission_comment_operations: Komentovať operácie
+  permission_import_operations: Importovať operácie
+  permission_edit_accounts: Upraviť účty
+  permission_delete_accounts: Vymazať účty
+  permission_manage_operation_invoices: Manažovať faktúry operácie
+  permission_manage_operation_relations: Manažovať prepojenia operácie
+
+  label_related_operations: Súvisiace operácie
+  text_account_updated: "Účet %{name} aktualizoval %{author}."
+  text_account_amount_changed: "Suma zmenná z %{old} na %{new}"
+  label_finance_account_updated: Finančný účet bol aktualizovaný
+  label_finance_total: Celkom
+
+  #1.0.3
+  permission_delete_operation_comments: Vymazať komentáre
+
+  #1.0.4
+  label_finance_cross_project_contacts: Povoliť prepojenia kontaktov cez projekty
+  label_finance_filter_companies: Filter firiem

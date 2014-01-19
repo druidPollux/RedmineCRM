@@ -1,0 +1,22 @@
+<h2><%= l(:label_account_plural) %></h2>
+
+<table class="list accounts">
+  <thead><tr>
+  <th><%= l(:field_name) %></th>
+  <th><%= l(:label_account_debit) %></th>
+  <th><%= l(:label_account_credit) %></th>
+  <th><%= l(:label_account_balance) %></th>
+  </tr></thead>
+  <tbody>
+<% @accounts.each do |account| %>
+  <tr class="<%= cycle 'odd', 'even' %>">
+    <td><%= link_to h(account.name), account_path(account) %></td>
+    <td class="money debit"><%= account.debit_to_s %></td>
+    <td class="money credit"><%= account.credit_to_s %></td>
+    <td class="money balance"><%= account.amount_to_s %></td>
+  </tr>
+<% end %>
+    </tbody>
+</table>
+
+<p><%= link_to_if_authorized l(:label_account_new), :controller => 'accounts', :action => 'new', :project_id => @project, :class => 'icon icon-add' %></p>

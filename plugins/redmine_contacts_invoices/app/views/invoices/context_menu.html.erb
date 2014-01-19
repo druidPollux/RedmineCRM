@@ -1,0 +1,27 @@
+<ul>
+
+	<% if @invoice.present? %>
+		<li><%= context_menu_link l(:button_edit), {:controller => 'invoices', :action => 'edit', :id => @invoice}, :class => 'icon-edit', :disabled => !@can[:edit] %></li>
+		<li><%= context_menu_link l(:label_invoice_pdf), {:controller => 'invoices', :action => 'show', :format => 'pdf', :id => @invoice}, :class => 'icon-pdf-context', :disabled => !@can[:pdf] %></li>
+    <li><%= context_menu_link l(:label_invoice_add_payment), new_invoice_payment_path(:invoice_id => @invoice), :class => 'icon icon-add-payment' if User.current.allowed_to?(:edit_invoice_payments, @invoice.project) %></li>
+	<% else %>
+    <!-- <li><%# context_menu_link l(:button_edit), {:controller => 'invoices', :action => 'bulk_edit', :ids => @invoices.collect(&:id)},
+            :class => 'icon-edit', :disabled => !@can[:edit] %></li> -->
+	<% end %>
+
+    <% unless @project.nil? -%>
+		<li class="folder">
+			<a href="#" class="submenu"><%= l(:field_status) %></a>
+			<ul>
+			<% collection_invoice_statuses_for_select.each do |u| -%>
+			    <li><%= context_menu_link u[0], {:controller => 'invoices', :action => 'bulk_update', :ids => @invoices.collect(&:id), :invoice => {'status_id' => u[1]}, :back_url => @back}, :method => :post,
+			                              :selected => (@invoice && u[1] == @invoice.status_id), :disabled =>  !@can[:change_status] %></li>
+			<% end -%>
+			</ul>
+		</li>
+	<% end %>
+
+   	 <li><%= context_menu_link l(:button_delete), {:controller => 'invoices', :action => 'bulk_destroy', :ids => @invoices.collect(&:id), :project_id => @project, :back_url => @back},
+                            :method => :delete, :confirm => l(:text_are_you_sure), :class => 'icon-del', :disabled => !@can[:delete] %></li>
+</ul>
+

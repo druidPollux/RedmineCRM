@@ -1,0 +1,83 @@
+<%= error_messages_for 'invoice' %>
+
+<div class="box tabular">
+
+<div class="splitcontentleft">
+  <p><%= f.text_field :number, :label => l(:field_invoice_number), :required => true, :style => "width: 90%" %>
+    <% if invoice.new_record? && @last_invoice_number %>
+    <br>
+  	<em class="info"><%= l(:label_invoice_last_number, :number => @last_invoice_number) %></em>
+  	<% end %>
+  </p>
+
+  <p class="subject"><%= f.text_field :subject, :label => l(:field_invoice_subject), :style => "width: 90%" %></p>
+  <p><%= f.select :project_id, project_tree_options_for_select(Invoice.allowed_target_projects, :selected => @project), {:required => true} %></p>
+  <p class="object-select">
+    <% if !invoice.new_record? && invoice.is_paid? %>
+      <%= label_tag l(:field_invoice_status) %><%= invoice.status %>
+    <% else %>
+      <%= f.select :status_id, collection_invoice_statuses_for_select, :label => l(:field_invoice_status), :required => true %>
+    <% end %>
+  </p>
+  <p class="object-select">
+    <%= label_tag :invoice_contact_id,  l(:field_invoice_contact)%>
+    <%= select_contact_tag('invoice[contact_id]', invoice.contact, :is_select => Contact.visible.by_project(RedmineInvoices.settings[:invoices_cross_project_contacts] ? nil : @project).count < 50, :cross_project_contacts => RedmineInvoices.settings[:invoices_cross_project_contacts], :is_company => RedmineInvoices.settings[:invoices_select_companies], :include_blank => true, :add_contact => true, :display_field => invoice.contact.blank?) %>
+  </p>
+  <p class="object-select"><%= f.select :assigned_to_id, (@project.assignable_users.collect {|m| [m.name, m.id]}), :include_blank => true, :label => l(:field_assigned_to) %></p>
+</div>
+
+<div class="splitcontentright">
+  <p><%= f.text_field :invoice_date, :size => 12, :required => true %><%= calendar_for('invoice_invoice_date') %> </p>
+  <p><%= f.text_field :due_date, :label => l(:field_invoice_due_date), :size => 12 %><%= calendar_for('invoice_due_date') %> </p>
+  <p><%= f.select :currency, collection_for_currencies_select, :label => l(:field_invoice_currency), :include_blank => true  %></p>
+  <p>
+    <%= f.text_field :discount, :label => l(:field_invoice_discount), :size => 10 %>
+    <%= f.select :discount_type, collection_for_discount_types_select, :no_label => true %>
+  </p>
+  <p class="object-select"><%= f.select :language, invoice_lang_options_for_select, {:label => l(:field_invoice_language)}, :disabled => InvoicesSettings.is_custom_template?(@project)  %></p>
+
+</div>
+
+<div style="clear:both;"> </div>
+
+<p><%= f.text_area :description, :cols => 60, :rows => 10, :class => 'wiki-edit' %><%= wikitoolbar_for 'invoice_description' %></p>
+
+<fieldset class="attributes">
+  <legend><%= l(:label_invoice_lines) %></legend>
+  <table class="invoice-lines form">
+    <tr>
+      <!-- <th class="sort"></th> -->
+      <th><%= l(:field_invoice_line_description) %></th>
+      <th><%= l(:field_invoice_line_quantity) %></th>
+      <% if InvoicesSettings.show_units? %>
+      <th><%= l(:field_invoice_line_units) %></th>
+      <% end %>
+      <th><%= l(:field_invoice_line_price) %></th>
+      <% if !InvoicesSettings.disable_taxes?(@project) || invoice.has_taxes?  %>
+      <th><%= l(:field_invoice_line_tax) %></th>
+      <% end %>
+      <th><%= l(:label_invoice_total) %></th>
+    </tr>
+
+    <tbody id="sortable">
+      <tr style="display:none;"></tr>
+      <%= f.fields_for :lines do |builder| %>
+          <%= render :partial => 'line_fields', :locals => {:f => builder, :invoice => invoice} %>
+      <% end %>
+    </tbody>
+    <tr class="line-total">
+      <td style="text-align: left;" class="add-link" colspan="<%= 3 + (InvoicesSettings.show_units? ? 1 : 0) + (!InvoicesSettings.disable_taxes?(@project) || invoice.has_taxes?  ? 1 : 0)  %>">
+      <%= link_to_add_invoice_fields l(:label_invoice_add_line), f, :lines %>
+      <%= call_hook(:edit_invoices_form_lines_actions, { :invoice => invoice, :form => f }) %>
+      </td>
+      <td class="total-data total" id="total_amount"><%= "%.2f" % invoice.amount.to_f %></td>
+      <td class="total-data"></td>
+    </tr>
+  </table>
+
+</fieldset>
+
+</div>
+
+
+

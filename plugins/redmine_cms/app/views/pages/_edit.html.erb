@@ -1,0 +1,9 @@
+<%= labelled_form_for :page, @page, :url => { :action => 'update', :id => @page},
+  :html => { :id => 'page_form', :multipart => true, :method => :put } do |f| %>
+
+<%= render :partial => 'form', :locals => { :f => f } %>
+<%= submit_tag l(:button_save) %>
+<%= link_to l(:label_cms_apply), "#", :style => "margin-left:10px;", :remote => true, :onclick => "editor.save(); $.ajax({url: '#{escape_javascript url_for(@page)}', type: \'put\', data: $(\'#page_form\').serialize()});return false;"%>
+<% end %>
+
+

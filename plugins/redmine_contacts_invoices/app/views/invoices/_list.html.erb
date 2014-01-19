@@ -1,0 +1,57 @@
+<%= form_tag({}) do -%>
+	<%= hidden_field_tag 'back_url', url_for(params) %>
+	<%= hidden_field_tag 'project_id', @project.id if @project %>
+<div class="autoscroll">
+    <table class="list">
+      <thead>
+      <tr>
+        <th class="checkbox hide-when-print"><%= link_to image_tag('toggle_check.png'), {}, :onclick => 'toggleIssuesSelection(this); return false;',
+                                                           :title => "#{l(:button_check_all)}/#{l(:button_uncheck_all)}" %>
+        </th>
+
+        <%= sort_header_tag('number', :caption => l(:field_invoice_number), :default_order => 'desc') %>
+        <%= sort_header_tag('invoice_date', :caption => l(:field_invoice_date), :default_order => 'desc') %>
+        <th><%= l(:field_invoice_contact) %></th>
+        <%= sort_header_tag('due_date', :caption => l(:field_invoice_due_date), :default_order => 'desc') %>
+        <th><%= l(:field_invoice_currency) %></th>
+        <%= sort_header_tag('amount', :caption => l(:field_invoice_amount), :default_order => 'desc') %>
+        <th><%= l(:label_invoice_status_paid) %></th>
+        <th><%= l(:label_invoice_amount_due) %></th>
+        <%= sort_header_tag('status', :caption => l(:field_invoice_status), :default_order => 'desc') %>
+      </tr>
+      </thead>
+      <% @invoices.each do |invoice| %>
+      <tr style="text-align: center;white-space: nowrap;" class="hascontextmenu invoice <%= cycle('odd', 'even') %> status-<%= invoice.status_id %> <%= 'overdue' if invoice.is_sent? && invoice.due_date && (invoice.due_date <= Date.today) %>">
+        <td class="checkbox hide-when-print"><%= check_box_tag("ids[]", invoice.id, false, :id => nil) %></td>
+        <td class="number"><%= link_to invoice.number, {:controller => :invoices, :action => :show, :id => invoice.id} %></td>
+        <td class="invoice_date"><%= format_date(invoice.invoice_date) %></td>
+        <td class="contact" style="text-align:left;width:50%;"><%= !invoice.contact.blank? ? link_to_contact(invoice.contact).html_safe : "" %></td>
+        <td class="due_date"><%= format_date(invoice.due_date) %></td>
+        <td class="currency" style="text-align:left;"><%= invoice.currency %></td>
+        <td class="amount" style="text-align:right;"><%= invoice.amount_to_s %></td>
+        <td class="paid-amount" style="text-align:right;">
+          <% if (invoice.is_paid? || invoice.is_open?) && invoice.balance > 0 %>
+             <%= price_to_currency(invoice.balance, invoice.currency) %>
+          <% end %>
+        </td>
+        <td class="due-amount" style="text-align:right;">
+          <% if (invoice.is_paid? || invoice.is_open?) && invoice.balance > 0 %>
+             <%= price_to_currency(invoice.remaining_balance, invoice.currency) %>
+          <% end %>
+        </td>
+        <td><%= invoice_status_name(invoice.status_id) %></td>
+      </tr>
+      <% end %>
+      <tr class="total">
+        <th colspan="4"></th>
+        <th class="title"> <%= "#{l(:label_total)} (#{@invoices_count}):" %> </th>
+        <th class="sum invoices-sum" colspan="2"><%= prices_collection_by_currency(@invoiced_amount, :hide_zeros => true).join('<br/>').html_safe %></th>
+        <th class="sum invoices-sum"><%= prices_collection_by_currency(@paid_amount, :hide_zeros => true).join('<br/>').html_safe %></th>
+        <th class="sum invoices-sum"><%= prices_collection_by_currency(@due_amount, :hide_zeros => true).join('<br/>').html_safe %></th>
+        <th></th>
+      </tr>
+    </table>
+</div>
+
+<% end %>
+

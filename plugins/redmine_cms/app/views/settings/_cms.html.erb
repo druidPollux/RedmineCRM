@@ -1,0 +1,15 @@
+<%  @pages = Page.all
+    @parts = Part.all
+    @cms_menus = CmsMenu.all %>
+
+<% cms_tabs = [{:name => 'general', :partial => 'settings/cms_general', :label => :label_general},
+        {:name => 'pages', :partial => 'pages/pages', :label => :label_cms_page_plural},
+        {:name => 'cms_menus', :partial => 'cms_menus/index', :label => :label_cms_menu_plural},
+        {:name => 'parts', :partial => 'parts/parts', :label => :label_cms_part_plural}
+        ]   %>   
+
+<%= render_tabs cms_tabs %>
+
+
+<% html_title(l(:label_cms)) -%>
+

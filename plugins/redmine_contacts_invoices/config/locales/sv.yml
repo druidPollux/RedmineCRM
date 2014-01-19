@@ -1,0 +1,151 @@
+# Swedish strings go here for Rails i18n
+sv:
+  project_module_contacts_invoices: Fakturor
+
+  label_invoice_plural: Fakturor
+  label_invoice: Faktura
+  label_invoice_new: Ny faktura
+  label_invoice_edit: Editera faktura
+  label_invoice_status: Status
+  label_invoice_status_draft: Utkast
+  label_invoice_status_sent: Skickad
+  label_invoice_status_paid: Betalad
+  label_invoice_lines: Faktura rader
+  label_invoice_percent: Procent
+  label_invoice_amount: Belopp
+  label_invoice_address: Adress
+  label_invoice_bill_to: Fakturaadress
+  label_invoice_company_representative: Kontakt
+  label_invoice_company_name: Företagsnamn
+  label_invoice_company_info: Företagsinformation
+  label_invoice_bill_info: Fakturainformation
+  label_invoice_units: Radenheter
+  label_invoice_total: Total
+  label_invoice_tax: Moms
+  label_invoice_sub_amount: Sub total
+  label_invoice_invoiced: Fakturerad
+  label_invoice_add_line: Lägg till rad
+  label_invoice_overdue: Förfallen
+  label_invoice_last_number: 'Sista faktura löpnummer var #%{number}'
+  label_invoice_template: Mall
+  label_invoice_number_format: Nummerformat faktura
+  label_invoice_default_tax: Standard moms värde
+  label_invoice_line_grouping: Radgruppering
+  label_invoice_line_grouping_by_activity: Per aktivitet
+  label_invoice_line_grouping_by_issue: Per rapporterat problem
+  label_invoice_line_grouping_by_user: Per användare
+  label_invoice_line_grouping_single_line: Enkel rad
+
+  permission_edit_own_invoices: Editera egna fakturor
+  permission_edit_invoices: Editera fakturor
+  permission_delete_invoices: Ta bort fakturor
+  permission_view_invoices: Se fakturor
+
+  button_send_mail: Skicka
+  button_print: Skriv ut
+  button_invoice: Faktura
+
+  field_invoice_number: Fakturanummer
+  field_invoice_date: Fakturadatum
+  field_invoice_contact: Kund
+  field_invoice_due_date: Förfallodatum
+  field_invoice_amount: Summa
+  field_invoice_discount: Rabatt
+  field_invoice_assigned_to: Ansvarig
+  field_invoice_status: Status
+  field_invoice_currency: Valuta
+  field_invoice_language: Faktura språk
+
+  field_invoice_line_position: '#'
+  field_invoice_line_description: Beskrivning
+  field_invoice_line_price: á-pris
+  field_invoice_line_quantity: Antal
+  field_invoice_line_tax: Moms
+  field_invoice_line_tax_amount: Moms värde
+  field_invoice_line_total: Totalt
+  field_invoice_line_units: Enhet
+
+  #0.0.3
+  label_invoice_company_logo_url: Företagslogga (URL)
+
+  #1.0.1
+  label_invoice_line_grouping_all: Alla
+  label_invoice_default_currency: Standard valuta
+  label_invoice_total_including_tax: Totalt ink. moms
+  label_invoice_excerpt_invoice_list: Undantaget faktura lista
+  label_invoice_created: Faktura skapad
+  label_invoice_disable_taxes: Inaktivera moms
+  label_invoice_days_late: '%{days} dagar sen'
+  label_invoice_contact_extra_field: Extrakontakt för faktura
+  lable_invoice_contact_extra_field_tip: Visas på faktura
+  label_invoice_decimal_separator: Decimal avskiljare
+  label_invoice_thousands_delimiter: Tusentals avskiljare
+  label_invoice_general: Generellet
+  label_invoice_company: Företag
+  label_invoice_total_with_tax: Totalt, ink. moms
+
+  #1.0.2
+  label_invoice_show_in_pdf: Visa som PDF
+  label_invoice_discount_including_tax: Rabatt ink. moms
+
+  #1.0.3
+  label_invoice_use_rate_plugin: Använd rate plugin
+  label_invoice_line_grouping_by_time_entry: Per tidsenhet
+  label_generate_invoice: Skapa faktura
+
+  #1.0.4
+  field_invoice_subject: Titel
+
+  project_module_contacts_expenses: Utlägg
+
+  label_expense_plural: Utlägg
+  label_expense: Utlägg
+  label_expense_new: Nytt utlägg
+  label_expense_edit: Editera utlägg
+  label_expense_status: Status
+  label_expense_status_draft: Utkast
+  label_expense_status_new: Ny
+  label_expense_status_billed: Inskickad
+  label_expense_status_paid: Betald
+  label_expense_created: Utlägg skapat
+
+  field_expense_date: Utläggsdatum
+  field_expense_contact: Kund
+  field_expense_status: Status
+  field_expense_price: Summa
+
+  permission_edit_own_expenses: Editera eget utlägg
+  permission_edit_expenses: Editera utlägg
+  permission_delete_expenses: Ta bort utlägg
+  permission_view_expenses: Se utlägg
+
+# 1.0.4
+  label_expense_stat_by_period: Sortera efter period
+  label_expense_stat_by_status: Sortera efter status
+
+# Expenses
+  project_module_contacts_expenses: Utlägg
+
+  label_expense_plural: Utlägg
+  label_expense: Utlägg
+  label_expense_new: Nytt utlägg
+  label_expense_edit: Editera utlägg
+  label_expense_status: Status
+  label_expense_status_draft: Utkast
+  label_expense_status_new: Ny
+  label_expense_status_billed: Inskickad
+  label_expense_status_paid: Betald
+  label_expense_created: Utlägg skapat
+
+  field_expense_date: Utläggsdatum
+  field_expense_contact: Kund
+  field_expense_status: Status
+  field_expense_price: Summa
+
+  permission_edit_own_expenses: Editera eget utlägg
+  permission_edit_expenses: Editera utlägg
+  permission_delete_expenses: Ta bort utlägg
+  permission_view_expenses: Se utlägg
+
+  label_expense_stat_by_period: Sortera efter period
+  label_expense_stat_by_status: Sortera efter status

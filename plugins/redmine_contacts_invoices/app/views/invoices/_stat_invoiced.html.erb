@@ -1,0 +1,30 @@
+<h3><%= "#{l(:label_invoice_invoiced)}#{' - ' + @invoice.contact.name.strip if @invoice && @invoice.contact}"  %></h3>
+<table class="invoices-stat">
+  <tr>
+    <th><%= l(:label_this_week).mb_chars.capitalize.to_s %></th>
+    <td class="sum"><%= prices_collection_by_currency(@current_week_sum, :hide_zeros => true).join('<br/>').html_safe %></td>
+  </tr>
+  <tr>
+    <th><%= l(:label_last_week).mb_chars.capitalize.to_s %></th>
+    <td class="sum"><%= prices_collection_by_currency(@last_week_sum, :hide_zeros => true).join('<br/>').html_safe %></td>
+  </tr>
+  <tr>
+    <th><%= l(:label_this_month).mb_chars.capitalize.to_s %></th>
+    <td class="sum"><%= prices_collection_by_currency(@current_month_sum, :hide_zeros => true).join('<br/>').html_safe %></td>
+  </tr>
+  <tr>
+    <th><%= l(:label_last_month).mb_chars.capitalize.to_s %></th>
+    <td class="sum"><%= prices_collection_by_currency(@last_month_sum, :hide_zeros => true).join('<br/>').html_safe %></td>
+  </tr>
+  <tr>
+    <th><%= l(:label_this_year).mb_chars.capitalize.to_s %></th>
+    <td class="sum"><%= prices_collection_by_currency(@current_year_sum, :hide_zeros => true).join('<br/>').html_safe %></td>
+  </tr>
+  <% if @invoice && @invoice.contact %>
+  <tr class="delimiter"><td colspan="2"><hr></td></tr>
+  <tr>
+    <th><%= l(:label_invoice_balance) %></th>
+    <td class="sum"><%= prices_collection_by_currency(@invoice.contact.invoices_balance, :hide_zeros => true).join('<br/>').html_safe %></td>
+  </tr>
+  <% end %>
+</table>
