@@ -20,4 +20,21 @@ vendor
 .bundle
 .hgignore
 
-#todo add plugins and public
+plugins
+!plugins/redmine_cms
+!plugins/redmine_contacts
+!plugins/redmine_contacts_invoices
+!plugins/redmine_favorite_projects
+!plugins/redmine_finance
+!plugins/redmine_issue_checklist
+!plugins/redmine_people
+!plugins/redmine_questions
+!plugins/redmine_tags
+!plugins/redmine_zenedit
+
+public
+!public/themes/a1
+!public/themes/circle
+!public/themes/coffee
+!public/themes/highrise
+!public/themes/redminecrm
