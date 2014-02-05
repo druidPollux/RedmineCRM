@@ -28,6 +28,7 @@ plugins
 !plugins/redmine_finance
 !plugins/redmine_issue_checklist
 !plugins/redmine_people
+!plugins/redmine_products
 !plugins/redmine_questions
 !plugins/redmine_tags
 !plugins/redmine_zenedit
