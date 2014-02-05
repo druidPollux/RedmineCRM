@@ -1,0 +1,20 @@
+<% products = @contact.products.visible.order("#{Product.table_name}.name") %>
+<div id="products">
+
+<h3><%= l(:label_product_plural) %></h3>
+
+<% if products.any? %>
+  <table class="related_products">
+  <% products.each do |product| %>
+    <tr class="product">
+      <td class="name" style="vertical-align: top;">
+        <p>
+          <%= link_to "##{product.code}", product_path(product) %>
+          - <%= product.name %>
+        </p>
+      </td>
+    </tr>
+  <% end %>
+  </table>
+<% end %>
+</div>

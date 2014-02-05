@@ -1,0 +1,32 @@
+<%= form_tag({}) do -%>
+	<%= hidden_field_tag 'back_url', url_for(params) %>
+	<%= hidden_field_tag 'project_id', @project.id if @project %>
+<div class="autoscroll">
+    <table class="list">
+      <thead>
+      <tr>
+        <th class="checkbox hide-when-print"><%= link_to image_tag('toggle_check.png'), {}, :onclick => 'toggleIssuesSelection(this); return false;', :title => "#{l(:button_check_all)}/#{l(:button_uncheck_all)}" %>
+        </th>
+
+        <%= sort_header_tag('code', :caption => l(:label_products_code), :default_order => 'desc') %>
+        <%= sort_header_tag('name', :caption => l(:label_products_name), :default_order => 'desc') %>
+        <%= sort_header_tag('description', :caption => l(:label_products_description), :default_order => 'desc') %>
+        <%= sort_header_tag('price', :caption => l(:label_products_price), :default_order => 'desc') %>
+        <%= sort_header_tag('status', :caption => l(:label_products_status), :default_order => 'desc') %>
+      </tr>
+      </thead>
+      <% @products.each do |product| %>
+      <tr style="text-align: center;white-space: nowrap;" class="hascontextmenu product <%= cycle('odd', 'even') %> status-<%= product.status_id %>  %>">
+        <td class="checkbox hide-when-print"><%= check_box_tag("ids[]", product.id, false, :id => nil) %></td>
+        <td class="code" style="text-align:left;"><%= link_to product.code, product_path(product) %></td>
+        <td class="name" style="text-align:left;"><%= link_to product.name, product_path(product) %></td>
+        <td class="description" style="text-align:left;width:50%;"><%= product.description %></td>
+        <td class="amount" style="text-align:right;"><%= product.price_to_s %></td>
+        <td><%= product.status %></td>
+      </tr>
+      <% end %>
+    </table>
+</div>
+
+<% end %>
+

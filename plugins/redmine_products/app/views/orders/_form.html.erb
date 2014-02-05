@@ -1,0 +1,74 @@
+<%= error_messages_for 'order' %>
+
+<div class="box tabular">
+
+<div class="splitcontentleft">
+  <p><%= f.text_field :number, :label => l(:label_products_number), :required => true %>
+    <% if @order.new_record? && @last_order_number %>
+    <br>
+  	<em class="info"><%= l(:label_products_order_last_number, :number => @last_order_number) %></em>
+  	<% end %>
+  </p>
+
+  <p class="subject"><%= f.text_field :subject, :label => l(:label_products_order_subject), :style => "width: 90%" %></p>
+  <p><%= f.select :project_id, project_tree_options_for_select(Order.allowed_target_projects, :selected => @project), {:required => true} %></p>
+  <p class="object-select">
+    <%= label_tag :order_contact_id,  l(:label_contact)%>
+    <%= select_contact_tag('order[contact_id]', @order.contact, :cross_project_contacts => ProductsSettings.cross_project_contacts?, :is_company => ProductsSettings.select_companies, :include_blank => true, :add_contact => true, :display_field => @order.contact.blank?) %>
+  </p>
+</div>
+
+<div class="splitcontentright">
+  <p><%= f.text_field :order_date, :label => l(:label_products_order_date), :size => 12, :required => true %><%= calendar_for('order_order_date') %> </p>
+  <p class="object-select">
+      <%= f.select :status_id, collection_for_order_status_for_select, :label => l(:label_products_status), :required => true %>
+  </p>
+  <p><%= f.select :currency, collection_for_currencies_select, :label => l(:label_products_currency), :include_blank => true  %></p>
+  <p class="object-select"><%= f.select :assigned_to_id, (@project.assignable_users.collect {|m| [m.name, m.id]}), :include_blank => true, :label => l(:field_assigned_to) %></p>
+</div>
+
+<div style="clear:both;"> </div>
+
+<p><%= f.text_area :description, :cols => 60, :rows => 10, :class => 'wiki-edit' %><%= wikitoolbar_for 'order_description' %></p>
+
+<hr>
+<br>
+  <table class="product-lines form" id="product_lines">
+    <thead>
+        <tr>
+          <th colspan="2"><%= l(:label_products_item) %></th>
+          <th><%= l(:label_products_quantity) %></th>
+          <th><%= l(:label_products_order_unit_price) %></th>
+          <% if show_taxes = !ContactsSetting.disable_taxes? || @order.has_taxes? %>
+          <th><%= l(:label_products_line_tax) %></th>
+          <% end %>
+          <th><%= l(:label_products_line_discount) %></th>
+          <th><%= l(:label_products_total) %></th>
+          <th></th>
+        </tr>
+    </thead>
+  <tbody id="sortable">
+    <tr style="display:none;"></tr>
+    <%= f.fields_for :lines do |builder| %>
+        <%= render :partial => 'line_fields', :locals => {:f => builder} %>
+    <% end %>
+  </tbody>
+  <thead>
+    <tr class="line-total">
+      <td style="text-align: left;" class="add-link" colspan="<%= 5 + (show_taxes ? 1 : 0)  %>">
+      <%= text_field_tag :new_product_code, "", :placeholder => l(:label_products_add)  %>
+      <%= javascript_tag "observeProductAutocompleteField('new_product_code', '#{escape_javascript auto_complete_products_path }', '#{escape_javascript add_products_path}')" %>
+      <%= orders_link_to_add_fields l(:label_products_add_line), f, :lines %>
+      </td>
+      <td class="total-data total" id="total_amount"><%= "%.2f" % @order.amount.to_f %></td>
+      <td class="total-data"></td>
+    </tr>
+  </thead>
+  </table>
+
+
+
+</div>
+
+
+

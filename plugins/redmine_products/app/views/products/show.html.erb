@@ -1,0 +1,64 @@
+<div class="contextual">
+<%= link_to  l(:label_products_order_new), new_project_order_path( @project, :product_ids =>  [@product.id]), :class => 'icon icon-order-add' if User.current.allowed_to?(:add_orders, @project) %>
+	<%= link_to l(:button_edit), edit_product_path(@product), :class => 'icon icon-edit' if User.current.allowed_to?(:edit_products, @project) %>
+	<%= link_to l(:button_delete), product_path(@product), :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del' if User.current.allowed_to?(:delete_products, @project) %>
+</div>
+
+<h2><%= "#{l(:label_product)} ##{@product.code}" %></h2>
+
+<div class="product issue details">
+
+
+  <table class="subject_header">
+    <tr>
+      <% if @product.image %>
+      <td class="avatar"><%= product_image_tag(@product, :size => 128, :full_size => true) %></td>
+      <% end %>
+      <td class="name" style="vertical-align: top;">
+        <h1><%= @product.name %></h1>
+        <div class="tags">
+            <%= product_tag_links(@product.tag_list) %>
+        </div>
+      </td>
+      <% unless @product.price.blank? %>
+      <td class="subject_info">
+        <ul>
+          <li class="price icon <%= deal_currency_icon(@product) %>" title="Price"><%= @product.price_to_s %></li>
+        </ul>
+      </td>
+      <% end %>
+
+    </tr>
+  </table>
+
+
+<table class="attributes">
+
+<%= call_hook(:view_products_show_details_bottom, :product => @product) %>
+</table>
+
+
+<% if @product.description? %>
+  <hr />
+	<p><strong><%=l(:label_products_description)%></strong></p>
+	<div class="wiki">
+	<%= textilizable @product, :description, :attachments => @product.attachments %>
+	</div>
+<% end %>
+
+</div>
+
+<% content_for :sidebar do %>
+    <div class="tags">
+      <h3><%= l(:label_crm_tags_plural) %></h3>
+      <%= Product.available_tags(:at_least => 1).map{|tag| product_tag_link(tag.name, :count => tag.count)}.join(' ').html_safe %>
+    </div>
+
+    <%= render :partial => 'recent_products' %>
+
+<% end %>
+
+<% content_for :header_tags do %>
+  <%= stylesheet_link_tag :products, :plugin => 'redmine_products' %>
+  <meta name = "format-detection" content = "telephone=no">
+<% end %>

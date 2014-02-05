@@ -1,0 +1,10 @@
+<div class="recent-products products-data">
+  <h3><%= l(:label_products_orders_recent) %></h3>
+  <% Order.by_project(@project).visible.limit(5).order("#{Order.table_name}.order_date DESC").each do |order| %>
+  <p class="order">
+    <strong><%= order.amount_to_s %>  </strong>
+    <%= link_to " - ##{order.number} - #{format_time(order.order_date)} (#{order.status.name})#{': ' + order.subject unless order.subject.blank?}", {:controller => 'orders', :action => 'show', :id => order.id } %>
+  </p>
+
+  <% end %>
+</div>

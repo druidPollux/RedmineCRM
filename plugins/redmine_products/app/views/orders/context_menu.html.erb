@@ -1,0 +1,26 @@
+<ul>
+
+	<% if @order.present? %>
+		<li><%= context_menu_link l(:button_edit), {:controller => 'orders', :action => 'edit', :id => @order}, :class => 'icon-edit', :disabled => !@can[:edit] %></li>
+	<% else %>
+    <!-- <li><%= context_menu_link l(:button_edit), {:controller => 'orders', :action => 'bulk_edit', :ids => @orders.collect(&:id)},
+            :class => 'icon-edit', :disabled => !@can[:edit] %></li> -->
+	<% end %>
+
+
+    <% unless @project.nil? -%>
+		<li class="folder">
+			<a href="#" class="submenu"><%= l(:field_status) %></a>
+			<ul>
+			<% collection_for_order_status_for_select.each do |u| -%>
+			    <li><%= context_menu_link u[0], {:controller => 'orders', :action => 'bulk_update', :ids => @orders.collect(&:id), :order => {'status_id' => u[1]}, :back_url => @back}, :method => :post,
+			                              :selected => (@order && u[1] == @order.status_id), :disabled =>  !@can[:edit] %></li>
+			<% end -%>
+			</ul>
+		</li>
+	<% end %>
+
+   	 <li><%= context_menu_link l(:button_delete), {:controller => 'orders', :action => 'bulk_destroy', :ids => @orders.collect(&:id)},
+                            :method => :delete, :confirm => l(:text_are_you_sure), :class => 'icon-del', :disabled => !@can[:delete] %></li>
+</ul>
+

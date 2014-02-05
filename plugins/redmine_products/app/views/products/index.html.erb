@@ -1,0 +1,114 @@
+<div class="contextual">
+  <%= link_to_if_authorized l(:label_products_new), {:controller => 'products', :action => 'new', :project_id => @project}, :class => 'icon icon-add' %>
+
+</div>
+<div class="filters">
+  <%= form_tag({:contoller => "products", :action => "index"}, :method => :get,  :id => "query_form") do %>
+    <%= hidden_field_tag('project_id', @project.to_param) if @project %>
+    <% no_filters = params[:status_id] == "1"  %>
+
+<h2 class="contacts_header">
+    <span id='scope_header' class="scope_title">
+    <%= l(:label_product_plural) %>
+    </span>
+
+    <span class="live_search">
+        <%= text_field_tag(:search, params[:search], :autocomplete => "off", :class => "live_search_field", :placeholder => l(:label_crm_contact_search) ) %>
+        <script type="text/javascript">
+
+           jQuery(function($) {
+              // when the #search field changes
+              $("#search").observe_field(2, function() {
+                var form = $("#query_form"); // grab the form wrapping the search bar.
+                var url = form.attr("action");
+                var formData = form.serialize();
+                $.get(url, formData, function(data) { // perform an AJAX get, the trailing function is what happens on successful get.
+                    $("#contact_list").html(data); // replace the "results" div with the result of action taken
+                });
+              });
+            });
+
+        </script>
+    </span>
+
+    <span class="tags">
+        <%= product_tag_links(params[:tag].split(',')) unless params[:tag].blank? %>
+    </span>
+
+</h2>
+
+
+
+	<fieldset id="filters" class="collapsible <%= 'collapsed' if no_filters %>">
+		<legend onclick="toggleFieldset(this);"><%= l(:label_filter_plural) %></legend>
+		<div style="<%= 'display: none;' if no_filters %>">
+			<p>
+			  <span class="filter-condition">
+					<%= label_tag l(:label_products_status) + " "  %>
+					<%= select_tag :status_id, collection_for_product_status_for_select(params[:status_id]) %>
+        </span>
+        <span class="filter-condition">
+          <%= label_tag l(:field_created_on) + " "%>
+  				<%= select_tag 'period', options_for_period_select(params[:period]) %>
+        </span>
+
+			</p>
+
+		</div>
+	</fieldset>
+
+    <fieldset class="collapsible collapsed">
+      <legend onclick="toggleFieldset(this);"><%= l(:label_options) %></legend>
+      <div style="display: none;">
+        <table>
+          <% if products_list_style == 'list_excerpt' %>
+          <tr>
+            <td><label for='sort'><%= l(:label_sort) %></label></td>
+            <td><%= select_tag('sort',
+                               options_for_select(
+                                 [[]] +
+                                 [[l(:label_products_status), "#{Product.table_name}.status_id:desc"],
+                                  [l(:field_name), "name"],
+                                  [l(:field_created_on), "created_at"]],
+                                 params[:sort])
+                       ) %></td>
+          </tr>
+          <% end %>
+        </table>
+      </div>
+    </fieldset>
+	<p class="buttons hide-when-print">
+	  	<%= link_to l(:button_apply), "#", :onclick=>"$('#query_form').submit()", :class => 'icon icon-checked' %>
+    	<%= link_to l(:button_clear), { :set_filter => 1, :project_id => @project }, :class => 'icon icon-reload'  %>
+	</p>
+	<% end %>
+
+</div>
+
+<div id="contact_list" class="product_list">
+<% if @products.empty? %>
+  <p class="nodata"><%= l(:label_no_data) %></p>
+<% else %>
+  <%= render :partial => products_list_style %>
+	<p class="pagination"><%= pagination_links_full @products_pages, @products_count %></p>
+<% end %>
+</div>
+
+<% content_for :sidebar do %>
+    <div class="tags">
+      <h3><%= l(:label_crm_tags_plural) %></h3>
+      <%= Product.available_tags(:at_least => 1).map{|tag| product_tag_link(tag.name, :count => tag.count)}.join(' ').html_safe %>
+    </div>
+    <%= render :partial => "recent_products" %>
+<% end %>
+
+<% html_title l(:label_product_plural) %>
+
+<%= context_menu url_for( {:controller => "products", :action => "context_menu"} )%>
+
+<% content_for :header_tags do %>
+  <%= javascript_include_tag :contacts, :plugin => 'redmine_contacts'  %>
+	<%= stylesheet_link_tag :products, :plugin => 'redmine_products' %>
+	<meta name = "format-detection" content = "telephone=no">
+<% end %>
+
