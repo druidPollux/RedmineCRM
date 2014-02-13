@@ -3,23 +3,24 @@ RedmineCRM
 
 Easy update mirror for RedmineCRM
 
-Requirements
-------------
-
-- Redmine `>= 2.1.0`
-
-
 Installation
 ------------
 
-- Clone this repository
-- Install dependencies and migrate database:
+- Init repository
 
         cd redmine/
         git init
         git remote add origin https://github.com/sergeyz/RedmineCRM.git
         git fetch
         git checkout -t origin/master
+
+- Or get updates
+
+        cd redmine/
+        git pull
+
+- Install dependencies and migrate database:
+
         bundle install --without development test
         bundle exec rake redmine:plugins RAILS_ENV=production
 
