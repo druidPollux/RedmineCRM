@@ -583,3 +583,6 @@ en:
   #3.2.11
   label_crm_post_address_format: Post address format
   label_crm_post_address_format_macros: "Address format macros: %{macros}"
+
+  #3.2.14
+  label_crm_last_year: last year

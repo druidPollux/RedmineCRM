@@ -1,7 +1,7 @@
 <%= fields_for "issue" do |ff| %>
 
   <%= label_tag 'task_subject',  l(:field_subject)%> <br>
-  <%= ff.text_field :subject, :style => "width: 98%;" %>
+  <%= ff.text_field :subject %>
 
   <p>
   <%= label_tag :assigned_to_id,  l(:field_assigned_to)%> <br>
@@ -32,4 +32,4 @@
 <br>
 <hr>
 <br>
-<%= submit_tag l(:button_add) %>
+<%= submit_tag l(:button_add), :class => "button-small" %>

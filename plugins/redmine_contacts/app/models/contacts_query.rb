@@ -1,7 +1,7 @@
 # This file is a part of Redmine CRM (redmine_contacts) plugin,
 # customer relationship management plugin for Redmine
 #
-# Copyright (C) 2011-2013 Kirill Bezrukov
+# Copyright (C) 2011-2014 Kirill Bezrukov
 # http://www.redminecrm.com/
 #
 # redmine_contacts is free software: you can redistribute it and/or modify
@@ -196,10 +196,10 @@ class ContactsQuery < ActiveRecord::Base
     if project
       principals += project.principals.sort
     else
-      all_projects = Project.visible.all
+      all_projects = Project.visible
       if all_projects.any?
         # members of visible projects
-        principals += Principal.active.find(:all, :conditions => ["#{User.table_name}.id IN (SELECT DISTINCT user_id FROM members WHERE project_id IN (?))", all_projects.collect(&:id)]).sort
+        principals += Principal.active.where("#{User.table_name}.id IN (SELECT DISTINCT user_id FROM members WHERE project_id IN (?))", all_projects.collect(&:id)).sort
 
       end
     end
@@ -246,7 +246,7 @@ class ContactsQuery < ActiveRecord::Base
   end
 
   def all_projects
-    @all_projects ||= Project.visible.all
+    @all_projects ||= Project.visible
   end
 
   def all_projects_values

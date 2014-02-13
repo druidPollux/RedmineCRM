@@ -1,7 +1,7 @@
 # This file is a part of Redmine CRM (redmine_contacts) plugin,
 # customer relationship management plugin for Redmine
 #
-# Copyright (C) 2011-2013 Kirill Bezrukov
+# Copyright (C) 2011-2014 Kirill Bezrukov
 # http://www.redminecrm.com/
 #
 # redmine_contacts is free software: you can redistribute it and/or modify
@@ -37,10 +37,10 @@ class ContactsQueriesController < ApplicationController
     end
 
     scope = ContactsQuery.scoped({})
-    scope = scope.scoped(:conditions => {:type => params[:type]}) if params[:type]
+    scope = scope.where(:type => params[:type]) if params[:type]
     @query_count = scope.visible.count
     @query_pages = Paginator.new self, @query_count, @limit, params['page']
-    @queries = scope.visible.all(:limit => @limit, :offset => @offset, :order => "#{ContactsQuery.table_name}.name")
+    @queries = scope.visible.offset(@offset).order("#{ContactsQuery.table_name}.name").first(@limit)
 
     respond_to do |format|
       format.html { render :nothing => true }

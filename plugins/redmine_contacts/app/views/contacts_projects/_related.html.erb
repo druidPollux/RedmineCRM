@@ -20,7 +20,7 @@
   	             :id => 'add-project-form') do %>
 	<p><%= select_tag :related_project_id, project_tree_options_for_select(Project.allowed_to(:edit_contacts).order(:lft).all), :prompt => "--- #{l(:actionview_instancetag_blank_option)} ---" %>
 
-	<%= submit_tag l(:button_add) %>
+	<%= submit_tag l(:button_add), :class => "button-small" %>
 	<%= link_to l(:button_cancel), {}, :onclick => "$('#add-project-form').hide(); return false;" %>
 	</p>
 	<% end %>

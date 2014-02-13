@@ -1,7 +1,7 @@
 # This file is a part of Redmine CRM (redmine_contacts) plugin,
 # customer relationship management plugin for Redmine
 #
-# Copyright (C) 2011-2013 Kirill Bezrukov
+# Copyright (C) 2011-2014 Kirill Bezrukov
 # http://www.redminecrm.com/
 #
 # redmine_contacts is free software: you can redistribute it and/or modify
@@ -228,7 +228,7 @@ class ContactsController < ApplicationController
 
   def context_menu
     @project = Project.find(params[:project_id]) unless params[:project_id].blank?
-    @contacts = Contact.visible.all(:conditions => {:id => params[:selected_contacts]})
+    @contacts = Contact.visible.where(:id => params[:selected_contacts])
     @contact = @contacts.first if (@contacts.size == 1)
     @can = {:edit => (@contact && @contact.editable?) || (@contacts && @contacts.collect{|c| c.editable?}.inject{|memo,d| memo && d}),
             :create_deal => (@project && User.current.allowed_to?(:add_deals, @project)),

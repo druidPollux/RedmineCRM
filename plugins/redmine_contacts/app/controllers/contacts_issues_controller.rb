@@ -1,7 +1,7 @@
 # This file is a part of Redmine CRM (redmine_contacts) plugin,
 # customer relationship management plugin for Redmine
 #
-# Copyright (C) 2011-2013 Kirill Bezrukov
+# Copyright (C) 2011-2014 Kirill Bezrukov
 # http://www.redminecrm.com/
 #
 # redmine_contacts is free software: you can redistribute it and/or modify
@@ -84,7 +84,7 @@ class ContactsIssuesController < ApplicationController
   end
 
   def autocomplete_for_contact
-    @contacts = Contact.visible.includes(:avatar).order_by_name.live_search(params[:q]).by_project(params[:cross_project_contacts] == "1" ? nil : @project).limit(100).all
+    @contacts = Contact.visible.includes(:avatar).order_by_name.live_search(params[:q]).by_project(params[:cross_project_contacts] == "1" ? nil : @project).limit(100)
     if @issue
       @contacts -= @issue.contacts
     end
@@ -104,22 +104,6 @@ class ContactsIssuesController < ApplicationController
     @project = @issue.project
   rescue ActiveRecord::RecordNotFound
     render_404
-  end
-
-  def assigned_to_users
-    user_values = []
-    project = @project
-    user_values << ["<< #{l(:label_all)} >>", ""]
-    user_values << ["<< #{l(:label_me)} >>", User.current.id] if User.current.logged?
-    if project
-      user_values += project.users.sort.collect{|s| [s.name, s.id.to_s] }
-    else
-      project_ids = Project.all(:conditions => Project.visible_condition(User.current)).collect(&:id)
-      if project_ids.any?
-        # members of the user's projects
-        user_values += User.active.find(:all, :conditions => ["#{User.table_name}.id IN (SELECT DISTINCT user_id FROM members WHERE project_id IN (?))", project_ids]).sort.collect{|s| [s.name, s.id.to_s] }
-      end
-    end
   end
 
 

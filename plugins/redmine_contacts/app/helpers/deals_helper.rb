@@ -3,7 +3,7 @@
 # This file is a part of Redmine CRM (redmine_contacts) plugin,
 # customer relationship management plugin for Redmine
 #
-# Copyright (C) 2011-2013 Kirill Bezrukov
+# Copyright (C) 2011-2014 Kirill Bezrukov
 # http://www.redminecrm.com/
 #
 # redmine_contacts is free software: you can redistribute it and/or modify
@@ -88,7 +88,7 @@ module DealsHelper
                   l(:field_updated_on, :locale => :en),
                   ]
 
-      custom_fields = DealCustomField.all
+      custom_fields = DealCustomField.order(:name)
       custom_fields.each {|f| headers << f.name}
       csv << headers.collect {|c| Redmine::CodesetUtil.from_utf8(c.to_s, encoding) }
       # csv lines

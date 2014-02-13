@@ -563,3 +563,6 @@ ru:
   #3.2.11
   label_crm_post_address_format: Формат почтового адреса
   label_crm_post_address_format_macros: "Макросы почтового формата: %{macros}"
+
+  #3.2.14
+  label_crm_last_year: последний год

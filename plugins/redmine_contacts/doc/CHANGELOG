@@ -1,8 +1,13 @@
 == Redmine CRM plugin changelog
 
 Redmine CRM plugin - customer relationship management plugin for redmine
-Copyright (C) 2011-2013 Kirill Bezrukov
+Copyright (C) 2011-2014 Kirill Bezrukov
 http://www.redminecrm.com/
+
+== 2014-01-23 v3.2.13
+
+* Fixed import deals link
+* Show formated address on contact page
 
 == 2014-01-03 v3.2.12
 

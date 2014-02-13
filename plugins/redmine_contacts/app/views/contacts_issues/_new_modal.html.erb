@@ -13,7 +13,7 @@
     :action => 'autocomplete_for_contact', :project_id => @project, :issue_id => @issue, :cross_project_contacts => RedmineContacts.cross_project_contacts? ? '1' : '0')}')" %>
 
   <div id="contacts_for_issue">
-    <%= contacts_check_box_tags 'contacts_issue[contact_ids][]', Contact.includes(:avatar).by_project(RedmineContacts.cross_project_contacts? ? nil : @project).visible.all(:limit => 100) - @issue.contacts %>
+    <%= contacts_check_box_tags 'contacts_issue[contact_ids][]', Contact.includes(:avatar).by_project(RedmineContacts.cross_project_contacts? ? nil : @project).visible.first(100) - @issue.contacts %>
   </div>
 
   <p class="buttons">

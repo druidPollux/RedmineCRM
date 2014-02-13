@@ -3,7 +3,7 @@
 # This file is a part of Redmine CRM (redmine_contacts) plugin,
 # customer relationship management plugin for Redmine
 #
-# Copyright (C) 2011-2013 Kirill Bezrukov
+# Copyright (C) 2011-2014 Kirill Bezrukov
 # http://www.redminecrm.com/
 #
 # redmine_contacts is free software: you can redistribute it and/or modify
@@ -247,6 +247,9 @@ module ContactsHelper
     when 'current_year'
       @from = Date.civil(Date.today.year, 1, 1)
       @to = Date.civil(Date.today.year, 12, 31)
+    when 'last_year'
+      @from = Date.civil(1.year.ago.year, 1, 1)
+      @to = Date.civil(1.year.ago.year, 12, 31)
     end
 
     @from, @to = @from, @to + 1 if (@from && @to)

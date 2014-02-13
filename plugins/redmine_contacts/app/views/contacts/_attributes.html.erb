@@ -21,7 +21,7 @@
 		<th class = "address"><%= l(:field_contact_address) %>:</th>
 		<% unless @contact.address.blank? %>
 		<td class="address adr">
-				<%= render :partial => 'common/address', :object => @contact.address %>
+				<%= @contact.post_address.gsub("\n", "<br/>").html_safe %>
 				<br>
 				<%= link_to l(:label_crm_show_on_map), "http://maps.google.com/maps?f=q&q=#{@contact.address}+(#{@contact.name})&ie=UTF8&om=1"%>
 		</td>
