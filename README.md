@@ -24,10 +24,16 @@ Installation
         bundle install --without development test
         bundle exec rake redmine:plugins RAILS_ENV=production
 
+- Restart your Redmine web server
+
+
+Optional
+------------
+
 - Install color patch
 
         patch --verbose -p1 < colors.diff
 
-- Restart your Redmine web server
+
 
 
