@@ -1,6 +1,6 @@
 <%= error_messages_for 'invoice' %>
 
-<div class="box tabular">
+<div class="box tabular attributes">
 
 <div class="splitcontentleft">
   <p><%= f.text_field :number, :label => l(:field_invoice_number), :required => true, :style => "width: 90%" %>
@@ -27,12 +27,13 @@
 </div>
 
 <div class="splitcontentright">
+  <p><%= f.text_field :order_number, :label => l(:field_invoice_order_number) %> </p>
   <p><%= f.text_field :invoice_date, :size => 12, :required => true %><%= calendar_for('invoice_invoice_date') %> </p>
   <p><%= f.text_field :due_date, :label => l(:field_invoice_due_date), :size => 12 %><%= calendar_for('invoice_due_date') %> </p>
   <p><%= f.select :currency, collection_for_currencies_select, :label => l(:field_invoice_currency), :include_blank => true  %></p>
   <p>
     <%= f.text_field :discount, :label => l(:field_invoice_discount), :size => 10 %>
-    <%= f.select :discount_type, collection_for_discount_types_select, :no_label => true %>
+    <%= f.select :discount_type, collection_for_discount_types_select, {:no_label => true}, :style => "width: 55px;" %>
   </p>
   <p class="object-select"><%= f.select :language, invoice_lang_options_for_select, {:label => l(:field_invoice_language)}, :disabled => InvoicesSettings.is_custom_template?(@project)  %></p>
 

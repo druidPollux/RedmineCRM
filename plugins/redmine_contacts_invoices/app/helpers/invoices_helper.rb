@@ -40,6 +40,21 @@ module InvoicesHelper
     content_tag(:span, status_tag, :class => "tag-label-color invoice-status #{invoice_status_name(invoice.status_id, true).to_s}")
   end
 
+  def invoice_tag(invoice)
+    invoice_title = "##{invoice.number} - #{format_date(invoice.invoice_date)}"
+    s = ''
+    if invoice.visible?
+      s << link_to(invoice_title, invoice_path(invoice), :class => 'icon icon-invoice', :download => true)
+      s << " " + link_to(image_tag('page_white_acrobat_context.png', :plugin => "redmine_contacts_invoices"), invoice_path(invoice, :format => 'pdf'))
+      s << " " + content_tag(:span, content_tag(:strong, invoice.amount_to_s), :class => "amount")
+    else
+      s << content_tag(:span, invoice_title, :class => 'icon icon-invoice')
+    end
+    s << " - #{invoice.subject}" unless invoice.subject.blank?
+    s << " " + content_tag(:span, '(' + invoice.contact.name + ')', :class => 'contact') if invoice.contact
+    s
+  end
+
   def contact_custom_fields
     if "ContactCustomField".is_a_defined_class?
       ContactCustomField.find(:all, :conditions => ["#{ContactCustomField.table_name}.field_format = 'string' OR #{ContactCustomField.table_name}.field_format = 'text'"]).map{|f| [f.name, f.id.to_s]}

@@ -4,6 +4,16 @@ Redmine Invoices plugin - invoicing plugin for Redmine
 Copyright (C) 2011-2013 Kirill Bezrukov
 http://www.redminecrm.com/projects/invoices
 
+== 2014-02-07 v3.1.0
+
+* Sending invoice by email
+* Added total sum to expenses table view
+* Added invoice.tax_amount param in custom templates
+* Added Order number field for invoice
+* Swedish translation update (Johan Bergquist)
+* Fixed due date missing in custom templates
+* Fixed currency symbols in prawn PDF reports
+
 == 2013-12-09 v3.0.1
 
 * Migration bug fixes

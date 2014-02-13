@@ -41,13 +41,6 @@
   <%= check_box_tag 'settings[invoices_select_companies]', 1, @settings["invoices_select_companies"] %>
 </p>
 
-
-<p>
-  <label><%= l(:label_invoice_units) %></label>
-  <%= text_area_tag 'settings[invoices_units]', @settings["invoices_units"].blank? ? '' : @settings["invoices_units"].split("\n").map{|u| u.strip}.join("\n"), :rows => 5 %>
-  <br /><em class="info"><%= l(:text_custom_field_possible_values_info) %></em>
-</p>
-
 <p>
   <label><%= l(:label_crm_show_in_top_menu) %></label>
   <span id="watchers_inputs">

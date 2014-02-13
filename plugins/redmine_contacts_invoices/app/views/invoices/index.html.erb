@@ -19,7 +19,7 @@
         </span>
         <span class="filter-condition">
           <%= label_tag l(:field_invoice_date) + " "%>
-  				<%= select_tag 'period', options_for_period_select(params[:period]) %>
+  				<%= select_tag :period, options_for_period_select(params[:period]) + options_for_select([[l(:label_crm_last_year), 'last_year']], params[:period]) %>
         </span>
         <span class="filter-condition">
           <%= label_tag l(:field_invoice_due_date) + " " %>
@@ -27,7 +27,7 @@
         </span>
         <span class="filter-condition">
           <%= label_tag l(:label_invoice_paid_date) + " " %>
-          <%= select_tag :paid_period, options_for_period_select(params[:paid_period]) %>
+          <%= select_tag :paid_period, options_for_period_select(params[:paid_period]) + options_for_select([[l(:label_crm_last_year), 'last_year']], params[:paid_period]) %>
         </span>
         <span class="filter-condition">
         <%= label_tag l(:label_contact) + " "  %>

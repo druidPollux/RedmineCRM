@@ -182,3 +182,11 @@ en:
   #3.0.1
   permission_add_invoices: Add invoices
   permission_add_expenses: Add expenses
+
+  #3.1.0
+  field_invoice_order_number: Order number
+  label_invoice_send_by_email: Send invoice by email
+  permission_send_invoices: Send emails
+  label_invoice_mail_to: To
+  label_invoice_email_template_plural: Email templates
+  label_invoice_email_template: Email template

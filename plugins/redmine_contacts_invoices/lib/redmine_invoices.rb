@@ -33,6 +33,8 @@ require 'reports/invoice_reports'
 require 'redmine_invoices/liquid/invoices'
 
 class InvoicesSettings
+  MACRO_LIST = %w({%contact.first_name%} {%contact.last_name%} {%contact.name%} {%contact.company%} {%invoice.number%} {%invoice.invoice_date%} {%invoice.due_date%} {%invoice.public_link%})
+
   # Returns the value of the setting named name
   def self.[](name, project_id)
     project_id = project_id.id if project_id.is_a?(Project)

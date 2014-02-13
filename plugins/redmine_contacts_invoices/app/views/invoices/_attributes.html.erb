@@ -1,18 +1,19 @@
 <table class="attributes invoice status-<%= invoice.status_id %>">
   <tr>
       <th class="status"><%=l(:field_invoice_status)%>:</th><td class="status"><%= invoice_status_tag(invoice) %></td>
-      <th class="start-date"><%=l(:field_invoice_date)%>:</th><td class="start-date"><%= format_date(invoice.invoice_date) %></td>
+      <th class="oder-number"><%=l(:field_invoice_order_number)%>:</th><td class="oder-number"><%= invoice.order_number %></td>
   </tr>
   <tr>
       <th class="contact"><%=l(:field_invoice_language)%>:</th><td class="language"><%= invoice_avaliable_locales_hash[invoice.language.blank? ? 'default' : invoice.language] %></td>
-      <th class="due-date"><%=l(:field_invoice_due_date)%>:</th><td class="due-date"><%= format_date(invoice.due_date) %></td>
+     <th class="start-date"><%=l(:field_invoice_date)%>:</th><td class="start-date"><%= format_date(invoice.invoice_date) %></td>
   </tr>
   <tr>
       <th class="contact"><%=l(:field_invoice_contact)%>:</th><td class="contact"><%= !invoice.contact.blank? ? link_to_contact(invoice.contact, :avatar => true).html_safe : "" %></td>
-      <th class="progress"><%=l(:field_invoice_discount)%>:</th><td class="progress"><%= progress_bar invoice.discount_rate, :width => '80px', :legend => "#{invoice.discount_rate.to_f.round(2)}% / #{price_to_currency(invoice.discount_amount, invoice.currency)}".html_safe %></td>
+      <th class="due-date"><%=l(:field_invoice_due_date)%>:</th><td class="due-date"><%= format_date(invoice.due_date) %></td>
   </tr>
   <tr>
       <th class="assigned-to"><%=l(:field_invoice_assigned_to)%>:</th><td class="assigned-to"><%= avatar(invoice.assigned_to, :size => "14") %><%= invoice.assigned_to ? link_to_user(invoice.assigned_to) : "-" %></td>
+      <th class="progress"><%=l(:field_invoice_discount)%>:</th><td class="progress"><%= progress_bar invoice.discount_rate, :width => '80px', :legend => "#{invoice.discount_rate.to_f.round(2)}% / #{price_to_currency(invoice.discount_amount, invoice.currency)}".html_safe %></td>
   </tr>
   <%= call_hook(:view_invoices_show_details_bottom, :invoice => invoice) %>
 </table>

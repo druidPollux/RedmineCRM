@@ -92,7 +92,7 @@ class InvoicesController < ApplicationController
       format.html
       format.api
       format.pdf do
-        send_data(invoice_to_pdf(@invoice), :type => 'application/pdf', :filename => "invoice-#{@invoice.number}.pdf", :disposition => 'inline')
+        send_data(invoice_to_pdf(@invoice), :type => 'application/pdf', :filename => @invoice.filename, :disposition => 'inline')
       end
     end
   end
@@ -176,6 +176,7 @@ class InvoicesController < ApplicationController
             :delete => @invoices.collect{|c| c.destroyable_by?(User.current)}.inject{|memo,d| memo && d},
             :create => User.current.allowed_to?(:add_invoices, @projects),
             :change_status => @invoices.collect{|c| !c.is_paid? }.inject{|memo,d| memo && d},
+            :send => User.current.allowed_to?(:send_invoices, @invoices.first.project),
             :pdf => User.current.allowed_to?(:view_invoices, @projects)
             }
     @back = back_url

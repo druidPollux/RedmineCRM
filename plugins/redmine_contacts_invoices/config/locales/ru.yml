@@ -180,3 +180,11 @@ ru:
   #3.0.1
   permission_add_invoices: Добавление счетов
   permission_add_expenses: Добавление расходов
+
+  #3.1.0
+  field_invoice_order_number: Номер заказа
+  label_invoice_send_by_email: Отправить счет по email
+  permission_send_invoices: Отправлять email
+  label_invoice_mail_to: Кому
+  label_invoice_email_template_plural: Шаблоны email
+  label_invoice_email_template: Шаблон email

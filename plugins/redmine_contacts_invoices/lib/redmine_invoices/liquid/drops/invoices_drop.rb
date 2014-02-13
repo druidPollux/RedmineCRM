@@ -51,9 +51,12 @@ class InvoiceDrop < Liquid::Drop
 
   delegate :id,
            :number,
+           :order_number,
            :invoice_date,
+           :due_date,
            :description,
            :subtotal,
+           :tax_amount,
            :tax_groups,
            :amount,
            :discount_rate,

@@ -3,8 +3,7 @@
 	<%= watcher_tag(@invoice, User.current, {:id => replace_watcher, :replace => ['watcher','watcher2']}) if false %>
 	<%= link_to l(:button_edit), {:controller => 'invoices', :action => 'edit', :id => @invoice}, :class => 'icon icon-edit' if !@invoice.nil? && @invoice.editable_by?(User.current) %>
   <%= link_to_if_authorized l(:label_invoice_pdf), {:controller => 'invoices', :action => 'show', :id => @invoice, :format => 'pdf'}, :class => 'icon icon-pdf' unless @invoice.nil? %>
-	<%= link_to l(:label_invoice_add_payment), new_invoice_payment_path(:invoice_id => @invoice), :class => 'icon icon-add-payment' if User.current.allowed_to?(:edit_invoice_payments, @project) %>
-	<%= link_to_if_authorized l(:button_send_mail), {:controller => 'invoice_mails', :action => 'send', :id => @invoice}, :class => 'icon icon-email' unless @invoice.nil? %>
+  <%= link_to l(:label_invoice_add_payment), new_invoice_payment_path(:invoice_id => @invoice), :class => 'icon icon-add-payment' if User.current.allowed_to?(:edit_invoice_payments, @project) %>
 	<%= link_to l(:button_delete), {:controller => 'invoices', :action => 'destroy', :id => @invoice}, :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del' if  !@invoice.nil? && @invoice.destroyable_by?(User.current) %>
 </div>
 
@@ -12,7 +11,7 @@
 
 <div class="issue invoice details">
   <div class="subject">
-    <h3><%= "#{@invoice.contact.name + ' - ' if @invoice.contact}#{@invoice.amount_to_s}#{' - ' + @invoice.subject unless @invoice.subject.blank?}".html_safe %></h3>
+    <h3><%= "#{@invoice.contact.name + ' - ' if @invoice.contact}#{@invoice.amount_to_s}#{' - ' + @invoice.subject unless @invoice.subject.blank?}" %></h3>
   </div>
 
   <p class="author">

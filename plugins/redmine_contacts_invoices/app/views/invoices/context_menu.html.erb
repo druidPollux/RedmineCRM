@@ -2,8 +2,8 @@
 
 	<% if @invoice.present? %>
 		<li><%= context_menu_link l(:button_edit), {:controller => 'invoices', :action => 'edit', :id => @invoice}, :class => 'icon-edit', :disabled => !@can[:edit] %></li>
-		<li><%= context_menu_link l(:label_invoice_pdf), {:controller => 'invoices', :action => 'show', :format => 'pdf', :id => @invoice}, :class => 'icon-pdf-context', :disabled => !@can[:pdf] %></li>
-    <li><%= context_menu_link l(:label_invoice_add_payment), new_invoice_payment_path(:invoice_id => @invoice), :class => 'icon icon-add-payment' if User.current.allowed_to?(:edit_invoice_payments, @invoice.project) %></li>
+    <li><%= context_menu_link l(:label_invoice_pdf), {:controller => 'invoices', :action => 'show', :format => 'pdf', :id => @invoice}, :class => 'icon-pdf-context', :disabled => !@can[:pdf] %></li>
+    <li><%= context_menu_link l(:label_invoice_add_payment), new_invoice_payment_path(:invoice_id => @invoice), :class => 'icon icon-add-payment', :disabled => !User.current.allowed_to?(:edit_invoice_payments, @invoice.project) %></li>
 	<% else %>
     <!-- <li><%# context_menu_link l(:button_edit), {:controller => 'invoices', :action => 'bulk_edit', :ids => @invoices.collect(&:id)},
             :class => 'icon-edit', :disabled => !@can[:edit] %></li> -->

@@ -38,7 +38,9 @@ table.invoices.index td.name h1.invoice_number {font-size: 16px;}
 table.invoices.index td.status { padding: 13px 5px 0px 10px;}
 table.invoices.index td.name.invoice-name { width: 80%;}
 table.invoices.index td.info.invoice-info {white-space: nowrap; text-align: right;padding-right: 10px;}
-table.contacts.index th.sum.invoices-sum, .invoice_list th.sum.invoices-sum { text-align: right; white-space: nowrap; width: 10%;}
+table.contacts.index th.sum.invoices-sum,
+.invoice_list th.sum.invoices-sum,
+.expense_list th.sum.invoices-sum { text-align: right; white-space: nowrap; width: 10%;}
 table.contacts.index .invoice-date {margin-top: 3px;}
 table.contacts.index .overdue-days {color: #B54;}
 table.contacts.index tr.context-menu-selection .overdue-days {color: white;}
@@ -101,6 +103,28 @@ div#invoice_payments {
 	margin-left: 1em;
 	margin-bottom: 1em;
 	padding-left: 1em;
+}
+
+
+/**********************************************************************/
+/* INVOICE CARD
+/**********************************************************************/
+
+div.invoice-card {
+	height: 50px;
+}
+
+div.invoice-card .invoice-name h3 {
+	margin-bottom: 0px;
+}
+
+div.invoice-card .avatar {
+	float: left;
+	margin-right: 10px;
+}
+
+div.invoice-card .invoice-info {
+	float: right;
 }
 
 /**********************************************************************/

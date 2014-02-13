@@ -244,6 +244,10 @@ class Invoice < ActiveRecord::Base
 
   end
 
+  def filename
+    "invoice-#{self.number.to_s}.pdf"
+  end
+
   private
 
   def validate_invoice

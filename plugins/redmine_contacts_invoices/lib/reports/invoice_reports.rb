@@ -42,9 +42,9 @@ module RedmineInvoices
             :Keywords => "invoice",
             :Creator => InvoicesSettings[:invoices_company_name, invoice.project].to_s,
             :CreationDate => Time.now,
-            :TotalAmount => price_to_currency(invoice.amount, invoice.currency, :converted => false),
-            :TaxAmount => price_to_currency(invoice.tax_amount, invoice.currency, :converted => false),
-            :Discount => price_to_currency(invoice.discount_amount, invoice.currency, :converted => false)
+            :TotalAmount => price_to_currency(invoice.amount, invoice.currency, :converted => false, :symbol => false),
+            :TaxAmount => price_to_currency(invoice.tax_amount, invoice.currency, :converted => false, :symbol => false),
+            :Discount => price_to_currency(invoice.discount_amount, invoice.currency, :converted => false, :symbol => false)
             },
             :margin => [50, 50, 60, 50])
         contact = invoice.contact || Contact.new(:first_name => '[New client]', :address_attributes => {:street1 => '[New client address]'}, :phone => '[phone]')
@@ -74,6 +74,10 @@ module RedmineInvoices
           invoice.number],
           [l(:field_invoice_date) + ":",
           format_date(invoice.invoice_date)]]
+
+        invoice_data << [l(:field_invoice_due_date) + ":", format_date(invoice.due_date)] if invoice.due_date
+        invoice_data << [l(:field_invoice_order_number) + ":", invoice.order_number] unless invoice.order_number.blank?
+        invoice_data << [l(:field_invoice_subject) + ":", invoice.subject] unless invoice.subject.blank?
 
         invoice.custom_values.each do |custom_value|
           if !custom_value.value.blank? && custom_value.custom_field.is_for_all?
@@ -159,8 +163,8 @@ module RedmineInvoices
             line.description,
             "x#{invoice_number_format(line.quantity)}",
             line.units,
-            price_to_currency(line.price, invoice.currency, :converted => false),
-            price_to_currency(line.total, invoice.currency, :converted => false)
+            price_to_currency(line.price, invoice.currency, :converted => false, :symbol => false),
+            price_to_currency(line.total, invoice.currency, :converted => false, :symbol => false)
           ]
         end
         lines.insert(0,[l(:field_invoice_line_position),
@@ -170,15 +174,15 @@ module RedmineInvoices
                        label_with_currency(:field_invoice_line_price, invoice.currency),
                        label_with_currency(:label_invoice_total, invoice.currency) ])
         lines << ['']
-        lines << ['', '', '', '', l(:label_invoice_sub_amount) + ":", price_to_currency(invoice.subtotal, invoice.currency, :converted => false)]  if invoice.discount_amount > 0 || (invoice.tax_amount> 0 && !invoice.total_with_tax?)
+        lines << ['', '', '', '', l(:label_invoice_sub_amount) + ":", price_to_currency(invoice.subtotal, invoice.currency, :converted => false, :symbol => false)]  if invoice.discount_amount > 0 || (invoice.tax_amount> 0 && !invoice.total_with_tax?)
 
         invoice.tax_groups.each do |tax_group|
-          lines << ['', '', '', '', "#{l(:label_invoice_tax)} (#{invoice_number_format(tax_group[0])}%):", price_to_currency(tax_group[1], invoice.currency, :converted => false)]
+          lines << ['', '', '', '', "#{l(:label_invoice_tax)} (#{invoice_number_format(tax_group[0])}%):", price_to_currency(tax_group[1], invoice.currency, :converted => false, :symbol => false)]
         end if invoice.tax_amount> 0
 
-        lines << ['', '', '', '', discount_label(invoice) + ":", "-" + price_to_currency(invoice.discount_amount, invoice.currency, :converted => false)] if invoice.discount_amount > 0
+        lines << ['', '', '', '', discount_label(invoice) + ":", "-" + price_to_currency(invoice.discount_amount, invoice.currency, :converted => false, :symbol => false)] if invoice.discount_amount > 0
 
-        lines << ['', '', '', '', label_with_currency(:label_invoice_total, invoice.currency) + ":", price_to_currency(invoice.amount, invoice.currency, :converted => false)]
+        lines << ['', '', '', '', label_with_currency(:label_invoice_total, invoice.currency) + ":", price_to_currency(invoice.amount, invoice.currency, :converted => false, :symbol => false)]
 
         pdf.table lines, :width => pdf.bounds.width, :cell_style => {:padding => [-3, 5, 3, 5]}, :header => true do |t|
           # t.cells.padding = 405
