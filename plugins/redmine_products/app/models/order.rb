@@ -140,7 +140,7 @@ class Order < ActiveRecord::Base
     if assigned_to
       notified += (assigned_to.is_a?(Group) ? assigned_to.users : [assigned_to])
     end
-    notified = notified.select {|u| u.active? && u.notify_about?(self)}
+    notified = notified.select {|u| u.active?}
 
     notified += project.notified_users
     notified.uniq!

@@ -19,7 +19,7 @@
 
 require 'redmine'
 require 'redmine_products'
-PRODUCTS_VERSION_NUMBER = '1.0.1'
+PRODUCTS_VERSION_NUMBER = '1.0.2'
 PRODUCTS_VERSION_STATUS = ''
 
 ActiveRecord::Base.observers += [:order_observer]
@@ -33,7 +33,7 @@ Redmine::Plugin.register :redmine_products do
   author_url 'mailto:support@redminecrm.com'
 
   requires_redmine :version_or_higher => '2.3'
-  requires_redmine_plugin :redmine_contacts, :version_or_higher => '3.2.12'
+  requires_redmine_plugin :redmine_contacts, :version_or_higher => '3.2.14'
 
   settings :default => {
     :orders_show_in_top_menu => true,

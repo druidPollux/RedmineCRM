@@ -300,11 +300,11 @@ class OrdersController < ApplicationController
   end
 
   def orders_sum_by_period(peroid, contact_id=nil)
-     retrieve_date_range(peroid)
+     from, to = RedmineContacts::DateUtils.retrieve_date_range(peroid)
      scope = Order.scoped({})
      scope = scope.visible
      scope = scope.by_project(@project.id) if @project
-     scope = scope.scoped(:conditions => ["#{Order.table_name}.order_date >= ? AND #{Order.table_name}.order_date < ?", @from, @to])
+     scope = scope.scoped(:conditions => ["#{Order.table_name}.order_date >= ? AND #{Order.table_name}.order_date < ?", from, to])
      scope = scope.scoped(:conditions => ["#{Order.table_name}.contact_id = ?", contact_id]) unless contact_id.blank?
      # debugger
      scope.sum(:amount, :group => :currency)

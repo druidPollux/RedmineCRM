@@ -4,6 +4,12 @@ Redmine Products plugin - managing products and orders plugin for Redmine
 Copyright (C) 2011-2014 Kirill Bezrukov
 http://www.redminecrm.com/
 
+== 2014-02-25 v1.0.2
+
+* Russian translation
+* Polish translation (Szymon Anders)
+* Redmine 2.5 support
+
 == 2014-01-30 v1.0.1
 
 * Show related invoices
