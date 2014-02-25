@@ -115,4 +115,23 @@ class Expense < ActiveRecord::Base
     @editable ||= editable_by?(usr)
   end
 
+  def self.sum_by_period(peroid, project, contact_id=nil)
+    from, to = RedmineContacts::DateUtils.retrieve_date_range(peroid)
+    scope = Expense.scoped({})
+    scope = scope.visible
+    scope = scope.by_project(project.id) if project
+    scope = scope.scoped(:conditions => ["#{Expense.table_name}.expense_date BETWEEN ? AND ?", from, to])
+    scope = scope.scoped(:conditions => ["#{Expense.table_name}.contact_id = ?", contact_id]) unless contact_id.blank?
+    scope.sum(:price, :group => :currency)
+  end
+
+  def self.sum_by_status(status_id, project, contact_id=nil)
+    scope = Expense.scoped({})
+    scope = scope.visible
+    scope = scope.by_project(project.id) if project
+    scope = scope.scoped(:conditions => ["#{Expense.table_name}.status_id = ?", status_id])
+    scope = scope.scoped(:conditions => ["#{Expense.table_name}.contact_id = ?", contact_id]) unless contact_id.blank?
+    [scope.sum(:price, :group => :currency), scope.count(:price)]
+  end
+
 end

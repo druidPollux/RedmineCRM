@@ -20,11 +20,8 @@
 # along with redmine_contacts_invoices.  If not, see <http://www.gnu.org/licenses/>.
 
 module InvoicesHelper
-  # require 'reports/invoice_report'
-  # include ActionView::Helpers::NumberHelper
+  include RedmineInvoices::InvoiceReports
   include Redmine::I18n
-  include CustomFieldsHelper
-  require "open-uri"
 
   def invoices_contacts_for_select(project, options={})
     scope = Contact.scoped({})
@@ -116,7 +113,7 @@ module InvoicesHelper
   end
 
   def collection_invoice_statuses
-    Invoice::STATUSES.map{|k, v| [v, k]}
+    Invoice::STATUSES.map{|k, v| [l(v), k]}
   end
 
   def collection_invoice_statuses_for_select

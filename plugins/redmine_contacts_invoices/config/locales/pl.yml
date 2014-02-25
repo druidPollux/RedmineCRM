@@ -1,9 +1,9 @@
 # Polish strings go here for Rails i18n
 pl:
-  project_module_contacts_invoices: Invoices
+  project_module_contacts_invoices: Faktury
 
   label_invoice_plural: Faktury
-  label_invoice: Faktura
+  label_invoice: Faktura VAT
   label_invoice_new: Nowa faktura
   label_invoice_edit: Edytuj fakturę
   label_invoice_status: Status
@@ -20,9 +20,9 @@ pl:
   label_invoice_company_info: Dane firmy
   label_invoice_bill_info: Dane rachunku
   label_invoice_units: Jednostka
-  label_invoice_total: Suma
+  label_invoice_total: Wartość brutto
   label_invoice_tax: Podatek
-  label_invoice_sub_amount: Podsuma
+  label_invoice_sub_amount: Wartość netto
   label_invoice_invoiced: Zafakturowane
   label_invoice_add_line: Dodaj linię
   label_invoice_overdue: Zaległa
@@ -45,8 +45,8 @@ pl:
   button_print: Wydrukuj
   button_invoice: Faktura
 
-  field_invoice_number: ID faktury
-  field_invoice_date: Data faktury
+  field_invoice_number: Nr
+  field_invoice_date: Data wystawienia
   field_invoice_contact: Klient
   field_invoice_due_date: Termin płatności
   field_invoice_amount: Kwota
@@ -56,13 +56,13 @@ pl:
   field_invoice_currency: Waluta
   field_invoice_language: Wersja językowa
 
-  field_invoice_line_position: '#'
+  field_invoice_line_position: 'Lp'
   field_invoice_line_description: Opis
-  field_invoice_line_price: Cena jednostki
+  field_invoice_line_price: Cena netto
   field_invoice_line_quantity: Ilość
   field_invoice_line_tax: Podatek
   field_invoice_line_tax_amount: Wartość podatku
-  field_invoice_line_total: Suma
+  field_invoice_line_total: Cena brutto
   field_invoice_line_units: Jednostka
 
   #0.0.3
@@ -72,7 +72,7 @@ pl:
   label_invoice_line_grouping_all: Wszystkie
   label_invoice_default_currency: Domyślna waluta
   label_invoice_total_including_tax: Razem, z podatkiem
-  label_invoice_excerpt_invoice_list: Wyciąg z lity faktur
+  label_invoice_excerpt_invoice_list: Wyciąg z listy faktur
   label_invoice_created: Faktura została utworzona
   label_invoice_disable_taxes: Ukryj pole podatku
   label_invoice_days_late: '%{days} dni opóźnienia'
@@ -96,9 +96,17 @@ pl:
   #1.0.4
   field_invoice_subject: Przedmiot
 
+  #2.0.0
+  label_invoice_filter_companies: Filter companies
+
+  #2.0.1
+  label_invoice_company_profile: Profil firmy
+
 # Expenses
   project_module_contacts_expenses: Koszty
 
+  permission_import_invoices: Importuj faktury
+  permission_import_expenses: Importuj wydatki
   label_expense_plural: Koszty
   label_expense: Koszt
   label_expense_new: Nowy koszt
@@ -124,3 +132,62 @@ pl:
 
   label_expense_stat_by_period: Koszty
   label_expense_stat_by_status: Status
+
+  #2.1.1
+  label_invoice_cross_project_contacts: Allow cross-project contacts relations
+
+  #2.1.2
+  label_invoice_show_invoices_in_top_menu: Show invoices in top menu
+  label_invoice_show_expenses_in_top_menu: Show expenses in top menu
+  permission_manage_invoices: Manage invoices
+  permission_comment_invoices: Comment invoices
+
+  #2.2.0
+  activerecord:
+    errors:
+      messages:
+        text_invoice_cant_change_status: can't be changed
+  label_invoice_status_canceled: Canceled
+  label_invoice_amount_due: Due
+  label_invoice_payment: Invoice payment
+  label_invoice_payment_plural: Payments
+  label_invoice_payment_new: New invoice payment
+  label_invoice_add_payment: Add payment
+  label_invoice_payment_date: Payment date
+  label_invoice_paid_date: Zapłacone dnia
+  label_invoice_balance: Balance
+  label_invoice_days_due: '%{days} days due'
+  label_invoice_internal: Internal
+  permission_edit_invoice_payments: Edit payments
+  label_invoice_payment_created: Invoice payment created
+
+  #2.3.0
+  label_invoice_is_billable: Billable
+  label_invoice_show_units: Show units
+  label_invoice_status_estimate: Estimate
+  label_estimate: Estimate
+
+  #3.0.0
+  label_invoice_templates: Szablony
+  label_invoice_custom_template: Invoice custom template
+  label_invoice_pdf: PDF
+  label_invoice_public_link: Public link
+  label_invoice_template_classic: "Classic"
+  label_invoice_template_modern: "Modern"
+  label_invoice_template_left: "Modern left"
+  label_invoice_template_blank_header: "Modern with blank header"
+  label_invoice_template_custom: "Custom template"
+  label_invoice_public_links: Public links
+  label_invoice_recurring: Recurring invoice
+
+  #3.0.1
+  permission_add_invoices: Add invoices
+  permission_add_expenses: Add expenses
+
+  #3.1.0
+  field_invoice_order_number: Order number
+  label_invoice_send_by_email: Send invoice by email
+  permission_send_invoices: Send emails
+  label_invoice_mail_to: To
+  label_invoice_email_template_plural: Email templates
+  label_invoice_email_template: Email template

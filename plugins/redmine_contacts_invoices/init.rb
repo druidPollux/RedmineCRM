@@ -19,7 +19,7 @@
 
 require 'redmine'
 
-INVOICES_VERSION_NUMBER = '3.1.0'
+INVOICES_VERSION_NUMBER = '3.1.1'
 INVOICES_VERSION_STATUS = ''
 
 Redmine::Plugin.register :redmine_contacts_invoices do
@@ -31,7 +31,7 @@ Redmine::Plugin.register :redmine_contacts_invoices do
   author_url 'mailto:support@redminecrm.com'
 
   requires_redmine :version_or_higher => '2.1.2'
-  requires_redmine_plugin :redmine_contacts, :version_or_higher => '3.2.11'
+  requires_redmine_plugin :redmine_contacts, :version_or_higher => '3.2.14'
 
   settings :default => {
     :invoices_company_name => "Your company name",

@@ -188,3 +188,7 @@ ru:
   label_invoice_mail_to: Кому
   label_invoice_email_template_plural: Шаблоны email
   label_invoice_email_template: Шаблон email
+
+  #3.1.1
+  label_invoice_hours: часы
+  label_invoice_email_curent_user: Email текущего пользователя

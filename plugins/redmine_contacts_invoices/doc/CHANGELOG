@@ -4,6 +4,15 @@ Redmine Invoices plugin - invoicing plugin for Redmine
 Copyright (C) 2011-2013 Kirill Bezrukov
 http://www.redminecrm.com/projects/invoices
 
+== 2014-02-25 v3.1.1
+
+* Polish translation update (Szymon Anders)
+* From address for sending invoices
+* Redmine 2.5 support
+* Fixed bug with invoice status translation
+* Fixed bug with spliting time in activity and user grouping invoice lines
+* Invoice contact statistics through all projects
+
 == 2014-02-07 v3.1.0
 
 * Sending invoice by email

@@ -168,15 +168,15 @@ class Invoice < ActiveRecord::Base
   end
 
   STATUSES = {
-    DRAFT_INVOICE => l(:label_invoice_status_draft),
-    ESTIMATE_INVOICE => l(:label_invoice_status_estimate),
-    SENT_INVOICE => l(:label_invoice_status_sent),
-    PAID_INVOICE => l(:label_invoice_status_paid),
-    CANCELED_INVOICE => l(:label_invoice_status_canceled)
+    DRAFT_INVOICE => :label_invoice_status_draft,
+    ESTIMATE_INVOICE => :label_invoice_status_estimate,
+    SENT_INVOICE => :label_invoice_status_sent,
+    PAID_INVOICE => :label_invoice_status_paid,
+    CANCELED_INVOICE => :label_invoice_status_canceled
   }
 
   def status
-    STATUSES[status_id]
+    l(STATUSES[status_id])
   end
 
   def set_status(st)
@@ -246,6 +246,26 @@ class Invoice < ActiveRecord::Base
 
   def filename
     "invoice-#{self.number.to_s}.pdf"
+  end
+
+  def self.sum_by_period(peroid, project, contact_id=nil)
+    from, to = RedmineContacts::DateUtils.retrieve_date_range(peroid)
+    scope = Invoice.scoped({})
+    scope = scope.visible
+    scope = scope.by_project(project.id) if project
+    scope = scope.where("#{Invoice.table_name}.invoice_date >= ? AND #{Invoice.table_name}.invoice_date < ?", from, to)
+    scope = scope.where("#{Invoice.table_name}.contact_id = ?", contact_id) unless contact_id.blank?
+    scope = scope.sent_or_paid
+    scope.sum(:amount, :group => :currency)
+  end
+
+  def self.sum_by_status(status_id, project, contact_id=nil)
+    scope = Invoice.scoped({})
+    scope = scope.visible
+    scope = scope.by_project(project.id) if project
+    scope = scope.where("#{Invoice.table_name}.status_id = ?", status_id)
+    scope = scope.where("#{Invoice.table_name}.contact_id = ?", contact_id) unless contact_id.blank?
+    [scope.sum(:amount, :group => :currency), scope.count(:number)]
   end
 
   private

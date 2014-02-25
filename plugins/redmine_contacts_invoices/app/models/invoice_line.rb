@@ -19,6 +19,9 @@
 
 class InvoiceLine < ActiveRecord::Base
   unloadable
+
+  include ContactsMoneyHelper
+
   belongs_to :invoice
 
   validates_presence_of :description, :price, :quantity

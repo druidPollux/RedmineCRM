@@ -47,6 +47,14 @@ class InvoicesSettings
     contacts_setting.blank? ? ContactsSetting.disable_taxes? : contacts_setting.to_i > 0
   end
 
+  def self.email_from_address
+    if Setting.plugin_redmine_contacts_invoices["invoices_email_current_user"].to_i > 0
+      User.current.logged? ? "#{User.current.name} <#{User.current.mail}>" : Setting.mail_from
+    else
+      Setting.plugin_redmine_contacts_invoices["invoices_email_from_address"].blank? ? Setting.mail_from : Setting.plugin_redmine_contacts_invoices["invoices_email_from_address"]
+    end
+  end
+
   def self.default_list_style
     Setting.plugin_redmine_contacts_invoices["invoices_excerpt_invoice_list"].to_i > 0 ? 'list_excerpt' : 'list'
   end

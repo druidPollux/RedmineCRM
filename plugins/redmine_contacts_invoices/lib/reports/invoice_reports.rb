@@ -22,6 +22,7 @@ module RedmineInvoices
     class << self
       include Redmine::I18n
       include InvoicesHelper
+      include ContactsMoneyHelper
 
       def invoice_to_pdf_prawn(invoice, type)
         saved_language = User.current.language

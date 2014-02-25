@@ -44,20 +44,6 @@ class RecurringInvoicesController < ApplicationController
   def index
     # retrieve_invoices_query
 
-    @current_week_sum = invoices_sum_by_period("current_week")
-    @last_week_sum = invoices_sum_by_period("last_week")
-    @current_month_sum = invoices_sum_by_period("current_month")
-    @last_month_sum = invoices_sum_by_period("last_month")
-    @current_year_sum = invoices_sum_by_period("current_year")
-
-    @status_stat = {}
-
-    @draft_status_sum, @draft_status_count = invoices_sum_by_status(RecurringInvoice::DRAFT_INVOICE)
-    @estimate_status_sum, @estimate_status_count = invoices_sum_by_status(RecurringInvoice::ESTIMATE_INVOICE)
-    @sent_status_sum, @sent_status_count = invoices_sum_by_status(RecurringInvoice::SENT_INVOICE)
-    @paid_status_sum, @paid_status_count = invoices_sum_by_status(RecurringInvoice::PAID_INVOICE)
-    @canceled_status_sum, @canceled_status_count = invoices_sum_by_status(RecurringInvoice::CANCELED_INVOICE)
-
     respond_to do |format|
       format.html do
          params[:status_id] = "o" unless params.has_key?(:status_id)
@@ -213,27 +199,6 @@ class RecurringInvoicesController < ApplicationController
 
   private
 
-  def invoices_sum_by_period(peroid, contact_id=nil)
-     retrieve_date_range(peroid)
-     scope = RecurringInvoice.scoped({})
-     scope = scope.visible
-     scope = scope.by_project(@project.id) if @project
-     scope = scope.scoped(:conditions => ["#{RecurringInvoice.table_name}.invoice_date >= ? AND #{RecurringInvoice.table_name}.invoice_date < ?", @from, @to])
-     scope = scope.scoped(:conditions => ["#{RecurringInvoice.table_name}.contact_id = ?", contact_id]) unless contact_id.blank?
-     scope = scope.sent_or_paid
-     # debugger
-     scope.sum(:amount, :group => :currency)
-  end
-
-  def invoices_sum_by_status(status_id, contact_id=nil)
-    scope = RecurringInvoice.scoped({})
-    scope = scope.visible
-    scope = scope.by_project(@project.id) if @project
-    scope = scope.scoped(:conditions => ["#{RecurringInvoice.table_name}.status_id = ?", status_id])
-    scope = scope.scoped(:conditions => ["#{RecurringInvoice.table_name}.contact_id = ?", contact_id]) unless contact_id.blank?
-    [scope.sum(:amount, :group => :currency), scope.count(:number)]
-  end
-
   def last_comments
     @last_comments = []
   end
@@ -254,10 +219,6 @@ class RecurringInvoicesController < ApplicationController
     scope = scope.scoped(:conditions => ["#{RecurringInvoice.table_name}.assigned_to_id = ?", params[:assigned_to_id]]) if !params[:assigned_to_id].blank?
     scope = scope.scoped(:conditions => ["#{RecurringInvoice.table_name}.due_date <= ? AND #{RecurringInvoice.table_name}.status_id = ?", Date.today, RecurringInvoice::SENT_INVOICE]) if (params[:status_id] == "d")
     scope = scope.scoped(:conditions => ["#{RecurringInvoice.table_name}.due_date <= ?", params[:due_date].to_date]) if (!params[:due_date].blank? && is_date?(params[:due_date]))
-    retrieve_date_range(params[:period].to_s)
-    scope = scope.scoped(:conditions => ["#{RecurringInvoice.table_name}.invoice_date BETWEEN ? AND ?", @from, @to]) if (@from && @to)
-    retrieve_date_range(params[:paid_period].to_s)
-    scope = scope.scoped(:conditions => ["#{RecurringInvoice.table_name}.paid_date BETWEEN ? AND ?", @from, @to]) if (@from && @to) && params[:paid_period]
 
     sort_init 'status', 'number'
     sort_update 'invoice_date' => 'invoice_date',

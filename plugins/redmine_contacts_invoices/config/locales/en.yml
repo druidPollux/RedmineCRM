@@ -190,3 +190,7 @@ en:
   label_invoice_mail_to: To
   label_invoice_email_template_plural: Email templates
   label_invoice_email_template: Email template
+
+  #3.1.1
+  label_invoice_hours: hours
+  label_invoice_email_curent_user: Current user email
