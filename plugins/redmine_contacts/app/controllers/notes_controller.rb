@@ -29,8 +29,6 @@ class NotesController < ApplicationController
   accept_api_auth :show, :create, :update, :destroy
 
   helper :attachments
-  helper :notes
-  helper :contacts
   helper :custom_fields
 
   def show

@@ -20,6 +20,7 @@
 # along with redmine_contacts.  If not, see <http://www.gnu.org/licenses/>.
 
 module NotesHelper
+  include ContactsHelper
 
   def collection_for_note_types_select
     note_types = [[l(:label_crm_note), '']] + [:label_crm_note_type_email, :label_crm_note_type_call, :label_crm_note_type_meeting].each_with_index.collect{|type, i| [l(type), i]}
@@ -128,7 +129,7 @@ module NotesHelper
                   note.author.name,
                   note.content
                   ]
-        custom_fields.each {|f| fields << show_value(note.custom_value_for(f)) }
+        custom_fields.each {|f| fields << RedmineContacts::CSVUtils.csv_custom_value(note.custom_value_for(f)) }
         csv << fields.collect {|c| Redmine::CodesetUtil.from_utf8(c.to_s, encoding) }
       end
     end

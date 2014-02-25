@@ -24,8 +24,6 @@
 
 	<h3><%= l(:label_contact_plural) %> </h3>
 
-
-	<% User.current.reload %>
 	<ul>
 	  <% @issue.contacts.order_by_name.visible.each do |contact| %>
 		<li id="contact_<%= contact.id%>">

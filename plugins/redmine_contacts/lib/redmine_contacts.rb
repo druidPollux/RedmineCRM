@@ -19,6 +19,8 @@
 
 require_dependency 'redmine_contacts/utils/thumbnail'
 require_dependency 'redmine_contacts/utils/check_mail'
+require_dependency 'redmine_contacts/utils/date_utils'
+require_dependency 'redmine_contacts/utils/csv_utils'
 require_dependency 'redmine_contacts/contacts_project_setting'
 
 # Patches
@@ -31,7 +33,8 @@ ActionDispatch::Reloader.to_prepare do
 	require_dependency 'redmine_contacts/patches/application_controller_patch'
 	require_dependency 'redmine_contacts/patches/attachments_controller_patch'
 	require_dependency 'redmine_contacts/patches/auto_completes_controller_patch'
-	require_dependency 'redmine_contacts/patches/users_controller_patch'
+  require_dependency 'redmine_contacts/patches/users_controller_patch'
+	require_dependency 'redmine_contacts/patches/user_patch'
 	require_dependency 'redmine_contacts/patches/my_controller_patch'
 	require_dependency 'redmine_contacts/patches/projects_controller_patch'
 	require_dependency 'redmine_contacts/patches/issues_controller_patch'
@@ -51,7 +54,7 @@ require_dependency 'redmine_contacts/hooks/views_layouts_hook'
 require 'acts_as_viewable/init'
 require 'acts_as_taggable_on_patch'
 
-require 'redmine_contacts/liquid/liquid' if Gem::Specification.find_all_by_name('liquid').any?
+require 'redmine_contacts/liquid/liquid' if `gem list`.match('liquid')
 
 module RedmineContacts
 

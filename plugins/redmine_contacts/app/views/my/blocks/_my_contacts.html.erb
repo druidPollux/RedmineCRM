@@ -1,5 +1,4 @@
 <h3><%= l(:label_crm_my_contact_plural) %></h3>
-<% User.current.reload %>
 <% contacts = Contact.visible.find(:all, :conditions => {:assigned_to_id  => User.current.id}, :limit => 20) %>
 
 <div class="box" id="duplicates">

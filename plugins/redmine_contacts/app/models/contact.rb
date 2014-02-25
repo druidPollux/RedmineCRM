@@ -108,7 +108,10 @@ class Contact < ActiveRecord::Base
   validates_uniqueness_of :first_name, :scope => [:last_name, :middle_name, :company]
   validates_presence_of :project, :message => "Contact should have project"
 
+  after_create :send_notification
+
   def self.visible_condition(user, options={})
+    user.reload
     user_ids = [user.id] + user.groups.map(&:id)
 
     projects_allowed_to_view_contacts = Project.where(Project.allowed_to_condition(user, :view_contacts)).pluck(:id)
@@ -327,22 +330,39 @@ class Contact < ActiveRecord::Base
     self.name
   end
 
-  # Returns the mail adresses of users that should be notified
-  def recipients
+  def notified_users
     notified = []
     # Author and assignee are always notified unless they have been
     # locked or don't want to be notified
-    # notified << author if author
+    notified << author if author
     if assigned_to
       notified += (assigned_to.is_a?(Group) ? assigned_to.users : [assigned_to])
     end
     notified = notified.select {|u| u.active? && u.notify_about?(self)}
 
     notified += project.notified_users
+
+    if !is_company && !contact_company.blank?
+      notified += contact_company.notified_users
+    end
+
     notified.uniq!
-    # Remove users that can not view the contact
+    # Remove users that can not view the issue
     notified.reject! {|user| !visible?(user)}
-    notified.collect(&:mail)
+    notified
+  end
+
+  # Returns the mail adresses of users that should be notified
+  def recipients
+    notified_users.collect(&:mail)
+  end
+
+  def all_watcher_recepients
+    notified = self.watcher_recipients
+    if !is_company && !contact_company.blank?
+      notified += contact_company.watcher_recipients
+    end
+    notified
   end
 
   private
@@ -351,6 +371,10 @@ class Contact < ActiveRecord::Base
     if @phones
       self.phone = @phones.uniq.map {|s| s.strip.delete(',').squeeze(" ")}.join(', ')
     end
+  end
+
+  def send_notification
+    Mailer.crm_contact_add(self).deliver if Setting.notified_events.include?('crm_contact_added')
   end
 
 end

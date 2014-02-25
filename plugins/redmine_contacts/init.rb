@@ -17,10 +17,8 @@
 # You should have received a copy of the GNU General Public License
 # along with redmine_contacts.  If not, see <http://www.gnu.org/licenses/>.
 
-CONTACTS_VERSION_NUMBER = '3.2.13'
+CONTACTS_VERSION_NUMBER = '3.2.14'
 CONTACTS_VERSION_STATUS = ''
-
-ActiveRecord::Base.observers += [:contact_observer, :note_observer]
 
 Redmine::Plugin.register :redmine_contacts do
   name 'Redmine CRM plugin'
@@ -33,7 +31,6 @@ Redmine::Plugin.register :redmine_contacts do
   requires_redmine :version_or_higher => '2.1.2'
 
   settings :default => {
-    :use_gravatars => false,
     :name_format => :lastname_firstname.to_s,
     :auto_thumbnails  => true,
     :major_currencies => "USD, EUR, GBP, RUB, CHF",

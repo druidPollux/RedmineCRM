@@ -20,6 +20,8 @@
 # along with redmine_contacts.  If not, see <http://www.gnu.org/licenses/>.
 
 module DealsHelper
+  include ContactsHelper
+
   def collection_for_status_select
     deal_statuses.collect{|s| [s.name, s.id.to_s]}
   end
@@ -109,7 +111,7 @@ module DealsHelper
                   format_date(deal.created_on),
                   format_date(deal.updated_on)
                   ]
-        deal.custom_field_values.each {|custom_value| fields << show_value(custom_value) }
+        deal.custom_field_values.each {|custom_value| fields << RedmineContacts::CSVUtils.csv_custom_value(custom_value) }
         csv << fields.collect {|c| Redmine::CodesetUtil.from_utf8(c.to_s, encoding) }
       end
     end

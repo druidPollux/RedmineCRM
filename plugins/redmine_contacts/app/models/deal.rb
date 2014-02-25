@@ -19,7 +19,7 @@
 
 class Deal < ActiveRecord::Base
   unloadable
-
+  include ContactsMoneyHelper
   include Redmine::SafeAttributes
 
   belongs_to :project
@@ -35,5 +35,11 @@ class Deal < ActiveRecord::Base
 
   def info
    result = ""
+  end
+
+private
+
+  def send_notification
+    Mailer.crm_deal_add(self).deliver if Setting.notified_events.include?('crm_deal_added')
   end
 end

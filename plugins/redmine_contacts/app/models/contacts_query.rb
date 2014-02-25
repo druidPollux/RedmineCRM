@@ -61,8 +61,8 @@ class ContactsQuery < ActiveRecord::Base
                                  :list_status => [ "o", "=", "!", "c", "*" ],
                                  :list_optional => [ "=", "!", "!*", "*" ],
                                  :list_subprojects => [ "*", "!*", "=" ],
-                                 :date => [ "=", ">=", "<=", "><", "<t+", ">t+", "t+", "t", "w", ">t-", "<t-", "t-", "!*", "*" ],
-                                 :date_past => [ "=", ">=", "<=", "><", ">t-", "<t-", "t-", "t", "w", "!*", "*" ],
+                                 :date => [ "=", ">=", "<=", "><", "<t+", ">t+", "><t+", "t+", "t", "ld", "w", "lw", "l2w", "m", "lm", "y", ">t-", "<t-", "><t-", "t-", "!*", "*" ],
+                                 :date_past => [ "=", ">=", "<=", "><", ">t-", "<t-", "><t-", "t-", "t", "ld", "w", "lw", "l2w", "m", "lm", "y", "!*", "*" ],
                                  :string => [ "=", "~", "!", "!~" ],
                                  :text => [  "~", "!~" ],
                                  :integer => [ "=", ">=", "<=", "><", "!*", "*" ],
@@ -149,7 +149,7 @@ class ContactsQuery < ActiveRecord::Base
           # filter requires one or more values
           (values_for(field) and !values_for(field).first.blank?) or
           # filter doesn't require any value
-          ["o", "c", "!*", "*", "t", "w"].include? operator_for(field)
+          ["o", "c", "!*", "*", "t", "ld", "w", "lw", "l2w", "m", "lm", "y"].include? operator_for(field)
     end if filters
   end
 
@@ -505,6 +505,24 @@ class ContactsQuery < ActiveRecord::Base
     sql_for_field(field, operator, value, Address.table_name, field)
   end
 
+  def joins_for_order_statement(order_options)
+    joins = []
+
+    if order_options
+      if order_options.include?('authors')
+        joins << "LEFT OUTER JOIN #{User.table_name} authors ON authors.id = #{queried_table_name}.author_id"
+      end
+      order_options.scan(/cf_\d+/).uniq.each do |name|
+        column = available_columns.detect {|c| c.name.to_s == name}
+        join = column && column.custom_field.join_for_order_statement
+        if join
+          joins << join
+        end
+      end
+    end
+    joins.any? ? joins.join(' ') : nil
+  end
+
   # Returns the contact count
   def contact_count
     Contact.visible.includes(:address).count(:conditions => statement)
@@ -518,7 +536,11 @@ class ContactsQuery < ActiveRecord::Base
     if grouped?
       begin
         # Rails will raise an (unexpected) RecordNotFound if there's only a nil group value
-        r = Contact.visible.count(:group => group_by_statement, :conditions => statement)
+        r = Contact.visible.
+          where(statement).
+          joins(joins_for_order_statement(group_by_statement)).
+          group(group_by_statement).
+          count
       rescue ActiveRecord::RecordNotFound
         r = {nil => contact_count}
       end
@@ -761,11 +783,39 @@ class ContactsQuery < ActiveRecord::Base
       sql = relative_date_clause(db_table, db_field, value.first.to_i, value.first.to_i)
     when "t"
       sql = relative_date_clause(db_table, db_field, 0, 0)
+    when "ld"
+      # = yesterday
+      sql = relative_date_clause(db_table, db_field, -1, -1)
     when "w"
+      # = this week
       first_day_of_week = l(:general_first_day_of_week).to_i
       day_of_week = Date.today.cwday
       days_ago = (day_of_week >= first_day_of_week ? day_of_week - first_day_of_week : day_of_week + 7 - first_day_of_week)
       sql = relative_date_clause(db_table, db_field, - days_ago, - days_ago + 6)
+    when "lw"
+      # = last week
+      first_day_of_week = l(:general_first_day_of_week).to_i
+      day_of_week = Date.today.cwday
+      days_ago = (day_of_week >= first_day_of_week ? day_of_week - first_day_of_week : day_of_week + 7 - first_day_of_week)
+      sql = relative_date_clause(db_table, db_field, - days_ago - 7, - days_ago - 1)
+    when "l2w"
+      # = last 2 weeks
+      first_day_of_week = l(:general_first_day_of_week).to_i
+      day_of_week = Date.today.cwday
+      days_ago = (day_of_week >= first_day_of_week ? day_of_week - first_day_of_week : day_of_week + 7 - first_day_of_week)
+      sql = relative_date_clause(db_table, db_field, - days_ago - 14, - days_ago - 1)
+    when "m"
+      # = this month
+      date = Date.today
+      sql = date_clause(db_table, db_field, date.beginning_of_month, date.end_of_month)
+    when "lm"
+      # = last month
+      date = Date.today.prev_month
+      sql = date_clause(db_table, db_field, date.beginning_of_month, date.end_of_month)
+    when "y"
+      # = this year
+      date = Date.today
+      sql = date_clause(db_table, db_field, date.beginning_of_year, date.end_of_year)
     when "~"
       sql = "LOWER(#{db_table}.#{db_field}) LIKE '%#{connection.quote_string(value.first.to_s.downcase)}%'"
     when "!~"

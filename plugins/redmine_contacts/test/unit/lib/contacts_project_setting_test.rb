@@ -60,6 +60,7 @@ class ContactsProjectSettingTest < ActiveSupport::TestCase
                              :contacts_queries])
 
   def setup
+    Setting.plugin_redmine_contacts["post_address_format"] = nil
     @project_settings = ContactsProjectSetting.new(Project.find(1), "redmine_contacts")
   end
 

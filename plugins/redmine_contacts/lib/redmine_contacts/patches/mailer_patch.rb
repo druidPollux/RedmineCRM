@@ -25,19 +25,19 @@ module RedmineContacts
       end
 
       module InstanceMethods
-        def crm_note_add(note, parent)
+        def crm_note_add(note)
           redmine_headers 'Project' => note.source.project.identifier,
                           'X-Notable-Id' => note.source.id,
                           'X-Note-Id' => note.id
           @author = note.author
           message_id note
-          recipients = (note.source.recipients + (parent ? parent.recipients : [])).uniq
-          cc = (parent ? (note.source.watcher_recipients + parent.watcher_recipients).uniq : note.source.watcher_recipients) - recipients
+          recipients = note.source.recipients
+          cc = (note.source.respond_to?(:all_watcher_recepients) ? note.source.all_watcher_recepients : note.source.watcher_recipients) - recipients
           @note = note
           @note_url = url_for(:controller => 'notes', :action => 'show', :id => note.id)
           mail :to => recipients,
                :cc => cc,
-               :subject => "[#{note.source.project.name}] - #{parent.name + ' - ' if parent}#{l(:label_crm_note_for)} #{note.source.name}"
+               :subject => "[#{note.source.project.name}] - #{l(:label_crm_note_for)} #{note.source.name}"
 
         end
 

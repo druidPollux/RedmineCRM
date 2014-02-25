@@ -61,7 +61,7 @@ class AutoCompletesControllerTest < ActionController::TestCase
   end
 
   def test_contacts_should_accept_term_param
-    get :contacts, :project_id => 'ecookbook', :q => 'ma'
+    get :contacts, :project_id => 'ecookbook', :term => 'ma'
     assert_response :success
     assert_not_nil assigns(:contacts)
     assert assigns(:contacts).detect {|contact| contact.name.match /Marat/}

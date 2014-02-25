@@ -4,7 +4,7 @@
 
 <div class="contextual">
 	<% replace_watcher ||= 'watcher' %>
-	<%= watcher_tag(@contact, User.current, {:id => replace_watcher, :replace => ['watcher','watcher2']}) %>
+	<%= watcher_link(@contact, User.current) %>
 	<%= link_to l(:button_edit), {:controller => 'contacts', :action => 'edit', :project_id => @project, :id => @contact}, :class => 'icon icon-edit' if @contact.editable? %>
 	<%= link_to l(:button_delete), {:controller => 'contacts', :action => 'destroy', :project_id => @project, :id => @contact}, :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del' if @contact.deletable? %>
 </div>

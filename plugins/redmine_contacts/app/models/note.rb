@@ -37,6 +37,8 @@ class Note < ActiveRecord::Base
                 :url => Proc.new {|o| {:controller => 'notes', :action => 'show', :id => o.id }},
                 :description => Proc.new {|o| o.content}
 
+  after_create :send_notification
+
   cattr_accessor :note_types
   @@note_types = {:email => 0, :call => 1, :meeting => 2}
   cattr_accessor :cut_length
@@ -83,6 +85,12 @@ class Note < ActiveRecord::Base
     return nil if super.blank?
     zone = User.current.time_zone
     zone ? super.in_time_zone(zone) : (super.utc? ? super.localtime : super)
+  end
+
+private
+
+  def send_notification
+    Mailer.crm_note_add(self).deliver if Setting.notified_events.include?('crm_note_added')
   end
 
 end

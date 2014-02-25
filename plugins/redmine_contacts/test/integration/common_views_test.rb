@@ -98,7 +98,6 @@ class CommonViewsTest < ActionController::IntegrationTest
     assert_response :success
   end
 
-
   test "Global search with contacts" do
     log_user("admin", "admin")
     get "/search?q=Domoway"

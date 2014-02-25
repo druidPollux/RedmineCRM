@@ -1,6 +1,6 @@
-<%= l(:text_crm_deal_updated, :name => h(@deal.full_name), :author => h(@deal.author)) %>
+<%= l(:text_crm_deal_updated, :name => h(@deal.full_name), :author => h(@author)) %>
 
-* <%=l(:text_crm_deal_status_changed, :old => (@status_was ? @status_was.name : ""), :new => (@deal.status ? @deal.status.name : "")) %>
+* <%=l(:text_crm_deal_status_changed, :old => (@status_was ? @status_was.name : ""), :new => (@status ? @status.name : "")) %>
 
 ----------------------------------------
 <%= "#{l(:label_deal)} ##{@deal.id}: #{@deal.info}".html_safe %>

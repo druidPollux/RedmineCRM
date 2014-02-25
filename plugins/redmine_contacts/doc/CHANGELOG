@@ -4,6 +4,13 @@ Redmine CRM plugin - customer relationship management plugin for redmine
 Copyright (C) 2011-2014 Kirill Bezrukov
 http://www.redminecrm.com/
 
+== 2014-02-25 v3.2.14
+
+* Update Polish translation (Szymon Anders)
+* Fixed bug with custom fields grouping in Contacts queries
+* Fixed bug with bulk edit contacts with multiple value custom fields
+* Fixed bug with date filters in contacts list
+
 == 2014-01-23 v3.2.13
 
 * Fixed import deals link

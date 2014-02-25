@@ -72,7 +72,7 @@ class ContactDrop < Liquid::Drop
   end
 
   def notes
-    @contact.notes.map{|n| NotesDrop.new(n) }
+    @contact.notes.map{|n| NoteDrop.new(n) }
   end
 
   def address

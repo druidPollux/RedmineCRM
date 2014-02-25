@@ -42,13 +42,14 @@ class ContactsController < ApplicationController
   helper :notes
   helper :custom_fields
   include CustomFieldsHelper
-  helper :context_menus unless Redmine::VERSION.to_s < '1.4'
+  helper :context_menus
   include WatchersHelper
   helper :sort
   include SortHelper
   helper :queries
   helper :contacts_queries
   include ContactsQueriesHelper
+  include ApplicationHelper
   include NotesHelper
 
   def index
@@ -68,7 +69,7 @@ class ContactsController < ApplicationController
         @limit = per_page_option
       end
       @contacts_count = @query.contact_count
-      @contacts_pages = Paginator.new self, @contacts_count, @limit, params['page']
+      @contacts_pages = Paginator.new(self, @contacts_count, @limit, params['page'])
       @offset ||= @contacts_pages.current.offset
       @contact_count_by_group = @query.contact_count_by_group
       @contacts = @query.contacts(:include => [:projects, :avatar],
@@ -112,6 +113,7 @@ class ContactsController < ApplicationController
 
     source_id_cond = @contact.is_company ? Contact.visible.order_by_name.select(:id).find_all_by_company(@contact.first_name) << @contact.id : @contact.id
     @note = Note.new(:created_on => Time.now)
+
     @notes_pages, @notes = paginate :notes,
                                     :per_page => 30,
                                     :conditions => {:source_id  => source_id_cond,
@@ -193,9 +195,6 @@ class ContactsController < ApplicationController
     unless request.xhr?
       @tags = Contact.available_tags(:project => @project)
     end
-    # @notes = Comment.find(:all,
-    #                            :conditions => { :commented_type => "Contact", :commented_id => find_contacts.map(&:id)},
-    #                            :order => "updated_on DESC")
 
     contacts = find_contacts(false)
 
@@ -207,7 +206,6 @@ class ContactsController < ApplicationController
     cond << " and (LOWER(#{Note.table_name}.content) LIKE '%#{params[:search_note].downcase}%')" if params[:search_note] and request.xhr?
     cond << " and (#{Note.table_name}.author_id = #{params[:note_author_id]})" if !params[:note_author_id].blank?
     cond << " and (#{Note.table_name}.type_id = #{params[:type_id]})" if !params[:type_id].blank?
-
 
     @notes_pages, @notes = paginate :notes,
                                     :per_page => 20,
@@ -237,7 +235,6 @@ class ContactsController < ApplicationController
             :send_mails => @contacts.collect{|c| c.send_mail_allowed? && !c.primary_email.blank?}.inject{|memo,d| memo && d}
             }
 
-    # @back = back_url
     render :layout => false
   end
 
@@ -259,7 +256,6 @@ private
   end
 
   def last_notes(count=5)
-    # @last_notes = find_contacts(false).find(:all, :include => :notes, :limit => count,  :order => 'notes.created_on DESC').map{|c| c.notes}.flatten.first(count)
     scope = ContactNote.scoped({})
     scope = scope.scoped(:conditions => ["#{Project.table_name}.id = ?", @project.id]) if @project
     scope = scope.includes(:attachments)
@@ -267,7 +263,6 @@ private
     @last_notes = scope.visible.find(:all,
                                      :limit => count,
                                      :order => "#{ContactNote.table_name}.created_on DESC")
-    # @last_notes = []
   end
 
   def find_contact
@@ -279,10 +274,6 @@ private
     project_id = (params[:contact] && params[:contact][:project_id]) || params[:project_id]
     @project = Project.find_by_identifier(project_id)
     @project ||= @contact.project
-    # if !(params[:project_id] == @project.identifier)
-    #   params[:project_id] = @project.identifier
-    #   redirect_to params
-    # end
   rescue ActiveRecord::RecordNotFound
     render_404
   end
@@ -316,7 +307,7 @@ private
     if pages
       page_size = params[:page_size].blank? ? 20 : params[:page_size].to_i
       @contacts_pages = Paginator.new(self, @contacts_count, page_size, params[:page])
-      @offset = @contacts_pages.current.offset
+      @offset = @contacts_pages.offset
       @limit =  @contacts_pages.items_per_page
 
       @contacts = @contacts.scoped :include => [:tags, :avatar], :limit  => @limit, :offset => @offset
@@ -339,14 +330,6 @@ private
     @project = @projects.first if @projects.size == 1
   rescue ActiveRecord::RecordNotFound
     render_404
-  end
-
-
-  def parse_params_for_bulk_contact_attributes(params)
-    attributes = (params[:contact] || {}).reject {|k,v| v.blank?}
-    attributes.keys.each {|k| attributes[k] = '' if attributes[k] == 'none'}
-    attributes[:custom_field_values].reject! {|k,v| v.blank?} if attributes[:custom_field_values]
-    attributes
   end
 
   def find_project
