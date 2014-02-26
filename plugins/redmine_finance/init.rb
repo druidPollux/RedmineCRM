@@ -19,7 +19,7 @@
 
 ActiveRecord::Base.observers += [:operation_observer]
 
-FINANCE_VERSION_NUMBER = '1.0.8'
+FINANCE_VERSION_NUMBER = '1.0.9'
 FINANCE_VERSION_STATUS = ''
 
 Redmine::Plugin.register :redmine_finance do
@@ -31,7 +31,7 @@ Redmine::Plugin.register :redmine_finance do
   author_url 'mailto:support@redminecrm.com'
 
   requires_redmine :version_or_higher => '2.1.2'
-  requires_redmine_plugin :redmine_contacts, :version_or_higher => '3.2.12'
+  requires_redmine_plugin :redmine_contacts, :version_or_higher => '3.2.14'
 
   settings :default => {
     :finance_default_currency => "USD",

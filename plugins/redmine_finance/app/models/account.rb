@@ -20,6 +20,8 @@
 class Account < ActiveRecord::Base
   unloadable
 
+  include ContactsMoneyHelper
+
   before_destroy :check_integrity
 
   belongs_to :project
@@ -50,11 +52,6 @@ class Account < ActiveRecord::Base
 
   def credit
     @credit ||= self.operations.outcome.sum(:amount)
-  end
-
-  def amount_to_s
-    return '' if self.amount.blank?
-    Money.from_float(self.amount, self.currency).format rescue helpers.number_with_delimiter(amount, :delimiter => ' ', :precision => 2)
   end
 
   def visible?(usr=nil)
@@ -88,6 +85,10 @@ class Account < ActiveRecord::Base
     # Remove users that can not view the contact
     notified.reject! {|user| !visible?(user)}
     notified.collect(&:mail)
+  end
+
+  def amount_to_s
+    object_price(self, :amount)
   end
 
   def debit_to_s

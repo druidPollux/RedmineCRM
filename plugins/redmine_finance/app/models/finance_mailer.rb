@@ -18,7 +18,7 @@
 # along with redmine_finance.  If not, see <http://www.gnu.org/licenses/>.
 
 class FinanceMailer < Mailer
-  helper :deals
+  helper :contacts_money
 
   def account_edit(operation)
     @account = operation.account.reload

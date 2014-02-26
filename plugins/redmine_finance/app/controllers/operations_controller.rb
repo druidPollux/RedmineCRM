@@ -180,7 +180,7 @@ class OperationsController < ApplicationController
   end
 
   def find_operations(pages=true, sort=true)
-    retrieve_date_range(params[:period].to_s)
+    from, to = RedmineContacts::DateUtils.retrieve_date_range(params[:period].to_s)
     scope = Operation.scoped({})
     scope = scope.joins(:account => :project).where(:accounts => {:project_id => @project}) if @project
     scope = scope.includes(:contact, :category)
@@ -188,7 +188,7 @@ class OperationsController < ApplicationController
     scope = scope.where(:category_id => params[:category_id]) unless params[:category_id].blank?
     scope = scope.where(:account_id => params[:account_id]) unless params[:account_id].blank?
     scope = scope.where(:contact_id => params[:contact_id]) unless params[:contact_id].blank?
-    scope = scope.where(["#{Operation.table_name}.operation_date BETWEEN ? AND ?", @from, @to]) if @from && @to
+    scope = scope.where(["#{Operation.table_name}.operation_date BETWEEN ? AND ?", from, to]) if from && to
 
     scope = scope.order("#{Operation.table_name}.operation_date DESC") if sort
     scope = scope.visible

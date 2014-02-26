@@ -1,9 +1,9 @@
-<div class="contextual">   
-  <%= link_to l(:button_edit), {:controller => "operations", :action => "edit", :id => @operation}, :class => 'icon icon-edit' if !@operation.blank? && @operation.editable_by?(User.current) %>  
+<div class="contextual">
+  <%= link_to l(:button_edit), {:controller => "operations", :action => "edit", :id => @operation}, :class => 'icon icon-edit' if !@operation.blank? && @operation.editable_by?(User.current) %>
   <%= link_to l(:button_delete), {:controller => "operations", :action => "destroy", :id => @operation}, :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del' if !@operation.nil? && @operation.destroyable_by?(User.current) %>
 </div>
-<h2><%= "#{l(:label_operation)} ##{@operation.id}" %></h2>   
-<div class="operation issue details">   
+<h2><%= "#{l(:label_operation)} ##{@operation.id}" %></h2>
+<div class="operation issue details">
 
 <div class="subject">
 <h3><%= "#{@operation.category_name}: #{@operation.amount_to_s}" %></h3>
@@ -67,7 +67,7 @@
 <% end %>
 
 
-<% content_for :sidebar do %>   
+<% content_for :sidebar do %>
   <% unless @operation.contact.blank? %>
   <div class="contact-card small-card">
       <h3><%= l(:label_contact) %></h3>
@@ -76,7 +76,7 @@
   <% end %>
 <% end %>
 
-<% html_title "#{l(:label_operation)} ##{@operation.id}: #{@operation.category_name}" %> 
+<% html_title "#{l(:label_operation)} ##{@operation.id}: #{@operation.category_name}" %>
 
 <% content_for :header_tags do %>
   <meta name = "format-detection" content = "telephone=no">

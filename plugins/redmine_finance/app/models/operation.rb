@@ -19,6 +19,9 @@
 
 class Operation < ActiveRecord::Base
   unloadable
+
+  include ContactsMoneyHelper
+
   belongs_to :account
   belongs_to :contact
   belongs_to :author, :class_name => "User", :foreign_key => "author_id"

@@ -90,7 +90,7 @@ module OperationsHelper
                   format_date(operation.created_at),
                   format_date(operation.updated_at)
                   ]
-        custom_fields.each {|f| fields << show_value(operation.custom_value_for(f)) }
+        custom_fields.each {|f| fields << RedmineContacts::CSVUtils.csv_custom_value(operation.custom_value_for(f)) }
         csv << fields.collect {|c| Redmine::CodesetUtil.from_utf8(c.to_s, encoding) }
       end
     end
