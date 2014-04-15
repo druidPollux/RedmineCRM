@@ -235,8 +235,8 @@ hu:
 
   #3.0.0
   label_crm_import: Importálás
-  label_crm_contact_note_plural: Kapcsolat megjegyzései
-  label_crm_deal_note_plural: Alku megjegyzései
+  label_contact_note_plural: Kapcsolat megjegyzései
+  label_deal_note_plural: Alku megjegyzései
   label_crm_contact_all_note_plural: Összes megjegyzés
   error_unable_delete_deal_status: Nem lehet eltávolítani az alku státuszát
   label_crm_contacts_hidden: Rejtett beállítások

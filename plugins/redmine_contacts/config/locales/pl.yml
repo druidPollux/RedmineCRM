@@ -32,7 +32,7 @@ pl:
   label_crm_note_for: Notka dla
   label_crm_show_on_map: Pokaż na mapie
   label_crm_add_another_phone: dodaj telefon
-  label_crm_contact_note_plural: Wszystkie notki
+  label_contact_note_plural: Wszystkie notki
   label_crm_remove: usuń
   label_crm_related_contacts: Powiązane kontakty
   label_crm_assigned_to: Odpowiedzialny
@@ -224,13 +224,13 @@ pl:
 
   #2.3.3
   label_crm_contact_show_in_app_menu: Show tabs in app menu
-  
+
   label_crm_contact_show_closed_issues: Show closed issues
 
   #3.0.0
   label_crm_import: Import
-  label_crm_contact_note_plural: Contacts notes
-  label_crm_deal_note_plural: Deal notes
+  label_contact_note_plural: Contacts notes
+  label_deal_note_plural: Deal notes
   label_crm_contact_all_note_plural: Wszystkie notatki
   error_unable_delete_deal_status: Unable to delete deal status
   label_crm_contacts_hidden: Hidden settings

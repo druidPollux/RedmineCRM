@@ -8,7 +8,7 @@ de:
   label_crm_view_all_contacts: Alle Kontakte anzeigen
   label_crm_background_info: Hintergrundinformationen
   label_crm_company: Unternehmen
-  label_contact_plural: Kontaktliste
+  label_contact_plural: Kontakte
   label_crm_contact_edit_information: Kontaktinformation bearbeiten
   label_crm_edit_tags: Tags bearbeiten
   label_crm_contact_view: Anzeigen
@@ -227,8 +227,8 @@ de:
 
   #3.0.0
   label_crm_import: Importieren
-  label_crm_contact_note_plural: Kontaktanmerkungen
-  label_crm_deal_note_plural: Deal Anmerkungen
+  label_contact_note_plural: Kontaktanmerkungen
+  label_deal_note_plural: Deal Anmerkungen
   label_crm_contact_all_note_plural: Alle Anmerkungen
   error_unable_delete_deal_status: Deal Status kann nicht gelöscht werden
   label_crm_contacts_hidden: Verborgene Einstellungen
@@ -542,7 +542,7 @@ de:
   label_crm_show_in_top_menu: Im oberen Menü anzeigen
   label_crm_show_in_app_menu: In App Menü anzeigen
   label_crm_money_settings: Währung
-  label_crm_disable_taxes: Stuern deaktiviert
+  label_crm_disable_taxes: Steuern deaktiviert
   label_crm_default_tax: Standard Steuersatz
   label_crm_tax_type: Steuerart
   label_crm_tax_type_inclusive: Steuer eingeschlossen
@@ -555,3 +555,10 @@ de:
   label_crm_add_contact_plural: Kontakt hinzufügen
   label_crm_search_for_contact: Kontakt suchen
   label_crm_major_currencies: Aktive Währungen
+
+  #3.2.11
+  label_crm_post_address_format: Postadress-Format
+  label_crm_post_address_format_macros: "Adress-Format Makros: %{macros}"
+
+  #3.2.14
+  label_crm_last_year: Letztes Jahr

@@ -25,7 +25,7 @@ class ContactsController < ApplicationController
 
   default_search_scope :contacts
 
-  before_filter :find_contact, :only => [:show, :edit, :update, :destroy]
+  before_filter :find_contact, :only => [:show, :edit, :update, :destroy, :load_tab]
   before_filter :find_project, :only => [:new, :create]
   before_filter :authorize, :only => [:create, :new]
   before_filter :authorize_contacts, :only => [:edit, :update, :destroy]
@@ -105,22 +105,7 @@ class ContactsController < ApplicationController
   end
 
   def show
-    scope = @contact.issues
-    scope = scope.open unless RedmineContacts.settings[:show_closed_issues]
-    @contact_issues_count = scope.visible.count
-    @contact_issues = scope.visible.find(:all, :order => "#{Issue.table_name}.status_id, #{Issue.table_name}.updated_on DESC", :limit => 10)
-    @company_contacts = @contact.company_contacts.visible
-
-    source_id_cond = @contact.is_company ? Contact.visible.order_by_name.select(:id).find_all_by_company(@contact.first_name) << @contact.id : @contact.id
-    @note = Note.new(:created_on => Time.now)
-
-    @notes_pages, @notes = paginate :notes,
-                                    :per_page => 30,
-                                    :conditions => {:source_id  => source_id_cond,
-                                                   :source_type => 'Contact'},
-                                    :include => [:attachments],
-                                    :order => "#{Note.table_name}.created_on DESC"
-
+    find_contact_issues
     respond_to do |format|
       format.js if request.xhr?
       format.html { @contact.viewed }
@@ -130,12 +115,10 @@ class ContactsController < ApplicationController
     end
   end
 
-
   def edit
   end
 
   def update
-    @contact.tags.clear
     if @contact.update_attributes(params[:contact])
       flash[:notice] = l(:notice_successful_update)
       attach_avatar
@@ -245,7 +228,18 @@ class ContactsController < ApplicationController
     redirect_back_or_default({:action => "index", :project_id => params[:project_id]})
   end
 
+  def load_tab
+
+  end
+
 private
+  def find_contact_issues
+    scope = @contact.issues
+    scope = scope.open unless RedmineContacts.settings[:show_closed_issues]
+    @contact_issues_count = scope.visible.count
+    @contact_issues = scope.visible.find(:all, :order => "#{Issue.table_name}.status_id, #{Issue.table_name}.updated_on DESC", :limit => 10)
+  end
+
   def attach_avatar
     if params[:contact_avatar]
       params[:contact_avatar][:description] = 'avatar'

@@ -238,8 +238,8 @@ es:
 
   #3.0.0
   label_crm_import: Importar
-  label_crm_contact_note_plural: Notas de contactos
-  label_crm_deal_note_plural: Notas de acuerdos
+  label_contact_note_plural: Notas de contactos
+  label_deal_note_plural: Notas de acuerdos
   label_crm_contact_all_note_plural: Todas las notas
   error_unable_delete_deal_status: No es posible borrar el estado del acuerdo
   label_crm_contacts_hidden: Ajustes ocultos

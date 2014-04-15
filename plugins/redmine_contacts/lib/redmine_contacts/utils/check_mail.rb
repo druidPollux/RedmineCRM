@@ -22,7 +22,6 @@ require 'net/pop'
 require 'openssl'
 require 'timeout'
 
-
 module RedmineContacts
   module Mailer
     class << self

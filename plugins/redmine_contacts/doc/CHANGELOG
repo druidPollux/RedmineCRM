@@ -4,6 +4,14 @@ Redmine CRM plugin - customer relationship management plugin for redmine
 Copyright (C) 2011-2014 Kirill Bezrukov
 http://www.redminecrm.com/
 
+== 2014-03-31 v3.2.15
+
+* Translation fixes for notes global search
+* Disable unique validation by contact name
+* Ajax contact tabs
+* Fixed bug with Liquid gem requirements
+* Fixed global search by contact note
+
 == 2014-02-25 v3.2.14
 
 * Update Polish translation (Szymon Anders)

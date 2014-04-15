@@ -31,7 +31,7 @@ tr:
   label_crm_note_for: Not ->
   label_crm_show_on_map: Haritada göster
   label_crm_add_another_phone: telefon ekle
-  label_crm_contact_note_plural: Tüm notlar
+  label_contact_note_plural: Tüm notlar
   label_crm_remove: Sil
   label_crm_related_contacts: İlgili kişiler
   label_crm_assigned_to: İlgili kişi

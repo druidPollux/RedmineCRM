@@ -235,8 +235,8 @@ pt-BR:
 
   #3.0.0
   label_crm_import: Import
-  label_crm_contact_note_plural: Todas as notas
-  label_crm_deal_note_plural: Deal notes
+  label_contact_note_plural: Todas as notas
+  label_deal_note_plural: Deal notes
   label_crm_contact_all_note_plural: All notes
   error_unable_delete_deal_status: Unable delete deal status
   label_crm_contacts_hidden: Hidden settings

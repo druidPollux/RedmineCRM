@@ -24,6 +24,10 @@
       post :bulk_edit, :bulk_update, :send_mails, :preview_email
       delete :bulk_destroy
     end
+    member do
+      get 'tabs/:tab' => 'contacts#show', :as => "tabs"
+      get 'load_tab' => 'contacts#load_tab', :as => "load_tab"
+    end
   end
 
   resources :projects do

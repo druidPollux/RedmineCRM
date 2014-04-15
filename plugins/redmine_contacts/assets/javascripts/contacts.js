@@ -92,7 +92,6 @@ function toggleContact(event, element)
 
   };
 
-
   $.fn.insertAtCaret = function (myValue) {
 
     return this.each(function() {
@@ -128,3 +127,35 @@ function toggleContact(event, element)
 
 })( jQuery );
 
+function setupDeferredTabs(url) {
+    $('body').on('click', '.tab-header', function(e){
+        tab = $(e.target);
+        $('.tab-placeholder').removeClass('active');
+        name = tab.data('name');
+        partial = tab.data('partial');
+        placeholder = $('#tab-placeholder-' + name);
+        placeholder.addClass('active');
+
+        if (!placeholder.is('.loaded')) {
+            url = url
+            $.ajax(url, {
+                data: {tab_name: name, partial: partial},
+                complete: function(){
+                    placeholder.addClass('loaded')
+                    //replaces current URL with the "href" attribute of the current link
+                    //(only triggered if supported by browser)
+                    if ("replaceState" in window.history) {
+                      window.history.replaceState(null, document.title, tab.attr('href'));
+                    }
+                    return undefined;
+                },
+                dataType: 'script'
+            })
+        }
+        else {
+            if ("replaceState" in window.history) {
+                window.history.replaceState(null, document.title, tab.attr('href'));
+            }
+        }
+    })
+};

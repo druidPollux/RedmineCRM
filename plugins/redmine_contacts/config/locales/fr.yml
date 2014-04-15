@@ -235,8 +235,8 @@ fr:
 
   #3.0.0
   label_crm_import: Importer
-  label_crm_contact_note_plural: Notes du contact
-  label_crm_deal_note_plural: Notes des affaires
+  label_contact_note_plural: Notes du contact
+  label_deal_note_plural: Notes des affaires
   label_crm_contact_all_note_plural: Toutes les notes
   error_unable_delete_deal_status: Impossible de supprimer l'état de l'affaire
   label_crm_contacts_hidden: Paramètres masqués

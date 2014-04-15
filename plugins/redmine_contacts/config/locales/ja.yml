@@ -230,8 +230,8 @@ ja:
 
   #3.0.0
   label_crm_import: インポート
-  label_crm_contact_note_plural: コンタクトノート
-  label_crm_deal_note_plural: 取引ノート
+  label_contact_note_plural: コンタクトノート
+  label_deal_note_plural: 取引ノート
   label_crm_contact_all_note_plural: すべてのノート
   error_unable_delete_deal_status: 取引ステータスを削除できません
   label_crm_contacts_hidden: 設定から隠す

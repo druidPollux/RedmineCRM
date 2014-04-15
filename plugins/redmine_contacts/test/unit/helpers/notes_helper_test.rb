@@ -55,7 +55,7 @@ class NotesHelperTest < ActionView::TestCase
 
   def test_authoring_note_without_time
     RedmineContacts.settings[:note_authoring_time] = false
-    assert_match /ADDED BY <A HREF="\/USERS\/1"(.*)>REDMINE ADMIN<\/A> <(ABBR|ACRONYM) TITLE="12\/12\/2012 02:00 PM">(12 MONTHS|ABOUT 1 YEAR)<\/(ABBR|ACRONYM)> AGO/, authoring_note('2012-12-12 10:00'.to_time, User.find(1)).upcase
+    assert_match /ADDED BY <A HREF="\/USERS\/1"(.*)>REDMINE ADMIN<\/A> <(ABBR|ACRONYM) TITLE="12\/12\/2012 02:00 PM">(12 MONTHS|ABOUT 1 YEAR|OVER 1 YEAR)<\/(ABBR|ACRONYM)> AGO/, authoring_note('2012-12-12 10:00'.to_time, User.find(1)).upcase
   end
 
   def test_authoring_note_with_time

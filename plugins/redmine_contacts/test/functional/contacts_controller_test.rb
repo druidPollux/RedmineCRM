@@ -138,7 +138,7 @@ class ContactsControllerTest < ActionController::TestCase
     assert_select 'div#content div#contact_list table.contacts td.name h1 a', 'Domoway'
   end
 
-  test "should get show" do
+  def test_get_show
     # log_user('admin', 'admin')
     @request.session[:user_id] = 2
     Setting.default_language = 'en'
@@ -153,8 +153,7 @@ class ContactsControllerTest < ActionController::TestCase
     assert_select 'div#tags_data span.tag-label-color a', 'main'
     assert_select 'div#tags_data span.tag-label-color a', 'test'
 
-    assert_select 'div#company_contacts h4.contacts_header a', /Marat Aminov/
-    assert_select 'div#company_contacts h4.contacts_header a', /Ivan Ivanov/
+    assert_select 'div#tab-placeholder-contacts'
 
     assert_select 'div#comments div#notes table.note_data td.name h4', 4
 

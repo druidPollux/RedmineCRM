@@ -231,14 +231,6 @@ module ContactsHelper
     onclick << remote_function(:url => url, :method => :put, :with => "{ bucket: '#{bucket}' }")
   end
 
-  def render_contact_tabs(tabs)
-    if tabs.any?
-      render :partial => 'common/contact_tabs', :locals => {:tabs => tabs}
-    else
-      content_tag 'p', l(:label_no_data), :class => "nodata"
-    end
-  end
-
   def render_contact_projects_hierarchy(projects)
     s = ''
     project_tree(projects) do |project, level|
@@ -394,5 +386,14 @@ module ContactsHelper
                         :ids => '#' + unsaved_contact_ids.join(', #'))
     end
   end
+
+  def render_contact_tabs(tabs)
+    if tabs.any?
+      render :partial => 'common/contact_tabs', :locals => {:tabs => tabs}
+    else
+      content_tag 'p', l(:label_no_data), :class => "nodata"
+    end
+  end
+
 
 end

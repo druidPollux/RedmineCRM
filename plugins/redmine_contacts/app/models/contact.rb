@@ -69,9 +69,10 @@ class Contact < ActiveRecord::Base
                                   "#{table_name}.last_name",
                                   "#{table_name}.company",
                                   "#{Address.table_name}.full_address",
-                                  "#{table_name}.background"],
+                                  "#{table_name}.background",
+                                  "#{ContactNote.table_name}.content"],
                      :project_key => "#{Project.table_name}.id",
-                     :include => [:projects, :address],
+                     :include => [:projects, :address, :notes],
                      # sort by id so that limited eager loading doesn't break with postgresql
                      :order_column => "#{table_name}.id"
 
@@ -103,9 +104,7 @@ class Contact < ActiveRecord::Base
 
 
 
-  # name or company is mandatory
   validates_presence_of :first_name
-  validates_uniqueness_of :first_name, :scope => [:last_name, :middle_name, :company]
   validates_presence_of :project, :message => "Contact should have project"
 
   after_create :send_notification

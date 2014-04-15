@@ -411,7 +411,8 @@ div#deal-status span.contextual {float: none; padding-left: 0px;}
 /**********************************************************************/
 table.list.deal-board tbody tr,
 table.list.deal-board tbody tr:hover {background-color: white;}
-.deal-board .deal-card {
+.deal-board .deal-card,
+.deal-board .sortable-placeholder {
 	padding: 5px;
 	border: solid 1px #d5d5d5;
 	background-color: white;
@@ -431,6 +432,26 @@ table.list.deal-board tbody tr:hover {background-color: white;}
 .deal-board td.deal-status-col.won .deal-card {background: #DFFFDF; border-color: #9FCF9F;}
 .deal-board td.deal-status-col.lost .deal-card {background: #FEE; border-color: #FCC;}
 
+.deal-board .sortable-placeholder {
+  background-color: #E9F8FD;
+  border: solid 1px #E9F8FD;
+  height: 65px;
+}
+
+.deal-board .deal-card.ui-sortable-helper, .deal-board .deal-card.draggable-active {
+  -moz-transform: rotate(5deg); /* Для Firefox */
+  -ms-transform: rotate(5deg); /* Для IE */
+  -webkit-transform: rotate(5deg); /* Для Safari, Chrome, iOS */
+  -o-transform: rotate(5deg); /* Для Opera */
+  transform: rotate(5deg);
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.05);
+  -webkit-box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.05);
+}
+
+.deal-board .deal-card.draggable-active {
+  width: 250px;
+}
 
 /**************************************************************/
 /* 		                  ICONS
@@ -663,4 +684,12 @@ table.contact.attributes .gravatar {
 
 table.sidebar.attributes td, table.sidebar.attributes th {
   padding: inherit;
+}
+
+.tab-placeholder {
+    display: none;
+}
+
+.tab-placeholder.active {
+    display: block !important;
 }

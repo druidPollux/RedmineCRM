@@ -1,3 +1,19 @@
+<%
+  if Redmine::VERSION.to_s > '2.3'
+    extend Redmine::Pagination
+  else
+    extend ActionController::Pagination
+  end
+  source_id_cond = @contact.is_company ? Contact.visible.order_by_name.select(:id).find_all_by_company(@contact.first_name) << @contact.id : @contact.id
+  @note = Note.new(:created_on => Time.now)
+  @notes_pages, @notes = paginate :notes,
+                                 :per_page => 30,
+                                 :conditions => {:source_id  => source_id_cond,
+                                                 :source_type => 'Contact'},
+                                 :include => [:attachments],
+                                 :order => "#{Note.table_name}.created_on DESC"
+
+%>
 <% if authorize_for(:notes, :create) %>
   <div class="add-note hide-when-print">
     <%= render :partial => 'notes/add', :locals => {:note_source => @contact} %>

@@ -54,7 +54,7 @@ require_dependency 'redmine_contacts/hooks/views_layouts_hook'
 require 'acts_as_viewable/init'
 require 'acts_as_taggable_on_patch'
 
-require 'redmine_contacts/liquid/liquid' if `gem list`.match('liquid')
+require 'redmine_contacts/liquid/liquid' if Object.const_defined?("Liquid") rescue false
 
 module RedmineContacts
 

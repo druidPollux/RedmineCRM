@@ -17,7 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with redmine_contacts.  If not, see <http://www.gnu.org/licenses/>.
 
-CONTACTS_VERSION_NUMBER = '3.2.14'
+CONTACTS_VERSION_NUMBER = '3.2.15'
 CONTACTS_VERSION_STATUS = ''
 
 Redmine::Plugin.register :redmine_contacts do
@@ -94,7 +94,6 @@ Redmine::Plugin.register :redmine_contacts do
 
   Redmine::Search.map do |search|
     search.register :contacts
-    search.register :contact_notes
   end
 
 end

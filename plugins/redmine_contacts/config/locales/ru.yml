@@ -231,8 +231,8 @@ ru:
 
   #3.0.0
   label_crm_import: Импорт
-  label_crm_contact_note_plural: Заметки контактов
-  label_crm_deal_note_plural: Заметки сделок
+  label_contact_note_plural: Заметки контактов
+  label_deal_note_plural: Заметки сделок
   label_crm_contact_all_note_plural: Все заметки
   error_unable_delete_deal_status: Невозможно удалить статус сделки
   label_crm_contacts_hidden: Дополнительные параметры

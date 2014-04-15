@@ -235,8 +235,8 @@ az:
 
   #3.0.0
   label_crm_import: Daxil etmək
-  label_crm_contact_note_plural: Əlaqə məlumatlarının qeydləri
-  label_crm_deal_note_plural: Sazişlərin qeydləri
+  label_contact_note_plural: Əlaqə məlumatlarının qeydləri
+  label_deal_note_plural: Sazişlərin qeydləri
   label_crm_contact_all_note_plural: Bütün qeydlər
   error_unable_delete_deal_status: Sazişin statusunu silmək mümkün deyildir
   label_crm_contacts_hidden: Əlavə parametrlər
