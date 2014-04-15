@@ -154,7 +154,7 @@ class InvoicesControllerTest < ActionController::TestCase
     assert_select 'div.invoice-lines table.list tr.line-data td.description', "Consulting work"
   end
 
-  test "should get show as pdf" do
+  def test_get_show_as_pdf
     @request.session[:user_id] = 1
     Setting.default_language = 'en'
 

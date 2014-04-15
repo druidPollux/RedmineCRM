@@ -1,0 +1,195 @@
+# encoding: utf-8
+# Bulgarian strings go here for Rails i18n
+bg:
+  project_module_contacts_invoices: Фактури
+
+  label_invoice_plural: Фактури
+  label_invoice: Фактура
+  label_invoice_new: Нова фактура
+  label_invoice_edit: Редакция
+  label_invoice_status: Статус
+  label_invoice_status_draft: Чернова
+  label_invoice_status_sent: Изпратена
+  label_invoice_status_paid: Платена
+  label_invoice_lines: Редове на фактура
+  label_invoice_percent: '%'
+  label_invoice_amount: '€'
+  label_invoice_address: Адрес
+  label_invoice_bill_to: Получател
+  label_invoice_company_representative: МОЛ
+  label_invoice_company_name: Име на фирмата
+  label_invoice_company_info: Информация за фирмата
+  label_invoice_bill_info: Банкова информация
+  label_invoice_units: Line units
+  label_invoice_total: Сума за плащане
+  label_invoice_tax: Данък
+  label_invoice_sub_amount: Данъчна основа
+  label_invoice_invoiced: Фактуриран
+  label_invoice_add_line: Добави ред
+  label_invoice_overdue: Просрочен
+  label_invoice_last_number: 'Последно издадена фактура #%{number}'
+  label_invoice_template: Шаблон
+  label_invoice_number_format: Номериране на фактури
+  label_invoice_default_tax: Данък по подразбиране
+  label_invoice_line_grouping: "Групиране на редове:"
+  label_invoice_line_grouping_by_activity: По дейност
+  label_invoice_line_grouping_by_issue: По задача
+  label_invoice_line_grouping_by_user: По потребител
+  label_invoice_line_grouping_single_line: По редове
+
+  permission_edit_own_invoices: Редакция на собствени фактури
+  permission_edit_invoices: Редакция на фактури
+  permission_delete_invoices: Изтриване на фактури
+  permission_view_invoices: Достъп до фактури
+
+  button_send_mail: Изпрати
+  button_print: Изпечатай
+  button_invoice: Фактура
+
+  field_invoice_number: Номер на фактура
+  field_invoice_date: Дата на издаване
+  field_invoice_contact: Клиент
+  field_invoice_due_date: Падежна дата
+  field_invoice_amount: Сума
+  field_invoice_discount: намаление
+  field_invoice_assigned_to: Възложена на
+  field_invoice_status: Статус
+  field_invoice_currency: Валута
+  field_invoice_language: Език
+
+  field_invoice_line_position: '№'
+  field_invoice_line_description: Описание
+  field_invoice_line_price: Единична цена
+  field_invoice_line_quantity: Количество
+  field_invoice_line_tax: Данък
+  field_invoice_line_tax_amount: Данъчна ставка
+  field_invoice_line_total: Общо
+  field_invoice_line_units: Единици
+
+  #0.0.3
+  label_invoice_company_logo_url: Лого на компанията (URL)
+
+  #1.0.1
+  label_invoice_line_grouping_all: Всички
+  label_invoice_default_currency: Валута по подразбиране
+  label_invoice_total_including_tax: Сума за плащане
+  label_invoice_excerpt_invoice_list: Списък с фактури
+  label_invoice_created: Създадена на
+  label_invoice_disable_taxes: Без данъц
+  label_invoice_days_late: 'Просрочка от %{days} дни'
+  label_invoice_contact_extra_field: Допълнително поле към лице за контакт
+  lable_invoice_contact_extra_field_tip: Което да се показва на фктурата (пр. Клиентски ЕИК или данъчен номер)
+  label_invoice_decimal_separator: Десетичен знак
+  label_invoice_thousands_delimiter: Разделител на хилядите
+  label_invoice_general: Настройки
+  label_invoice_company: Компания
+  label_invoice_total_with_tax: Платима сума, с включен данък
+
+  #1.0.2
+  label_invoice_show_in_pdf: Покажи в PDF
+  label_invoice_discount_including_tax: Намалението с включен ДДС
+
+  #1.0.3
+  label_invoice_use_rate_plugin: Use rate plugin
+  label_invoice_line_grouping_by_time_entry: По дата
+  label_generate_invoice: Създай фактура
+
+  #1.0.4
+  field_invoice_subject: Основание
+
+  #2.0.0
+  label_invoice_filter_companies: Филтриране на компании
+
+  #2.0.1
+  label_invoice_company_profile: Профил на компания
+
+# Expenses
+  project_module_contacts_expenses: Разходи
+
+  permission_import_invoices: Внеси фактури
+  permission_import_expenses: Експорт на фактури
+  label_expense_plural: Разходи
+  label_expense: Разход
+  label_expense_new: Нов разход
+  label_expense_edit: Редакция на разход
+  label_expense_status: Статус
+  label_expense_status_draft: Чернова
+  label_expense_status_new: Нов
+  label_expense_status_billed: Таксуван
+  label_expense_status_paid: Платен
+  label_expense_created: Създаден разход
+
+  field_expense_date: Дата на разход
+  field_expense_contact: Клиент
+  field_expense_status: Статус
+  field_expense_price: Сума
+
+  permission_edit_own_expenses: Редакция на собствени разходи
+  permission_edit_expenses: Редакция на разходи
+  permission_delete_expenses: Изтриване на разходи
+  permission_view_expenses: Достъп до разходи
+
+  label_expense_stat_by_period: Разходи по период
+  label_expense_stat_by_status: разходи по статус
+
+  #2.1.1
+  label_invoice_cross_project_contacts: Позволи да се виждат контактите между отделните проекти.
+
+  #2.1.2
+  label_invoice_show_invoices_in_top_menu: Покажи "Фактури" в меню на програмата
+  label_invoice_show_expenses_in_top_menu: Покажи "Фактури" в горното меню
+  permission_manage_invoices: Управление на фактури
+  permission_comment_invoices: Коментари към фактури
+
+  #2.2.0
+  activerecord:
+    errors:
+      messages:
+        text_invoice_cant_change_status: Не може да бъде променено
+  label_invoice_status_canceled: Прекъснат
+  label_invoice_amount_due: Просрочен
+  label_invoice_payment: Плащане на фактура
+  label_invoice_payment_plural: Плащания
+  label_invoice_payment_new: Ново плащане на фактура
+  label_invoice_add_payment: Добави плащане
+  label_invoice_payment_date: Дата на плащане
+  label_invoice_paid_date: Платено на
+  label_invoice_balance: балансе
+  label_invoice_days_due: 'Просровено с %{days} дни'
+  label_invoice_internal: Вътрешен
+  permission_edit_invoice_payments: Редакция на плащания
+  label_invoice_payment_created: Създадено е плащане на фактурата
+
+  #2.3.0
+  label_invoice_is_billable: Платимо
+  label_invoice_show_units: Покажи единици
+  label_invoice_status_estimate: Приблизително
+  label_estimate: Приблизително
+
+  #3.0.0
+  label_invoice_templates: Шаблони
+  label_invoice_custom_template: Потребителски шаблони на фактури
+  label_invoice_pdf: PDF
+  label_invoice_public_link: Публична
+  label_invoice_template_classic: "Класически"
+  label_invoice_template_modern: "Модерен"
+  label_invoice_template_left: "Модерен ляво"
+  label_invoice_template_blank_header: "Модерен без заглавна част"
+  label_invoice_template_custom: "Потребителски шаблон"
+  label_invoice_public_links: Публични връзки
+  label_invoice_recurring: Периодична фактура
+
+  #3.0.1
+  permission_add_invoices: Добави фактури
+  permission_add_expenses: Добави разходи
+
+  #3.1.0
+  field_invoice_order_number: Номер на поръчка
+  label_invoice_send_by_email: Изпрати фактура по имейл
+  permission_send_invoices: Изпрати имейли
+  label_invoice_mail_to: До
+  label_invoice_email_template_plural: Имейл шаблони
+  label_invoice_email_template: Имейл шаблон
+
+  #3.1.1
+  label_invoice_hours: часове

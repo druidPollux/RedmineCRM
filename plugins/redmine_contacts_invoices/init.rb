@@ -19,7 +19,7 @@
 
 require 'redmine'
 
-INVOICES_VERSION_NUMBER = '3.1.1'
+INVOICES_VERSION_NUMBER = '3.1.3'
 INVOICES_VERSION_STATUS = ''
 
 Redmine::Plugin.register :redmine_contacts_invoices do

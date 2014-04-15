@@ -177,3 +177,20 @@ de:
   label_invoice_template_custom: "Eigene Vorlage"
   label_invoice_public_links: Öffentliche Links
   label_invoice_recurring: Wiederkehrende Rechnung
+  
+  #3.0.1
+  permission_add_invoices: Rechnung hinzufügen
+  permission_add_expenses: Aufwendung hinzufügen
+
+  #3.1.0
+  field_invoice_order_number: BesteOrder number
+  label_invoice_send_by_email: Sende Rechnung per E-Mail
+  permission_send_invoices: Sende E-Mails
+  label_invoice_mail_to: An
+  label_invoice_email_template_plural: E-Mail Vorlagen
+  label_invoice_email_template: E-Mail Vorlage
+
+  #3.1.1
+  label_invoice_hours: Stunden
+  label_invoice_email_curent_user: Aktuelle Benutzer E-Mail
+  

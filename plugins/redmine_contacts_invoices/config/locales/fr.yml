@@ -1,6 +1,5 @@
 fr:
   project_module_contacts_invoices: Factures
-
   label_invoice_plural: Factures
   label_invoice: Facture
   label_invoice_new: Nouvelle facture
@@ -68,6 +67,43 @@ fr:
 
   in_case_of_need_draft: Brouillon
 
+  #0.0.3
+  label_invoice_company_logo_url: Logo société (URL)
+
+  #1.0.1
+  label_invoice_line_grouping_all: All
+  label_invoice_default_currency: Default currency
+  label_invoice_total_including_tax: Total including tax
+  label_invoice_excerpt_invoice_list: Excerpt invoice list
+  label_invoice_created: Invoice created
+  label_invoice_disable_taxes: Disable taxes
+  label_invoice_days_late: '%{days} days late'
+  label_invoice_contact_extra_field: Contact extra field for invoice
+  lable_invoice_contact_extra_field_tip: Displayed on invoices (e.g. Client VAT or TAX ID)
+  label_invoice_decimal_separator: Decimal separator
+  label_invoice_thousands_delimiter: Thousands delimiter
+  label_invoice_general: General
+  label_invoice_company: Company
+  label_invoice_total_with_tax: Total, including tax
+
+  #1.0.2
+  label_invoice_show_in_pdf: Show in PDF
+  label_invoice_discount_including_tax: Discount including tax
+
+  #1.0.3
+  label_invoice_use_rate_plugin: Use rate plugin
+  label_invoice_line_grouping_by_time_entry: By time entry
+  label_generate_invoice: Generate invoice
+
+  #1.0.4
+  field_invoice_subject: Objet
+
+  #2.0.0
+  label_invoice_filter_companies: Filtrer sociétés
+
+  #2.0.1
+  label_invoice_company_profile: Company profile
+
 # Expenses
   project_module_contacts_expenses: Dépenses
 
@@ -91,3 +127,69 @@ fr:
   permission_edit_expenses: Editer les dépenses
   permission_delete_expenses: Effacer les dépenses
   permission_view_expenses: Voir les dépenses
+
+  label_expense_stat_by_period: Dépenses par période
+  label_expense_stat_by_status: Dépenses par statut
+
+  #2.1.1
+  label_invoice_cross_project_contacts: Autoriser les contacts inter-projets
+
+  #2.1.2
+  label_invoice_show_invoices_in_top_menu: Afficher les factures dans le menu principal
+  label_invoice_show_expenses_in_top_menu: Afficher les dépenses dans le menu principal
+  permission_manage_invoices: Gérer les factures
+  permission_comment_invoices: Commenter les factures
+
+  #2.2.0
+  activerecord:
+    errors:
+      messages:
+        text_invoice_cant_change_status: ne peut êre modifié(e)
+  label_invoice_status_canceled: Annulé
+  label_invoice_amount_due: Restant dû
+  label_invoice_payment: Règlement facture
+  label_invoice_payment_plural: Règlements
+  label_invoice_payment_new: Nouveau règlement
+  label_invoice_add_payment: Ajouter règlement
+  label_invoice_payment_date: Date de règlement
+  label_invoice_paid_date: Réglé le
+  label_invoice_balance: Restant
+  label_invoice_days_due: 'Emise il y a %{days}'
+  label_invoice_internal: Interne
+  permission_edit_invoice_payments: Editer règlements
+  label_invoice_payment_created: Règlement ajouté
+
+  #2.3.0
+  label_invoice_is_billable: Facturable
+  label_invoice_show_units: Afficher unités
+  label_invoice_status_estimate: Devis
+  label_estimate: Devis
+
+  #3.0.0
+  label_invoice_templates: Modèles
+  label_invoice_custom_template: Modèle de facture personalisé
+  label_invoice_pdf: PDF
+  label_invoice_public_link: Lien public
+  label_invoice_template_classic: "Classique"
+  label_invoice_template_modern: "Moderne"
+  label_invoice_template_left: "Moderne gauche"
+  label_invoice_template_blank_header: "Moderne sans entête"
+  label_invoice_template_custom: "Personalisé"
+  label_invoice_public_links: Liens publiques
+  label_invoice_recurring: Facture récurrente
+
+  #3.0.1
+  permission_add_invoices: Ajouter factures
+  permission_add_expenses: Ajouter dépenses
+
+  #3.1.0
+  field_invoice_order_number: Bon de commande
+  label_invoice_send_by_email: Envoyer la facture par email
+  permission_send_invoices: Envoyer emails
+  label_invoice_mail_to: Destinataire
+  label_invoice_email_template_plural: Modèles email
+  label_invoice_email_template: Modèle Email
+
+  #3.1.1
+  label_invoice_hours: heures
+  label_invoice_email_curent_user: Votre email

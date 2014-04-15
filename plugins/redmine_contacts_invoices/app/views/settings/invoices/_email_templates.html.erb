@@ -1,0 +1,43 @@
+<fieldset class="box"><legend><%= l(:label_invoice_email_template) %></legend>
+
+<p>
+  <label><%= l(:label_invoice_email_curent_user) %></label>
+  <%= check_box_tag 'settings[invoices_email_current_user]', 1, @settings["invoices_email_current_user"] %>
+</p>
+
+<p class="from_address" style = "<%= 'display: none;' if @settings["invoices_email_current_user"].to_i > 0 %>">
+  <label><%= l(:field_mail_from) %></label>
+  <%= text_field_tag 'settings[invoices_email_from_address]', @settings["invoices_email_current_user"].to_i > 0 ? "" : InvoicesSettings.email_from_address, :style => "width: 100%;" %>
+</p>
+
+
+<p>
+  <label><%= l(:field_subject) %></label>
+  <%= text_field_tag 'settings[invoices_email_subject]', @settings["invoices_email_subject"], :style => "width: 100%;" %>
+</p>
+
+<p>
+  <label><%= l(:label_invoice_email_template) %></label>
+  <%= text_area_tag 'settings[invoices_email_template]', @settings["invoices_email_template"], :rows => 10 %>
+  <em class="info mail-macros"><%= l(:text_email_macros, :macro => InvoicesSettings::MACRO_LIST.map{|m| link_to m, "#", :class => "mail-macro"}.join(', ')).html_safe %></em>
+</p>
+</fieldset>
+
+<script type="text/javascript" charset="utf-8">
+  $("#settings_invoices_email_current_user").bind("click", function() {
+    if ($(this).is(':checked')) {
+      $('.from_address').hide();
+      $('#settings_invoices_email_from_address').val('');
+    } else {
+      $('.from_address').show();
+    }
+  });
+
+  $(".mail-macros a.mail-macro").bind("click", function() {
+    $('#settings_invoices_email_template').insertAtCaret($(this).html());
+  });
+</script>
+
+<% content_for :header_tags do %>
+  <%= javascript_include_tag :contacts, :plugin => 'redmine_contacts'  %>
+<% end %>

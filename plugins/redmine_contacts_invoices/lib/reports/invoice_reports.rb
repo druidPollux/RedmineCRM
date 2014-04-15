@@ -83,7 +83,7 @@ module RedmineInvoices
         invoice.custom_values.each do |custom_value|
           if !custom_value.value.blank? && custom_value.custom_field.is_for_all?
             invoice_data << [custom_value.custom_field.name + ":",
-                             show_value(custom_value)]
+                             RedmineContacts::CSVUtils.csv_custom_value(custom_value)]
           end
         end
 
