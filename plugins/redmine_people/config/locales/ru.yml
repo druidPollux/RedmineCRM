@@ -16,21 +16,21 @@ ru:
 
   button_people_edit_profile: Редактировать профиль
 
-  field_people_avatar: Avatar
-  field_people_job_title: Должность
-  field_people_phone: Телефон
-  field_people_phone_plural: Телефоны
-  field_people_skype: Skype
-  field_people_twitter: Twitter
-  field_people_facebook: Facebook
-  field_people_linkedin: LinkedIn
-  field_people_middlename: Отчество
-  field_people_background: Дополнительная информация
-  field_people_address: Адрес
-  field_people_gender: Пол
-  field_people_birthday: Дата рождения
-  field_people_appearance_date: Дата начала работы
-  field_people_age: Возраст
+  label_people_avatar: Avatar
+  label_people_job_title: Должность
+  label_people_phone: Телефон
+  label_people_phone_plural: Телефоны
+  label_people_skype: Skype
+  label_people_twitter: Twitter
+  label_people_facebook: Facebook
+  label_people_linkedin: LinkedIn
+  label_people_middlename: Отчество
+  label_people_background: Дополнительная информация
+  label_people_address: Адрес
+  label_people_gender: Пол
+  label_people_birthday: Дата рождения
+  label_people_appearance_date: Дата начала работы
+  label_people_age: Возраст
 
   people_permission_edit_people: Редактирования сотрудников
   people_permission_view_people: Просмотр сотрудников
@@ -40,7 +40,7 @@ ru:
 
   #0.0.2
   label_people_acl_settings: Права доступа
-  label_people_visibility: Видимость 
+  label_people_visibility: Видимость
   label_people_visibility_select: Показывать сотрудников
   label_people_visibility_resistered: Для зарегистрированных пользователей
   label_people_visibility_selected: Для выбранных пользователей
@@ -51,10 +51,10 @@ ru:
   label_department_new: Новый отдел
   label_department: Отдел
   label_department_head: Руководитель
-  field_people_department: Отдел
+  label_people_department: Отдел
   label_people_at_department: в
   field_department_parent: Родительский отдел
-  people_permission_edit_departments: Редактирование отделов 
+  people_permission_edit_departments: Редактирование отделов
 
   #0.1.5
-  people_permission_delete_departments: Удаление отделов 
+  people_permission_delete_departments: Удаление отделов

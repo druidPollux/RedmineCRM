@@ -1,9 +1,9 @@
-<%= error_messages_for 'department' %>  
+<%= error_messages_for 'department' %>
 
-<% html_title "#{l(:label_people_department)} ##{@department.id}: #{@department.name}" %>    
+<% html_title "#{l(:label_department)} ##{@department.id}: #{@department.name}" %>
 
-<div class="contextual">     
-  <%= link_to l(:button_edit), edit_department_path(@department), :class => 'icon icon-edit' if User.current.allowed_people_to?(:edit_departments) %> 
+<div class="contextual">
+  <%= link_to l(:button_edit), edit_department_path(@department), :class => 'icon icon-edit' if User.current.allowed_people_to?(:edit_departments) %>
   <%= link_to l(:button_delete), department_path(@department), :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del' if User.current.allowed_people_to?(:delete_departments) %>
 </div>
 
@@ -25,19 +25,19 @@
   <% if @department.background? || @department.attachments.any? -%>
 
   <% if @department.background? %>
-    <p><strong><%=l(:field_people_background)%></strong></p>
+    <p><strong><%=l(:label_people_background)%></strong></p>
     <div class="wiki">
     <%= textilizable @department, :background, :attachments => @department.attachments %>
     </div>
   <% end %>
   <%= link_to_attachments @department, :thumbnails => true %>
-  <% end -%>  
+  <% end -%>
 </div>
 
-<% content_for :sidebar do %>    
+<% content_for :sidebar do %>
   <div id="department_people">
     <h3><%= l(:label_people) %></h3>
-    <%= render :partial => 'people/person_data', :collection => @department.people %>
+    <%= render :partial => 'people/person_data', :collection => @department.people.active %>
   </div>
 
 <% end %>

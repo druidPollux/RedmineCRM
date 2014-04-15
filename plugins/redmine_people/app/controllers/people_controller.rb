@@ -1,7 +1,7 @@
 class PeopleController < ApplicationController
   unloadable
 
-  Mime::Type.register "text/x-vcard", :vcf    
+  Mime::Type.register "text/x-vcard", :vcf
 
   before_filter :find_person, :only => [:show, :edit, :update, :destroy, :edit_membership, :destroy_membership]
   before_filter :authorize_people, :except => [:avatar, :context_menu]
@@ -16,30 +16,30 @@ class PeopleController < ApplicationController
   	@people = find_people
     @groups = Group.all.sort
     @departments = Department.order(:name)
-    @next_birthdays = Person.next_birthdays
-    @new_people = Person.where("appearance_date IS NOT NULL").order("appearance_date desc").first(5)
+    @next_birthdays = Person.active.next_birthdays
+    @new_people = Person.active.where("appearance_date IS NOT NULL").order("appearance_date desc").first(5)
 
     respond_to do |format|
-      format.html {render :partial => 'list_excerpt', :layout => false if request.xhr?} 
+      format.html {render :partial => 'list_excerpt', :layout => false if request.xhr?}
     end
   end
 
   def show
     # @person.roles = Role.new(:permissions => [:download_attachments])
     events = Redmine::Activity::Fetcher.new(User.current, :author => @person).events(nil, nil, :limit => 10)
-    @events_by_day = events.group_by(&:event_date)  
+    @events_by_day = events.group_by(&:event_date)
     @person_attachments = @person.attachments.select{|a| a != @person.avatar}
     @memberships = @person.memberships.all(:conditions => Project.visible_condition(User.current))
-    respond_to do |format| 
-      format.html 
-      format.vcf { send_data(person_to_vcard(@person), :filename => "#{@person.name}.vcf", :type => 'text/x-vcard;', :disposition => 'attachment') }            
-    end      
+    respond_to do |format|
+      format.html
+      format.vcf { send_data(person_to_vcard(@person), :filename => "#{@person.name}.vcf", :type => 'text/x-vcard;', :disposition => 'attachment') }
+    end
   end
 
   def edit
     @auth_sources = AuthSource.find(:all)
     @departments = Department.all.sort
-    @membership ||= Member.new    
+    @membership ||= Member.new
   end
 
   def new
@@ -50,16 +50,17 @@ class PeopleController < ApplicationController
 
   def update
     (render_403; return false) unless @person.editable_by?(User.current)
-    if @person.update_attributes(params[:person]) 
-      flash[:notice] = l(:notice_successful_update)  
+    @person.safe_attributes = params[:person]
+    if @person.save
+      flash[:notice] = l(:notice_successful_update)
       attach_avatar
       attachments = Attachment.attach_files(@person, params[:attachments])
       render_attachment_warning_if_needed(@person)
-      respond_to do |format| 
-        format.html { redirect_to :action => "show", :id => @person } 
+      respond_to do |format|
+        format.html { redirect_to :action => "show", :id => @person }
         format.api  { head :ok }
-      end  
-    else           
+      end
+    else
       respond_to do |format|
         format.html { render :action => "edit"}
         format.api  { render_validation_errors(@person) }
@@ -110,12 +111,12 @@ class PeopleController < ApplicationController
       # images are sent inline
       if (defined?(RedmineContacts::Thumbnail) == 'constant') && Redmine::Thumbnail.convert_available?
         target = File.join(attachment.class.thumbnails_storage_path, "#{attachment.id}_#{attachment.digest}_#{params[:size]}.thumb")
-        thumbnail = RedmineContacts::Thumbnail.generate(attachment.diskfile, target, params[:size])        
+        thumbnail = RedmineContacts::Thumbnail.generate(attachment.diskfile, target, params[:size])
       elsif Redmine::Thumbnail.convert_available?
         thumbnail = attachment.thumbnail(:size => params[:size])
       else
         thumbnail = attachment.diskfile
-      end 
+      end
 
       if stale?(:etag => attachment.digest)
         send_file thumbnail, :filename => (request.env['HTTP_USER_AGENT'] =~ %r{MSIE} ? ERB::Util.url_encode(attachment.filename) : attachment.filename),
@@ -135,13 +136,13 @@ class PeopleController < ApplicationController
   def context_menu
     @person = @people.first if (@people.size == 1)
     @can = {:edit =>  @people.collect{|c| User.current.allowed_people_to?(:edit_people, @person)}.inject{|memo,d| memo && d}
-            }   
-            
-    # @back = back_url        
-    render :layout => false      
+            }
+
+    # @back = back_url
+    render :layout => false
   end
 
-private   
+private
   def authorize_people
     allowed = case params[:action].to_s
       when "create", "new"
@@ -154,21 +155,21 @@ private
         User.current.allowed_people_to?(:view_people, @person)
       else
         false
-      end    
+      end
 
     if allowed
       true
-    else  
-      deny_access  
+    else
+      deny_access
     end
   end
 
   def attach_avatar
-    if params[:person_avatar]    
-      params[:person_avatar][:description] = 'avatar'     
-      @person.avatar.destroy if @person.avatar 
-      Attachment.attach_files(@person, {"1" => params[:person_avatar]})  
-      render_attachment_warning_if_needed(@person)    
+    if params[:person_avatar]
+      params[:person_avatar][:description] = 'avatar'
+      @person.avatar.destroy if @person.avatar
+      Attachment.attach_files(@person, {"1" => params[:person_avatar]})
+      render_attachment_warning_if_needed(@person)
     end
   end
 
@@ -178,7 +179,7 @@ private
       content_type = Redmine::MimeType.of(attachment.filename)
     end
     content_type.to_s
-  end  
+  end
 
   def find_person
     if params[:id] == 'current'
@@ -191,30 +192,30 @@ private
     render_404
   end
 
-  def find_people(pages=true)  
+  def find_people(pages=true)
     # scope = scope.scoped(:conditions => ["#{Person.table_name}.status_id = ?", params[:status_id]]) if (!params[:status_id].blank? && params[:status_id] != "o" && params[:status_id] != "d")
     @status = params[:status] || 1
     scope = Person.logged.status(@status)
     scope = scope.seach_by_name(params[:name]) if params[:name].present?
-    scope = scope.in_group(params[:group_id]) if params[:group_id].present?                
-    scope = scope.in_department(params[:department_id]) if params[:department_id].present?                
+    scope = scope.in_group(params[:group_id]) if params[:group_id].present?
+    scope = scope.in_department(params[:department_id]) if params[:department_id].present?
     scope = scope.where(:type => 'User')
-    
+
     @people_count = scope.count
-    @group = Group.find(params[:group_id]) if params[:group_id].present?      
-    @department = Department.find(params[:department_id]) if params[:department_id].present?      
-    if pages 
-      @limit =  per_page_option 
-      @people_pages = Paginator.new(self, @people_count,  @limit, params[:page])     
-      @offset = @people_pages.current.offset  
-       
+    @group = Group.find(params[:group_id]) if params[:group_id].present?
+    @department = Department.find(params[:department_id]) if params[:department_id].present?
+    if pages
+      @limit =  per_page_option
+      @people_pages = Paginator.new(self, @people_count,  @limit, params[:page])
+      @offset = @people_pages.current.offset
+
       scope = scope.scoped :limit  => @limit, :offset => @offset
       @people = scope
-      
+
       fake_name = @people.first.name if @people.length > 0 #without this patch paging does not work
     end
-    
-    scope    
+
+    scope
   end
 
   def bulk_find_people

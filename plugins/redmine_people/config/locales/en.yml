@@ -16,21 +16,21 @@ en:
 
   button_people_edit_profile: Edit profile
 
-  field_people_avatar: Avatar
-  field_people_job_title: Job title
-  field_people_phone: Phone
-  field_people_phone_plural: Phones
-  field_people_skype: Skype
-  field_people_twitter: Twitter
-  field_people_facebook: Facebook 
-  field_people_linkedin: LinkedIn
-  field_people_middlename: Middle name
-  field_people_background: Background info
-  field_people_address: Address
-  field_people_gender: Gender
-  field_people_birthday: Birthday
-  field_people_appearance_date: Appearance date
-  field_people_age: Age
+  label_people_avatar: Avatar
+  label_people_job_title: Job title
+  label_people_phone: Phone
+  label_people_phone_plural: Phones
+  label_people_skype: Skype
+  label_people_twitter: Twitter
+  label_people_facebook: Facebook
+  label_people_linkedin: LinkedIn
+  label_people_middlename: Middle name
+  label_people_background: Background info
+  label_people_address: Address
+  label_people_gender: Gender
+  label_people_birthday: Birthday
+  label_people_appearance_date: Appearance date
+  label_people_age: Age
 
   people_permission_edit_people: Edit people
   people_permission_view_people: View people
@@ -51,10 +51,16 @@ en:
   label_department_new: New department
   label_department: Department
   label_department_head: Head
-  field_people_department: Department
+  label_people_department: Department
   label_people_at_department: at
   field_department_parent: Subdepartment of
   people_permission_edit_departments: Edit departments
 
   #0.1.5
   people_permission_delete_departments: Delete departments
+
+  #0.1.6
+  label_people_new_mail: New message
+
+  #0.1.7
+  label_people_show_for_registered_users: Show people for registered users

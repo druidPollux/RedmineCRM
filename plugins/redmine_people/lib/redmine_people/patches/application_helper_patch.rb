@@ -42,7 +42,7 @@ module RedminePeople
         def link_to_user_with_people(user, options={})
           if user.is_a?(User)
             name = h(user.name(options[:format]))
-            if user.active?
+            if user.active? && User.current.allowed_people_to?(:view_people, user)
               link_to name, :controller => 'people', :action => 'show', :id => user
             else
               name

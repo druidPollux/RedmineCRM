@@ -18,7 +18,7 @@ class PeopleAcl
   end
 
   def principal
-    User.find_by_id(self.principal_id)
+    Principal.find_by_id(self.principal_id)
   end
 
   def <<(perm)
@@ -29,11 +29,11 @@ class PeopleAcl
   def self.delete(principal_id)
     users_acls = Setting.plugin_redmine_people[:users_acl] || {}
     users_acls.delete(principal_id.to_s)
-    Setting.plugin_redmine_people = Setting.plugin_redmine_people.merge(:users_acl => users_acls)    
+    Setting.plugin_redmine_people = Setting.plugin_redmine_people.merge(:users_acl => users_acls)
   end
 
   def self.create(principal_id, permissions)
-    return false unless principal_id.blank? || User.find_by_id(principal_id)
+    return false unless principal_id.blank? || Principal.find_by_id(principal_id)
     acl = self.new(principal_id, permissions)
     acl.save
   end
@@ -41,18 +41,18 @@ class PeopleAcl
   def self.all
     return [] unless self.acls && self.acls.is_a?(Hash)
     self.acls.map do |acl|
-      self.new(acl[0], acl[1]) if acl[0] && acl[1] && acl[1].is_a?(Array) && User.find_by_id(acl[0])
+      self.new(acl[0], acl[1]) if acl[0] && acl[1] && acl[1].is_a?(Array) && Principal.find_by_id(acl[0])
     end.compact || []
-  end 
+  end
 
   def self.find(principal_id)
     perms = self.acls && self.acls.is_a?(Hash) && self.acls[principal_id.to_s]
     self.new(principal_id.to_s, perms) if perms && perms.is_a?(Array)
-  end  
+  end
 
   def self.first
     self.all[0]
-  end  
+  end
 
   def self.allowed_to?(principal, permission)
     return false unless principal && principal.is_a?(Principal)
@@ -61,7 +61,7 @@ class PeopleAcl
     else
       false
     end
-  end  
+  end
 
   def save
     users_acls = Setting.plugin_redmine_people[:users_acl]
