@@ -1,6 +1,6 @@
 @import url(../../../stylesheets/application.css);
 
-/* Circle Theme version 1.0.1, Copyright (C) 2014 Kirill Bezrukov www.redminecrm.com */
+/* Circle Theme version 1.0.2, Copyright (C) 2014 Kirill Bezrukov www.redminecrm.com */
 
 /**********************************************************/
 /* LOGO */
@@ -110,9 +110,9 @@ h2 {
 
 #header {
 	background-color: #29333a;
-	height: 100px;
 	min-height: 0px;
 	padding: 8px 20px;
+	padding-bottom: 35px;
 }
 
 #header > h1 {
@@ -179,6 +179,24 @@ h2 {
 	color: #fff;
 }
 
+#main-menu .menu-button {
+  position: absolute;
+  right: 10px;
+  top: 16px;
+  text-indent: 66em;
+  overflow: hidden;
+	cursor: pointer;
+	width: 24px;
+  height: 16px;
+  background: url(../images/menu_button.png) no-repeat;
+  background-size: 16px 16px; /* for retina displays */
+}
+
+#main-menu .menu-button:hover {
+	background: url(../images/menu_button_hover.png) no-repeat;
+	background-size: 16px 16px; /* for retina displays */
+}
+
 /**********************************************************/
 /* SIDEBAR */
 /**********************************************************/
@@ -216,6 +234,10 @@ div.flash.notice, #flash_notice {
 div.flash.error, #errorExplanation {
 	background: #e52817;
 	color: #fff;
+}
+
+div.flash.warning, .conflict {
+  background-image: none;
 }
 
 #errorExplanation ul {
@@ -260,6 +282,7 @@ span.tag-label-color {
 	border: 0px !important;
 	padding: 4px 8px !important;
 	border-radius: 20px !important;
+	line-height: 13px;
 }
 
 span.tag-label-color:hover {
@@ -273,6 +296,19 @@ span.tag-label-color:hover {
 .tagit-close .text-icon {
 	top: -3px;
 	position: relative;
+}
+
+div#content ul.tagit li {
+	margin: 2px 5px 1px 0;
+}
+
+div#content .contacts-tags-edit ul.tagit {
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	-o-border-radius: 3px;
+	border-radius: 3px;
+	border: 1px solid #e0e2e3;
 }
 
 /**********************************************************/
@@ -297,6 +333,9 @@ div#content #context-menu li:hover {
 	border-radius: 0px;
 }
 
+div#content #context-menu a.disabled, div#content #context-menu a.disabled:hover {
+	color: #aaa;
+}
 /**********************************************************/
 /* TIP */
 /**********************************************************/
@@ -309,7 +348,6 @@ div.tooltip:hover span.tip {
 	border-radius: 4px;
 }
 
-
 /**********************************************************/
 /* jQuery UI */
 /**********************************************************/
@@ -320,6 +358,12 @@ div.tooltip:hover span.tip {
 
 .ui-widget input, .ui-widget select, .ui-widget textarea {
 	font-size: 12px;
+}
+
+.ui-widget-overlay {
+	background: #000;
+	filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
+	opacity: 0.6;
 }
 
 div.modal {
@@ -343,7 +387,7 @@ div.modal {
 }
 
 .ui-datepicker .ui-widget-header {
-	background: #fafafa;
+	background: #fff;
 	border: 0px;
 	border-bottom: solid 1px #ced4d9;
 	border-radius: 0px;
@@ -392,11 +436,11 @@ div.modal {
 }
 
 .ui-widget-header .ui-icon-circle-triangle-e {
-	background: url(../images/next.png) no-repeat 0px 0px;;
+	background: url(../images/next.png) no-repeat 0px 0px;
 }
 
 .ui-widget-header .ui-icon-circle-triangle-w {
-	background: url(../images/prev.png) no-repeat 0px 0px;;
+	background: url(../images/prev.png) no-repeat 0px 0px;
 }
 
 .ui-datepicker .ui-datepicker-next {
@@ -409,6 +453,47 @@ div.modal {
 	left: 10px;
 }
 
+.ui-datepicker th {
+	/*font-size: 13px;*/
+	color: #aaa;
+	font-weight: 500;
+}
+
+.ui-datepicker .ui-state-default {
+  /*font-size: 13px;*/
+  font-weight: 500;
+  color: #333;
+  border: 1px solid #fff;
+  background: #fff;
+}
+
+.ui-datepicker .ui-state-default:hover {
+	background: #f6f6f6;
+}
+
+.ui-datepicker .ui-state-active {
+	background: #D2EEFF;
+}
+
+.ui-datepicker .ui-state-highlight {
+	color: #ff3b30;
+}
+
+.ui-datepicker .ui-state-highlight:hover {
+	background-color: #ffd8d6;
+}
+
+#ui-datepicker-div {
+	padding: 10px;
+}
+
+.ui-datepicker .ui-datepicker-buttonpane {
+	padding-top: 0.5em;
+}
+
+.ui-datepicker-week-col, .ui-datepicker .ui-priority-secondary {
+	color: #aaa;
+}
 
 .ui-dialog .ui-dialog-titlebar-close {
 	right: 1em;
@@ -503,7 +588,7 @@ input[type="button"].small,
 .ui-datepicker .ui-datepicker-buttonpane button,
 .query-columns td.buttons input[type="button"],
 input[type="submit"].small {
-	height: 24px;
+	height: 26px;
 	padding: 0 13px 0;
 	line-height: 23px;
 	font-size: 12px;
@@ -515,7 +600,7 @@ input[type="submit"].small {
 input[type="text"],
 input[type="password"],
 fieldset#filters td.values input {
-	padding: 0 10px 1px 10px;
+	padding: 1px 10px;
 	background-color: #fff;
 	color: #3d454c;
 	-webkit-border-radius: 3px;
@@ -564,7 +649,7 @@ select {
 	-ms-border-radius: 3px;
 	-o-border-radius: 3px;
 	border-radius: 3px;
-	height: 25px;
+	height: 26px;
 }
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2),
@@ -616,8 +701,10 @@ input.hasDatepicker {
 
 img.ui-datepicker-trigger {
 	position: relative;
-	left: -26px;
+	margin-left: -26px;
+	margin-right: 10px;
 }
+
 
 /**********************************************************/
 /* FORMS SPECIFIC */
@@ -660,6 +747,11 @@ input#content_comments {
 	border-top: 1px solid #ffffdd;
 	border-left: 1px solid #ffffdd;
 	border-right: 1px solid #ffffdd;
+}
+
+#content .box .tabs ul li a.selected {
+	background-color: #fafafa;
+	border-bottom: 1px solid #fafafa;
 }
 /**********************************************************/
 /* TABLES */
@@ -719,5 +811,7 @@ div.deal {
 	border: 0px !important;
 	padding: 10px !important;
 }
+
+table.progress td {padding: 0px;}
 
 div.details {padding: 20px !important;}
