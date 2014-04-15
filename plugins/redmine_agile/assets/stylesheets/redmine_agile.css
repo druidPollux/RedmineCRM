@@ -1,0 +1,117 @@
+/**********************************************************************/
+/* ICONS
+/**********************************************************************/
+#admin-menu a.agile { background-image: url(../images/agile.png);}
+
+
+/**********************************************************************/
+/* ISSUES SIDEBAR
+/**********************************************************************/
+#sidebar ul {
+  margin: 0;
+  padding: 0;
+}
+
+#sidebar ul li {
+  list-style-type: none;
+  margin: 0px 2px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+/**********************************************************************/
+/* AGILE BOARD
+/**********************************************************************/
+table.list.issues-board tbody tr,
+table.list.issues-board tbody tr:hover {background-color: white;}
+
+.assignable-user.draggable-active {
+  padding: 5px;
+  border: 1px solid #D5D5D5;
+  background-color: #ffffdd;
+}
+
+.issues-board td.issue-status-col.closed {background-color: #FAFAFA;}
+
+.issues-board.status-colors thead th {border-top: 4px solid #ADADAD;}
+
+/**********************************************************************/
+/* ISSUE CARD
+/**********************************************************************/
+.issues-board .issue-card {
+  padding: 5px;
+  border: solid 1px #d5d5d5;
+  background-color: #ffffdd;
+  margin: 5px;
+  word-wrap: break-word;
+  text-align: left;
+  white-space: normal;
+}
+
+.issue-card .attributes {
+  color: #888;
+  font-size: 90%;
+}
+
+.issue-card .thumbnail {
+  height: 145px;
+  background-size: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 5px;
+}
+
+.issue-card .checkbox {display: none;}
+.issue-card .avatar {float: left; margin-right: 5px;}
+.issue-card p.name {font-weight: bold;}
+.issue-card p.project {
+  border: 1px solid #d5d5d5;
+  padding: 5px;
+  margin-bottom: 5px;
+  text-align: center;
+  background-color: white;
+}
+.issue-card .info {
+  border-top: 1px solid #d5d5d5;
+  padding-top: 5px;
+  margin-top: 5px;
+}
+.issue-card table.progress {
+  float: none;
+  margin-top: 5px;
+}
+
+.issue-card table.progress td {
+  height: 5px;
+  padding: 0px;
+}
+
+.issue-card .issue-id.without-tracker {
+  float: right;
+}
+
+.issue-card.context-menu-selection p.project {
+  background-color: initial;
+}
+
+.issue-card.context-menu-selection em.info {
+  color: white;
+}
+
+.issues-board td.issue-status-col.closed .issue-card {background-color: #EDEDED;}
+
+.issue-card.ui-sortable-helper {
+  -moz-transform: rotate(5deg); /* Для Firefox */
+  -ms-transform: rotate(5deg); /* Для IE */
+  -webkit-transform: rotate(5deg); /* Для Safari, Chrome, iOS */
+  -o-transform: rotate(5deg); /* Для Opera */
+  transform: rotate(5deg);
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.05);
+  -webkit-box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.05);
+}
+
+.issues-board td.issue-status-col.droppable-hover, .issues-board td.issue-status-col .issue-card.droppable-hover {
+  border-style: dotted;
+  background-color: #E9F8FD;
+}
+

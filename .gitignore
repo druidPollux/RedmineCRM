@@ -21,6 +21,7 @@ vendor
 .hgignore
 
 plugins
+!plugins/redmine_agile
 !plugins/redmine_cms
 !plugins/redmine_contacts
 !plugins/redmine_contacts_invoices

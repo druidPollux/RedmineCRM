@@ -1,0 +1,45 @@
+# Russian strings go here for Rails i18n
+ru:
+  label_agile: Agile
+  label_agile_board: Доска задач
+  label_agile_board_plural: Доски задач
+  label_agile_board_thumbnails: Превью
+  label_agile_board_issues_per_column: Кол-во задач в колонке
+  label_agile_board_more_issues: Еще задачи
+  error_agile_status_transition: Невозможно изменить статус
+  label_agile_board_new: Новая доска
+  label_agile_board_edit: Редактировать доску
+  label_agile_my_boards: Мои доски
+  label_agile_issue_id: Номер задачи
+
+  permission_manage_public_agile_queries: Управление публичными досками задач
+  permission_add_agile_queries: Добавление досок задач
+  permission_view_agile_queries: Просмотр досок задач
+
+  #1.1.0
+  label_agile_board_default_columns: Поля по умолчанию
+  label_agile_charts_issues_burndown: Сгорание задач
+  label_agile_charts_work_burndown: Сгорание времени задач
+  label_agile_charts_number_of_hours: Кол-во часов
+  label_agile_charts_number_of_issues: Кол-во задач
+  label_agile_charts_cumulative_flow: Накопительный поток
+  label_agile_charts_trackers_cumulative_flow: Накопительный поток треккеров
+  label_agile_charts_issues_velocity: Скорость закрытия задач
+  label_agile_charts_lead_time: Цикл задачи
+  label_agile_charts_average_lead_time: Средний цикл задачи
+  label_agile_chart_plural: Диаграммы
+  permission_view_agile_charts: Просмотр диаграмм
+  label_agile_ideal_work_remaining: Идеально
+  label_agile_actual_work_remaining: Действительно
+  label_agile_chart: Диаграмма
+  label_agile_date_from: С
+  label_agile_date_to: По
+  label_agile_chart_dates: Интервалы диаграммы
+  label_agile_weighed_ideal_work_remaining: Взвещенно
+  label_agile_status_colors: Цвета статусов
+  label_agile_charts_created_closed: Создано/Закрыто
+  label_agile_charts_number_of_days: Кол-во дней
+  label_agile_too_many_items: "Диаграмма не может быть создана потому что превышено максимальное кол-во задач (%{max})"
+  label_agile_time_reports_items_limit: Максимальное кол-во задач отображаемых на диаграммах
+  label_agile_total_work_remaining: Всего
+  label_agile_default_chart: Диаграмма для версии

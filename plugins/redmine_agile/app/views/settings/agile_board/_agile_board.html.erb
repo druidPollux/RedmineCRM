@@ -1,0 +1,20 @@
+
+<p>
+  <label><%= l(:label_agile_board_issues_per_column) %></label>
+  <%= text_field_tag 'settings[issues_per_column]', RedmineAgile.issues_per_column, :size => 3 %>
+</p>
+
+<p>
+  <label><%= l(:label_agile_board_default_columns) %></label>
+  <%= select_tag 'settings[default_columns]', options_for_select(AgileQuery.new(:column_names => RedmineAgile.default_columns).available_columns.collect{|column| [column.caption, column.name]}, RedmineAgile.default_columns), :multiple => true, :include_blank => true, :size => 10, :style => "width:150px" %>
+</p>
+
+<p>
+  <label><%= l(:label_agile_default_chart) %></label>
+  <%= select_tag 'settings[default_chart]', options_charts_for_select(RedmineAgile.default_chart) %>
+</p>
+
+<p>
+  <label><%= l(:label_agile_time_reports_items_limit) %></label>
+  <%= text_field_tag 'settings[time_reports_items_limit]', RedmineAgile.time_reports_items_limit, :size => 3 %>
+</p>

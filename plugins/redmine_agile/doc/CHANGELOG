@@ -1,0 +1,39 @@
+== Redmine Agile plugin changelog
+
+Redmine Agile plugin - Agile board plugin for redmine
+Copyright (C) 2011-2014 RedmineCRM
+http://www.redminecrm.com/
+
+== 2014-04-09 v1.1.2
+
+* Compatibility fixes
+
+== 2014-04-09 v1.1.1
+
+* New scale divisions for charts
+* Fixes for work burndown with subtasks
+* Fixed Gantt and Caledar issues
+
+== 2014-04-07 v1.1.0
+
+* Save and manage agile boards
+* Select issue card fields
+* Permissions for agile boards
+* Default issue card columns setting
+* Issue card context menu
+* Project column
+* Issue done ratio and status flows
+* Charts (Work burndown chart, Issues burndown chart, Cumulative flow chart, Trackers cumulative flow chart, Velocity chart, Lead time chart, Average lead time chart, Created/Closed chart)
+* Fixed bug with load more filters
+
+== 2014-03-18 v1.0.1
+
+* Sorting issues inside status
+* Issues lazy loading
+
+== 2014-02-28 v1.0.0
+
+* Initial release
+* Draggable issues
+* Draggable assignees
+* Issue description and attached image preview
